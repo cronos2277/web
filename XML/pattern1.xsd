@@ -1,0 +1,11 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="resources">
+    <xs:complexType>
+        <xs:sequence>
+                <xs:element name="funcionario"/>
+                <xs:attribute name="id" type="xs:integer"/>
+                <xs:attribute name="nome" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+</xs:schema>

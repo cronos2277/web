@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg">
+  <title xml:lang="pt">Exemplo 9</title>
+  <circle cx="100" cy="100" r="75" fill="#00BFFF" stroke="green" stroke-width="1pt">
+    <title>Esse é um círculo azul.</title>
+    <desc>Exemplo de círculo azul com bordas verdes</desc>
+  </circle>
+</svg>

@@ -1,0 +1,22 @@
+title{
+    color:red;
+    display: block;
+    padding-left:20%;
+    
+}
+values{
+    padding-top: 10px;
+    background-color: gray;
+}
+value{
+    border-bottom: 1px solid black;
+    display:block;
+}
+id{
+    color:blue;
+    padding-left:10%;
+}
+prop{
+    color:black;
+    padding-left: 3%;
+}

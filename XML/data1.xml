@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<resources xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:funcionario id="1" nome="Joao"/>
+    <xs:funcionario id="2" nome="Maria"/>
+</resources>

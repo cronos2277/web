@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title xml:lang="pt">Exemplo 10</title>
+  <defs>
+    <circle id="circulo1" cx="100" cy="100" r="75" fill="#00BFFF" stroke="green"/>
+  </defs>
+  <use xlink:href="#circulo1" stroke-width="12pt">
+    <title>Esse é um cículo azul.</title>
+  </use>
+</svg>

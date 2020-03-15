@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<escola>
+    <turma>
+        <aluno>Joao Da Silva</aluno>
+        <aluno>Paulo Francisco</aluno>
+        <aluno>Pedro Cesar</aluno>
+        <aluno>Fernando Oliveira</aluno>
+    </turma>
+    <turma>
+        <aluno>Maria Costa</aluno>
+        <aluno>Franciele Souza</aluno>
+        <aluno>Amanda Rosa</aluno>
+        <aluno>Mariana Lima</aluno>
+    </turma>
+</escola>

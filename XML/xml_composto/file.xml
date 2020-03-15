@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="file.css" ?>
+<root>
+    <title>Exemplo XML</title>
+    <values>
+        <value>
+            <id>1</id>
+            <prop>Meu Primeiro valor</prop>
+        </value>
+        <value>
+            <id>2</id>
+            <prop>Meu segundo valor</prop>
+        </value>
+        <value>
+            <id>3</id>
+            <prop>Meu terceiro valor</prop>
+        </value>
+    </values>
+</root>

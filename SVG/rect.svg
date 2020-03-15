@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg">
+  <rect x='10' y='60' width='300' height='600' fill="yellow" stroke="blue" stroke-width="5px" transform="rotate(5)"/>
+  
+</svg>

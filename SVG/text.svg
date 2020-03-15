@@ -1,0 +1,24 @@
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title xml:lang="pt">Treinaweb Cursos</title>
+  <defs>
+    <g id="texto">
+      <text width="300px" height="60px" x="20" y="60" font-family="IM FELL English PRO" font-size="32pt">
+        Treinaweb Cursos
+      </text>
+      <text width="300px" height="60px" x="20" y="120" font-family="IM FELL English PRO" font-size="24pt">
+        Cursos online de
+        <tspan font-size="48">Tecnologia</tspan>
+      </text>
+      <text width="300px" height="60px" x="20" y="170" font-family="IM FELL English PRO" font-size="32pt" font-style="italic">
+        da
+      </text>
+      <text width="300px" height="60px" x="20" y="250" font-family="IM FELL English PRO" font-size="48pt">
+        informação.
+      </text>
+    </g>
+  </defs>
+  <g transform="translate(2, 2)">
+    <use xlink:href="#texto" fill="#1C1C1C"/>
+  </g>
+  <use xlink:href="#texto" fill="#1E90FF"/>
+</svg>
