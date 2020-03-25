@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Exemplo de tabelas</title>
+    </head>
+    <body>
+        <!-- 
+            border => grossura da borda da tabela;
+            bordercolor => a cor da borda;
+            cellspacing => espaço entre as celulas;
+            align => o alinhamento da tabela;
+            bgcolor => cor de background;
+            width => largura da tabela;
+            height => altura da tabela, auto é definido automaticamente com base na largura.
+            background => Imagem de fundo se for o caso.
+        -->
+        <table border="5" bordercolor="red" cellspacing="5px" cellpadding="10%"
+            align="center" bgcolor="#eee" width="50%" height="auto"
+        >
+            <caption>Aqui uma legenda sobre a tabela.</caption>
+            
+            <th>
+                <td>Titulo 1
+                <td>Titulo 2
+                <td>Titulo 3           
+
+            <tr>
+                <td> Valor 1
+                <td> Valor 2
+                <td colspan="2" bgcolor="red"> Valor 3
+        <!-- colspan e rowspan fazem com que as céluas ocupem mais de uma linha ou mais de uma coluna respectivamente. -->     
+        </table>
+
+        <table border="5" cellspacing="5px" cellpadding="10%"
+        align="center" background="bgimgs.jpg" width="50%" height="auto"
+        >
+        <!-- caption coloca uma legenda acima da tabela. -->
+            <caption>Aqui uma legenda sobre a tabela.</caption>
+
+            <th>
+                <td>Titulo 1
+                <td>Titulo 2
+                <td>Titulo 3  
+
+            <tr>
+                <td> Valor 1
+                <td> Valor 2                
+                <td rowspan="2" bgcolor="yellow"> Valor 3
+
+            <tr>
+                <td> Valor 1
+                <td> Valor 2
+                
+        </table>
+    </body>
+</html>
