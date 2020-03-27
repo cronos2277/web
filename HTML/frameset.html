@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            Frameset
+        </title>
+    </head>    
+    <!-- 
+        rows divide todos os elementos interno, sendo o primeiro 
+        ocupando 5% de espaço e o segundo 95% do espaço vertical
+        da página. 
+    -->
+    <frameset rows="5%,95%" >
+        <frameset>            
+            <frame src="header.html"/>
+        </frameset>
+        <!-- 
+            Aqui temos a mesma lógica, porem ao invés de colunas, 
+            temos o redirecionamento em horizontal, no caso
+            25% para a esquerda, 25% a direita e o restante ao centro.
+        -->
+        <frameset cols="25%,*,25%" >
+            <!-- 
+                o name pode ser usado como alvo de um target, no caso 
+                se houver um link o mesmo pode ser carregado dentro
+                do espaço delimitado dentro do name colocando o name
+                como valor do atributo target. O target tem essa utilidade
+                alem de abrir um link em uma nova pagina ou aba.
+            -->
+            <frame src="body-list.html" name="todos1" noresize>
+            <frame src="table.html" name="todos2" noresize>
+            <!-- noresize bloqueia o usuário de redimencionar os frame -->
+            <frame src="body-list.html" name="todos3" noresize>
+        </frameset> 
+    </frameset>
+    <!-- 
+        Frameset permite colocar outras paginas uma dentro da outra,
+        como se fosse um container. Repare que nessa pagina nao tem 
+        um body. Essa forma de se fazer layout está obsoleta.
+    -->
+</html>
