@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Formulário</title>
+    </head>
+    <body>
+        <form>
+            <label for="var">Input Simples</label>
+            <!-- maxlenght define o número máximo de caracteres, o size o tamanho do campo. -->
+                <input type="text" id="var" name="var" maxlength="20" size="20"/>
+                <br><br>
+            <label>Opcoes</label>
+            <!-- repare que o name dos três radio buttons são os mesmos, do contrário ao marcar um não desmarcaria o outro. -->
+                <input type="radio" id="opcoes" name="opcoes" value="opt1"/> OPT1
+                <input type="radio" id="opcoes" name="opcoes" value="opt2"/> OPT2 
+                <input type="radio" id="opcoes" name="opcoes" value="opt3"/> OPT3 
+                <br><br>
+            <label>Checkbox</label>
+            <!-- Aqui no checkout, temos a lógica oposta ao do radio acima, tudo isso porque o name é diferente. -->
+                <input type="checkbox" id="chk1" name="chk1" /> CHK1
+                <input type="checkbox" id="chk2" name="chk2" /> CHK2
+                <input type="checkbox" id="chk3" name="chk3" /> CHK3
+                <br><br>
+            <label>Select</label>
+                <select>
+                    <option value="1">Valor1</option>
+                    <option value="2">Valor2</option>
+                    <option value="3">Valor3</option>
+                    <option value="4">Valor4</option>
+                    <option value="5">Valor5</option>
+                    <option value="6">Valor6</option>
+                </select>
+                <br><br>
+            <label>Multiple Select</label>
+            <br>
+            <!-- A grande diferença de um select para uma lista como a de baixo, é a presença do atributo size e multiple. -->
+            <select size="6" multiple>
+                <!-- use o CTRL ou o shift caso queira selecionar mais de uma opção. -->
+                <option value="1">Valor1</option>
+                <option value="2">Valor2</option>
+                <option value="3">Valor3</option>
+                <option value="4">Valor4</option>
+                <option value="5">Valor5</option>
+                <option value="6">Valor6</option>
+            </select>
+            <br><br>
+            <label>Text Area</label> <br>
+            <textarea></textarea>
+            <br><br>
+            <input type="submit" value="Enviar!"/>
+            <!-- limpa qualquer valor do formulário, deixando-o com os valores padrões.-->
+            <input type="reset" value="Limpar!"/>
+            <!-- um botão customizável que pode ter o seu funcionamento feito via javascript. -->
+            <input type="button" value="Opção!"/>
+        </form>
+    </body>
+</html>
