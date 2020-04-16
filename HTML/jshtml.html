@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>    
+    <script>
+        window.onload = function(){
+            var a = "A altura é: "+window.screen.height; //Pegando altura.
+            var b = "A largura é: "+window.screen.width; //Pegando largura.
+            var c = window.event; //Objeto de event dentro do objeto window.            
+            document.getElementById('result1').innerText = a;
+            document.getElementById('result2').innerText = b;
+            
+        }
+    </script>
+</head>
+<body>
+    <marquee direction="right">
+        <!-- Faz o texto correr na direção especificada. -->
+        Texto correndo.
+    </marquee>
+    <blockquote>
+        <!-- Por padrão apenas da um espaçamento para colocar uma citação. -->
+        Uma Citação!
+    </blockquote>
+    <span id='result1'></span>
+    <br />
+    <span id='result2'></span>
+    <br />
+    <span id='result3'></span>
+</body>
+</html>
