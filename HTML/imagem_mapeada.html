@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Exemplo de Imagem Mapeada</title>
+    </head>
+    <body>
+        <div>
+        <!-- Caso você queira usar mapeamento na imagem, você informa o nome do nome, usando de # como prefixo.-->    
+            <img src ="links.png" usemap="#mapeamento"/>
+        <!-- Aqui temos um exemplo de mapeamento, o mesmo é citado na img acima. -->
+            <map name ="mapeamento">    
+                <!-- Aqui temos um exemplo de uso.-->
+                <area shape="rect" coords="0,0,160,80" onClick="alert('Clicado no link1');" />
+                <area shape="rect" coords="0,0,430,80" onClick="alert('Clicado no link2');"/>
+                <area shape="rect" coords="0,0,700,80" onClick="alert('Clicado no link3');"/>     
+                <area shape="rect" coords="0,0,970,80" onClick="alert('Clicado no link4');"/>                 
+            </map>      
+        </div>
+        <!-- 
+            shape é a forma, existe também o circle e triangle, que no caso tem 3 coordenadas, nesse caso
+            temos um retangulo e o retangulo tem 4 cordenadas. O primeiro par é a cordenada X e Y da onde
+            começa a área, o segundo par é aonde termina a coordenada desse retangulo. Vamos imaginar um
+            retangulo 100 por 100 e no caso queremos, prencher todo o retangulo. Nesse caso começamos
+            em zero de largura e altura, ou seja (0,0) e teminaremos aonde esta o "ultimo" pixel vamos
+            dizer assim que estaria na posição 100 em x e 100 em Y, nesse caso ficaria (100,100), nesse
+            caso a nossa seleção ficaria assim: <area shape="rect" coords="0,0,100,100" />
+        -->
+    </body>
+</html>
