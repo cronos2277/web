@@ -93,7 +93,12 @@
     <input form="meuForm" type="date" name="data" /> <!-- Cria um campo específico para datas -->
     <input form="meuForm" type="color" name="cor" /> <!-- cria um campo específico para cores. -->
     <br />
-    <!-- cria uma barra, se totalmente para esquerda zero, se totalmente a direita 100 -->
+    <!-- 
+        Cria uma barra, se totalmente para esquerda zero, se totalmente a direita 100, isso por padrão.
+        você poderia informar um "min" contendo o valor minimo para quando a barra estiver a extrema esquerda, 
+        um "max" com o valor maximo, para quando a barra estiver a extrema direita e um "step" contendo
+        o quando a barra varia quando se arrasta por um lado ou outro.
+    -->
     <input form="meuForm" type="range" name="barra" /> <br />    
     <!-- Abre uma janela para você adicionar um arquivo do pc. -->
     <input form="meuForm" type="file" name="arquivo" /> 
@@ -110,5 +115,7 @@
     <br /> <input form="meuForm" name="horas" type="time" />
     <!-- Campo específico para Numeros.-->
     <br /> <input form="meuForm" type="number" name="numero" value="0"/>
+    <!-- Esse é um campo de url, a url deve ser válida, inclusive com o http incluso. -->
+    <br /> <input form="meuForm" type="url" name="site"/>
     <br /><input form="meuForm" type="submit" name="submeta" value="Submeter Normal Igual ao Outro!" />
 </html>
