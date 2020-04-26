@@ -2,6 +2,19 @@
 <html>
     <head>
         <title>Formulário:HTML 5</title>
+        <style>
+            label{
+                font-weight: 900;
+                color:blue;
+                font-size: 20px;
+            }
+
+            span{
+                font-weight: 900;
+                color:red;
+                font-size: 20px;
+            }
+        </style>
     </head>
     <!-- 
         accept-charset => Pode ser útil, caso a codificação da pagina seja diferente da codificação
@@ -33,12 +46,19 @@
         enctype="multipart/form-data" id="meuForm" target="_blank"
     >
         <!-- O Autofocus faz com que o elemento seja selecionado assim que renderizado. -->
-        <input type="text" autofocus list="lista" id="myinput" name="myinput" placeholder="Input com listas"/> <br />
+        <!-- Required torna o campo obrigatório. -->
+        <label>Input com listas: </label>
+        <input type="text" autofocus list="lista" id="myinput" name="myinput" placeholder="Input com listas" onchange="updating(myinput,listaSpan)" required/> 
+        <span id="listaSpan">NULL</span>
+        <br />
         <!-- 
             Você pode criar campos customizáveis através do pattern, no caso fizemos um para o cep.
             Você deve informar a expressão regular, sem o "^" e "$", seguindo o exemplo abaixo: 
         -->
-        <br />  <input type="text" pattern="\d{5}-\d{3}" placeholder="CEP, Ex: 12345-123" name="cep"/> <br /> 
+        <br />  
+        <label>Input com Pattern: </label>
+        <input type="text" pattern="\d{5}-\d{3}" placeholder="CEP, Ex: 12345-123" name="cep" id="cep" onchange="updating(cep,cepSpan)"/>
+        <span id="cepSpan">NULL</span><br /> 
         <!-- 
             Exibe uma lista de valores no campo input, o id do datalist deve bater com o atributo 
             list do input text. O label é o nome que será exibido na lista e o value o valor, quando
@@ -90,32 +110,66 @@
         Você pode encorporar um campo ao formulário usando o atributo form. O valor do form deve ser identico
         ao id do formulário para funcionar, ou seja form="ID_DO_FORMULARIO_QUE_VOCE_QUER".
     -->
-    <input form="meuForm" type="date" name="data" /> <!-- Cria um campo específico para datas -->
-    <input form="meuForm" type="color" name="cor" /> <!-- cria um campo específico para cores. -->
-    <br />
+    <label>Input de date: </label><input form="meuForm" type="date" name="data" id="data" onchange='updating(data,dataSpan);'/> 
+    <span id="dataSpan">NULL</span>
+    <br /><!-- Cria um campo específico para datas -->
+    <label>Input para Color: </label><input form="meuForm" type="color" name="cor" id="cor" onchange='updating(cor,color);' /> 
+    <span id="colorValue">#000</span>
+    <br /> <!-- cria um campo específico para cores. -->    
     <!-- 
         Cria uma barra, se totalmente para esquerda zero, se totalmente a direita 100, isso por padrão.
         você poderia informar um "min" contendo o valor minimo para quando a barra estiver a extrema esquerda, 
         um "max" com o valor maximo, para quando a barra estiver a extrema direita e um "step" contendo
         o quando a barra varia quando se arrasta por um lado ou outro.
     -->
-    <input form="meuForm" type="range" name="barra" /> <br />    
+    <label>Input Range: </label><input form="meuForm" type="range" name="barra" id="barra" onchange='updating(barra,range);'/> 
+    <span id="rangeValue">50</span><br />  
     <!-- Abre uma janela para você adicionar um arquivo do pc. -->
-    <input form="meuForm" type="file" name="arquivo" /> 
+    <label>Input file: </label><input form="meuForm" type="file" name="arquivo" />  <br />
     <!-- 
         Essa é a imagem. Quando clicado na imagem é enviado o name.x e o name.y da posição que você clicou. 
         ou seja, como a variavel tem o nome de imagem, é enviado dois atributos quando se clica na imagem
         junto de todos os outros elementos do formulário, no caso seguindo esse campo criado abaixo,
         imagem.x e imagem.y contendo a posição x e y clicada.
     -->
-    <br /> <input form="meuForm" type="image" name="imagem" src="bgimgs.jpg"/>
+    <label>Input Image: </label>
+    <br /><input form="meuForm" type="image" name="imagem" src="bgimgs.jpg"/>
     <!-- Caompo customizável para e-mail. -->
-    <br /> <input form="meuForm" type="email" name="email" placeholder="seuEmail@email.com"/>    
+    <br /><label>Input Email:</label> <input form="meuForm" type="email" id="emailId" name="email" 
+    placeholder="seuEmail@email.com" onchange='updating(emailId,emailSpan);'/>
+    <span id="emailSpan">Null</span>    
     <!-- Campo específico para horas e minutos. -->
-    <br /> <input form="meuForm" name="horas" type="time" />
+    <br /> <label>Input Time: </label><input form="meuForm" name="horas" type="time" id="timeId" 
+    onchange='updating(timeId,timeSpan);'/><span id="timeSpan">Null</span> 
     <!-- Campo específico para Numeros.-->
-    <br /> <input form="meuForm" type="number" name="numero" value="0"/>
+    <br /> <label>Input Number: </label> <input form="meuForm" type="number" name="numero" value="0" id="numeroId" 
+    onchange='updating(numeroId,numeroSpan);'/><span id="numeroSpan">0</span> 
     <!-- Esse é um campo de url, a url deve ser válida, inclusive com o http incluso. -->
-    <br /> <input form="meuForm" type="url" name="site"/>
+    <br /> <label>Input URL: </label><input id="urlId" form="meuForm" type="url" name="site" placeholder="Ex: http://www.seusite.com"
+    onchange='updating(urlId,urlSpan);'/><span id="urlSpan">Null</span> 
     <br /><input form="meuForm" type="submit" name="submeta" value="Submeter Normal Igual ao Outro!" />
+    <script>
+        function updating(self,target){
+            target.textContent = self.value;
+        }
+
+        const range = document.getElementById("rangeValue");
+        const barra = document.getElementById("barra");        
+        const color = document.getElementById("colorValue");        
+        const cor = document.getElementById("cor");        
+        const myinput = document.getElementById("myinput");        
+        const listaSpan = document.getElementById("listaSpan");        
+        const cep = document.getElementById("cep");        
+        const cepSpan = document.getElementById("cepSpan");        
+        const data = document.getElementById("data");        
+        const dataSpan = document.getElementById("dataSpan");        
+        const emailId = document.getElementById("emailId");        
+        const emailSpan = document.getElementById("emailSpan");        
+        const timeId = document.getElementById("timeId");        
+        const timeSpan = document.getElementById("timeSpan");        
+        const numeroId = document.getElementById("numeroId");        
+        const numeroSpan = document.getElementById("numeroSpan");        
+        const urlId = document.getElementById("urlId");        
+        const urlSpan = document.getElementById("urlSpan");        
+    </script>
 </html>
