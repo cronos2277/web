@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formulário:HTML 5</title>
+    </head>
+    <!-- 
+        accept-charset => Pode ser útil, caso a codificação da pagina seja diferente da codificação
+    de destino, no caso assim que o dado for enviado o mesmo será convertido a UTF-8, que é o
+    valor do "accept-charset" abaixo.
+        "accept" => Obsoleto. Você informa que tipo de dados o fomulário pode aceitar, lembrando é obsoleto.
+        "autocomplete" => Por padrão é "on". Caso off, desabilita-se a opção do campo ser preenchido com dados
+        alimentados anteriormente em campos que tem os mesmos id e ou name.
+        "enctype" => Forma com que os dados serão transmitidos ao destino, assim sendo:{
+
+            application/x-www-form-urlencoded => É o padrão, tudo que for caracter especial é mudado,
+            como espaço por exemplo que é trocado por um "+" e o & por %26% e codifica com base no accept-charset.
+
+            text/plain => A mesma coisa que o "application", mas não codifica com base no accept-charset ou na
+            codificação da página, simplesmente envia o dado.
+
+            multipart/form-data => Não executa a codificação, no caso esse deve usar quando for fazer algum upload,
+            uma vez que com as outras codificação o upload pode dar problemas.
+        }
+        Target de formulário => acontece no submit {
+            _blank = "Em uma nova pagina",
+            _self = "na própria página",
+            _parent = "Na página pai",
+            _top = "na mesma pagina, porem de maneira expandida."
+        }
+    -->
+    <form 
+        method="get" accept-charset="UTF-8" accept="image/png, image/jpeg" autocomplete="on"
+        enctype="multipart/form-data" id="meuForm" target="_blank"
+    >
+        <!-- O Autofocus faz com que o elemento seja selecionado assim que renderizado. -->
+        <input type="text" autofocus list="lista" id="myinput" name="myinput" placeholder="Input com listas"/> <br />
+        <!-- 
+            Você pode criar campos customizáveis através do pattern, no caso fizemos um para o cep.
+            Você deve informar a expressão regular, sem o "^" e "$", seguindo o exemplo abaixo: 
+        -->
+        <br />  <input type="text" pattern="\d{5}-\d{3}" placeholder="CEP, Ex: 12345-123" name="cep"/> <br /> 
+        <!-- 
+            Exibe uma lista de valores no campo input, o id do datalist deve bater com o atributo 
+            list do input text. O label é o nome que será exibido na lista e o value o valor, quando
+            o mesmo é selecionado.
+        -->
+        <datalist id="lista">
+            <option label="Letra A" value="a"/>
+            <option label="Letra B" value="b"/>
+            <option label="Letra C" value="c"/>
+            <option label="Letra D" value="d"/>
+            <option label="Letra E" value="e"/>
+            <option label="Letra F" value="f"/>
+            <option label="Letra G" value="g"/>
+            <option label="Letra H" value="h"/>
+            <option label="Letra I" value="i"/>
+            <option label="Letra J" value="j"/>
+            <option label="Letra L" value="l"/>
+            <option label="Letra M" value="m"/>
+            <option label="Letra N" value="n"/>
+            <option label="Letra O" value="o"/>
+            <option label="Letra P" value="p"/>
+            <option label="Letra Q" value="q"/>
+            <option label="Letra R" value="r"/>
+            <option label="Letra S" value="s"/>
+            <option label="Letra T" value="t"/>
+            <option label="Letra U" value="u"/>
+            <option label="Letra V" value="v"/>
+            <option label="Letra W" value="w"/>
+            <option label="Letra X" value="x"/>
+            <option label="Letra Y" value="y"/>
+            <option label="Letra Z" value="z"/>
+        </datalist>
+        <br />
+        <input type="submit" value="Submeter Normal!"/>
+        <!-- 
+            Você pode fazer com que o envio seja alterado, para isso você pode colocar valores de formulários,
+            dentro de um campo submit, dessa forma voce faz uso dos atributos forms
+            formmethod => indica o metodo a ser usado.
+            formenctype => Indica a codificação.
+            formaction => A pagina que receberá os dados.
+            Resumindo o submit executa a ação com base em dados informados nos parametros ao invés de usar
+            os parametros informados no formulario, essa é uma forma de fazer um submit diferente do que
+            se espera do form.
+        -->
+        <input type="submit" formmethod="POST" formenctype="text/plain" formaction="formulario.html" value="Sbmt"/>        
+    </form>
+    <H2>Campo e botão fora do formulário, mas entregrado ao formulário acima.</H2>
+    <!-- 
+        Você pode encorporar um campo ao formulário usando o atributo form. O valor do form deve ser identico
+        ao id do formulário para funcionar, ou seja form="ID_DO_FORMULARIO_QUE_VOCE_QUER".
+    -->
+    <input form="meuForm" type="date" name="data" /> <!-- Cria um campo específico para datas -->
+    <input form="meuForm" type="color" name="cor" /> <!-- cria um campo específico para cores. -->
+    <br />
+    <!-- cria uma barra, se totalmente para esquerda zero, se totalmente a direita 100 -->
+    <input form="meuForm" type="range" name="barra" /> <br />    
+    <!-- Abre uma janela para você adicionar um arquivo do pc. -->
+    <input form="meuForm" type="file" name="arquivo" /> 
+    <!-- 
+        Essa é a imagem. Quando clicado na imagem é enviado o name.x e o name.y da posição que você clicou. 
+        ou seja, como a variavel tem o nome de imagem, é enviado dois atributos quando se clica na imagem
+        junto de todos os outros elementos do formulário, no caso seguindo esse campo criado abaixo,
+        imagem.x e imagem.y contendo a posição x e y clicada.
+    -->
+    <br /> <input form="meuForm" type="image" name="imagem" src="bgimgs.jpg"/>
+    <!-- Caompo customizável para e-mail. -->
+    <br /> <input form="meuForm" type="email" name="email" placeholder="seuEmail@email.com"/>    
+    <!-- Campo específico para horas e minutos. -->
+    <br /> <input form="meuForm" name="horas" type="time" />
+    <!-- Campo específico para Numeros.-->
+    <br /> <input form="meuForm" type="number" name="numero" value="0"/>
+    <br /><input form="meuForm" type="submit" name="submeta" value="Submeter Normal Igual ao Outro!" />
+</html>
