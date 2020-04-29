@@ -9,15 +9,15 @@
         #fillall{
             background-color: aqua;
         }
-        #rtl, #ltr{
+        #rtl, #ltr,#paragrafo1,#sim{
             background-color: blue;
             color:white;
         }
-        #hidden-true,#hidden-false{
+        #hidden-true,#hidden-false,#paragrafo2,#nao{
             background-color: red;
             color:white;
         }
-        #spellcheck-true,#spellcheck-false{
+        #spellcheck-true,#spellcheck-false,#paragrafo3{
             background-color: green;
             color:white;
         }
@@ -26,6 +26,9 @@
             background-color: black;
             color:whitesmoke;
             font-size: 20px;
+        }      
+        #bloco{
+            background-color: darkgray;
         }
     </style>
 </head>
@@ -68,6 +71,20 @@
         <input id="spellcheck-false" type="button" onclick="IsSpellcheck(false,input)" value="SPELLCHECK = 'FALSE'" title="Desabilita o corretor ortografico do input">     
         
     </div>
+    <div id="bloco">
+        <!-- 
+            contenteditable pode aceitar 3 valores: true, false ou inherit, se true,
+            permite que o usuario consiga editar o texto no navegador, se false, desabilita.
+            ja "inherit" habilita ou desabilita de acordo com o valor contenteditable do atributo
+            pai. Se o atributo pai tiver true ele assume verdadeiro, caso contrario false, tudo
+            depende do valor do no pai.
+        -->
+        <p contenteditable="true" id="paragrafo1">ELEMENTO 1 PODE SER EDITADO SEMPRE (DUPLO CLIQUE PARA EDITAR)</p>
+        <p contenteditable="false" id="paragrafo2">ELEMENTO 2 NÃO PODE SER EDITADO (TENTE DAR O DUPLO CLIQUE E VEJA)</p>
+        <p contenteditable="inherit" id="paragrafo3">ELEMENTO 3 PODE SER EDITADO DEPENDENDO DA DIV PAI (DEPENDE DO BOTAO QUE VOCE APERTAR, COM O SIM EDITE VOCE CONSEGUE EDITAR)</p>
+        <input type="button" value="SIM EDITE!" id="sim" onclick="contentEditabe(true)"/> 
+        <input type="button" value="NAO EDITE!" id="nao" onclick="contentEditabe(false)"/>
+    </div>
     <script>
         //Bloco do input
         const input = document.getElementById("inputExemplo");
@@ -101,6 +118,14 @@
                 element.spellcheck = true;
             }else{
                 element.spellcheck = false;
+            }
+        }
+        function contentEditabe(isTrue){
+            const bloco = document.getElementById("bloco");
+            if(isTrue){
+                bloco.contentEditable = "true";
+            }else{
+                bloco.contentEditable = "false";
             }
         }
 

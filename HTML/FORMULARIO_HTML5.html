@@ -40,7 +40,11 @@
             _parent = "Na página pai",
             _top = "na mesma pagina, porem de maneira expandida."
         }
+        Também tem o atributo tabindex, esse atributo controla a ordem de tabulacao, saindo do menor numero ao menor,
+        por exemplo voce coloca o primeiro elemento da tabulacao ou com autofocus como 1, e ai o proximo a ser preenchido
+        como 2, e assim ir ordenando todo o caminho que deve ser percorrido, quando o usuario pressionar tab.
     -->
+    <h2>Pressione TAB para ir ao proximo elemento.</h2>
     <form 
         method="get" accept-charset="UTF-8" accept="image/png, image/jpeg" autocomplete="on"
         enctype="multipart/form-data" id="meuForm" target="_blank"
@@ -48,7 +52,10 @@
         <!-- O Autofocus faz com que o elemento seja selecionado assim que renderizado. -->
         <!-- Required torna o campo obrigatório. -->
         <label>Input com listas: </label>
-        <input type="text" autofocus list="lista" id="myinput" name="myinput" placeholder="Input com listas" onchange="updating(myinput,listaSpan)" required/> 
+        <input type="text" autofocus list="lista" id="myinput" name="myinput" 
+            placeholder="Input com listas" onchange="updating(myinput,listaSpan)" required
+            tabindex="1"    
+        /> 
         <span id="listaSpan">NULL</span>
         <br />
         <!-- 
@@ -103,7 +110,7 @@
             os parametros informados no formulario, essa é uma forma de fazer um submit diferente do que
             se espera do form.
         -->
-        <input type="submit" formmethod="POST" formenctype="text/plain" formaction="formulario.html" value="Sbmt"/>        
+        <input type="submit" formmethod="POST" formenctype="text/plain" formaction="formulario.html" value="Sbmt" tabindex="4"/>        
     </form>
     <H2>Campo e botão fora do formulário, mas entregrado ao formulário acima.</H2>
     <!-- 
@@ -122,7 +129,7 @@
         um "max" com o valor maximo, para quando a barra estiver a extrema direita e um "step" contendo
         o quando a barra varia quando se arrasta por um lado ou outro.
     -->
-    <label>Input Range: </label><input form="meuForm" type="range" name="barra" id="barra" onchange='updating(barra,range);'/> 
+    <label>Input Range: </label><input form="meuForm" type="range" name="barra" id="barra" onchange='updating(barra,range);' tabindex="3"/> 
     <span id="rangeValue">50</span><br />  
     <!-- Abre uma janela para você adicionar um arquivo do pc. -->
     <label>Input file: </label><input form="meuForm" type="file" name="arquivo" />  <br />
@@ -143,11 +150,11 @@
     onchange='updating(timeId,timeSpan);'/><span id="timeSpan">Null</span> 
     <!-- Campo específico para Numeros.-->
     <br /> <label>Input Number: </label> <input form="meuForm" type="number" name="numero" value="0" id="numeroId" 
-    onchange='updating(numeroId,numeroSpan);'/><span id="numeroSpan">0</span> 
+    onchange='updating(numeroId,numeroSpan);' tabindex="2"/><span id="numeroSpan">0</span> 
     <!-- Esse é um campo de url, a url deve ser válida, inclusive com o http incluso. -->
     <br /> <label>Input URL: </label><input id="urlId" form="meuForm" type="url" name="site" placeholder="Ex: http://www.seusite.com"
     onchange='updating(urlId,urlSpan);'/><span id="urlSpan">Null</span> 
-    <br /><input form="meuForm" type="submit" name="submeta" value="Submeter Normal Igual ao Outro!" />
+    <br /><input form="meuForm" type="submit" name="submeta" value="Submeter Normal Igual ao Outro!" tabindex="5"/>
     <script>
         function updating(self,target){
             target.textContent = self.value;
