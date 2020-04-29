@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>HTML5 Inputs</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>    
+    <style>
+        #fillall{
+            background-color: aqua;
+        }
+        #rtl, #ltr{
+            background-color: blue;
+            color:white;
+        }
+        #hidden-true,#hidden-false{
+            background-color: red;
+            color:white;
+        }
+        #spellcheck-true,#spellcheck-false{
+            background-color: green;
+            color:white;
+        }
+        #tecla-aviso{
+            font-weight: 900;
+            background-color: black;
+            color:whitesmoke;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body contextmenu="share"> <!-- o valor do contextmenu, deve bater com o ID do menu. -->
+    <!-- 
+        O menu de contexto esta obsoleto e deixando de ser usando nos navegadores
+        mais novos, entao pode nao funcionar da maneira almejada.
+    -->
+    <menu type="context" id="share"> <!-- repare que o ID bate com o atributo contextmenu do body.-->
+        <menu label="share">
+            <menuitem label="MenuExemplo1" valor="1"></menuitem>
+            <menuitem label="MenuExemplo2" valor="2"></menuitem>
+        </menu>
+    </menu>
+    <div id="fillall">   
+        <span id="tecla-aviso">Pressione a Tecla "ALT+Q" para que o input tenha foco.</span>  <br />  
+        <!-- 
+            Aqui temos um exemplo de como funciona os atributos do campo input.
+            dir => se "ltr" (Padrão, texto da esquerda para a direita).
+            dir => se "rtl" (texto da direita para a esquerda).
+            hidden => (true) => oculta o elemento, (false, padrão) => exibe o elemento.
+
+            spellcheck => (true ou false) => Habilita e desabilita corretor ortografico, 
+            esse corretor ortografico faz a verificacao quando o usuario digita o valor
+            do input nesse exemplo de input. 
+
+            accesskey => aqui voce informa o caracter que o usuario deve usar para que 
+            esse elemento tenha foco, no caso do input abaixo, isso acontece quando
+            pressionado a tecla "ALT+Q", porem apenas o q eh informado, ficando subentendido
+            assim que voce precisa pressiona-lo na compania do "ALT".
+        -->   
+        <input type="text" dir="ltr" id="inputExemplo" placeholder="Exemplo de Texto"
+            spellcheck="true" accesskey="q" 
+        />
+        <input id="rtl" type="button" onclick="IsSettingRtl(true,input)"/ value="DIR = 'RTL'" title="Ao clicar o texto do input sera alinhado a direita">
+        <input id="ltr" type="button" onclick="IsSettingRtl(false,input)" value="DIR = 'LTR'" title="Ao clicar o texto do input sera alinhado a esquerda">        
+        <input id="hidden-true" type="button" onclick="Ishidden(true,input)" value="HIDDEN = 'TRUE'" title="Ao clicar o elemento sera ocultado">        
+        <input id="hidden-false" type="button" onclick="Ishidden(false,input)" value="HIDDEN = 'FALSE'" title="Ao clicar o elemento sera revelado">        
+        <input id="spellcheck-true" type="button" onclick="IsSpellcheck(true,input)" value="SPELLCHECK = 'TRUE'" title="Habilita o corretor ortografico do input">        
+        <input id="spellcheck-false" type="button" onclick="IsSpellcheck(false,input)" value="SPELLCHECK = 'FALSE'" title="Desabilita o corretor ortografico do input">     
+        
+    </div>
+    <script>
+        //Bloco do input
+        const input = document.getElementById("inputExemplo");
+        /*
+            Uma vez que voce tenha pego o elemento, "via getElment"
+            ou "getElements" voce podera por os atributos direto no
+            elmento, por exemplo, aqui pegamos um "input" e colocamos 
+            na variavel "input" via javascript, nesse caso por exemplo: 
+            "input.dir = 'rtl ou ltr'" ou "input.hidden = 'true ou false'"
+        */
+        function IsSettingRtl(isTrue,element){
+            //Aqui colocaremos um atributo no dir de acordo com o botao apertado.
+            if(isTrue){
+                element.dir = "rtl";
+            }else{
+                element.dir = "ltr";
+            }
+        }
+        function Ishidden(isTrue,element){
+            //Aqui deixamos o hidden verdadeiro ou falso. Nao use o hidden se quiser 
+            //que o elemento seja exibido.
+            if(isTrue){
+                element.hidden = true;
+            }else{
+                element.hidden = false;
+            }
+        }
+        function IsSpellcheck(isTrue,element){
+            //Aqui deixamos o spellcheck verdadeiro ou falso. Nao use o hidden se quiser           
+            if(isTrue){
+                element.spellcheck = true;
+            }else{
+                element.spellcheck = false;
+            }
+        }
+
+    </script>
+</body>
+</html>
