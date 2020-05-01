@@ -30,13 +30,39 @@
                 width: 45%;
                 height:33%;
             }
+            div#total{
+                width: 90%;
+                background:white;
+                margin-top:33%;
+                margin-left: 5%;
+                
+            }
             h1{
                 background-color: white;
                 margin-left:50%;
             }
+            h1#title-dropzone{
+                margin-left: 0px;                                
+            }            
             h2{
                 background-color: white;
             }
+            input[type=button]{
+                background-color: darkgray;
+                border-color: silver;      
+            }
+            .actions{
+                padding:15px;                
+                color:white;                          
+            }  
+            #total{
+                background-color:black;
+            }
+            #dropzone{
+                background-color: yellow;
+                width:100%;
+                height:20vh;
+            }                  
         </style>
     </head>
     <body>
@@ -63,6 +89,27 @@
             <span id="item-5" draggable="true" ondragstart="return dragStart(event)" ondragend="dragEnd(event)">item 5</span>
             <span id="item-6" draggable="true" ondragstart="return dragStart(event)" ondragend="dragEnd(event)">item 6</span>
         </div>
+        <br />        
+        <div id="total">
+            <!-- 
+                Dropzone eh uma caracteristica que ainda nao foi emplementada muito bem nos navegadoras, a ideia de um dropzone
+                eh que voce crie um espaco para que o usuario arraste um dado ou um arquivo para dentro desse aspaco e ai o
+                navegador pegue esse arquivo via copia, recorte ou link simbolico e encorpore na pagina, no caso ao arrastar
+                o arquivo ao espaco amarelo, a pagina vai abrir com o endereco de memoria do arquivo.
+            -->
+            <h1 id="title-dropzone">DropZone, arrasta arquivos para o espaco em amarelo:</h1>
+            <!-- As opcoes sao copy => cria uma copia ao arrastar, move => move ao arrastar e link, que cria um link simbolico quando arrastar-->
+            <!-- ondrop eh a funcao que ira ser disparada, quando um arquivo for soltado nesse retangulo amarelo (nesse Exemplo customizavel com css)-->
+            <div id="dropzone" dropzone="copy" ondrop="receber()">
+
+            </div>
+            <div id="btns">
+                <strong><span id="dropzone-action">DROPZONE=LINK</span></strong>
+                <input type="button" value="COPY" class="actions" onclick="dropzoneAction('copy')"/>
+                <input type="button" value="LINK" class="actions" onclick="dropzoneAction('link')"/>
+                <input type="button" value="MOVE" class="actions" onclick="dropzoneAction('move')"/>
+            </div>       
+        </div>
         <script>
             function dragStart(ev){
                 console.log('dragStart: Ativado quando começa a arrastar');
@@ -79,6 +126,17 @@
             }
             function dragEnd(ev){
                 console.log('dragEnd: Ativado quando a operacao Drag eh encerrado.');
+            }
+            function dropzoneAction(action){
+                document.getElementById('dropzone').dropzone= action;
+                document.getElementById('dropzone-action').innerText = "DROPZONE="+action;
+            }
+            function receber(){
+                const arquivo = event.dataTransfer.files[0];
+                if(arquivo[0].kind == 'file'){
+                    let imagem = new image();
+                    imagem.src = window.createObjectURL(arquivo[0].getAsfile());
+                }
             }
         </script>
     </body>
