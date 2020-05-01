@@ -41,28 +41,44 @@
     </head>
     <body>
         <h1>EXEMPLO DE DRAGGABLE</h1>
-        <h2>Arraste os Itens de um Container a outro</h2>
+        <h2>Arraste os Itens de um Container a outro. Ative o console do navegador para ver como funciona os eventos</h2>
         <br />
+        <!-- 
+            Os atributos:
+            "draggable" = true/false/auto. Precisa estar true para habilitar que o opcao de arrasto funcione, 
+            no auto o mesmo eh habilitado caso esteja habilitado por padrao no navegador.
+            --
+            "ondragstart" => Quando voce comeca a arrastar.
+            "ondragover" => Quando o elemento arrastado esta encima de um outro, pode ser interassante para efeitos de sobreposicao.
+            "ondrop" => Ativado quando voce larga o elemento.
+            "ondragend" => Ativando quando toda a operacao de arrasto eh encerrado. Pode ser útil para limpar a memória por exemplo.
+        -->
         <div id="left" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-            <span id="item-1" draggable="true" ondragstart="return dragStart(event)">item 1</span>
-            <span id="item-2" draggable="true" ondragstart="return dragStart(event)">item 2</span>
-            <span id="item-3" draggable="true" ondragstart="return dragStart(event)">item 3</span>
+            <span id="item-1" draggable="true" ondragstart="return dragStart(event)" ondragend="dragEnd(event)">item 1</span>
+            <span id="item-2" draggable="true" ondragstart="return dragStart(event)" ondragend="dragEnd(event)">item 2</span>
+            <span id="item-3" draggable="true" ondragstart="return dragStart(event)" ondragend="dragEnd(event)">item 3</span>
         </div>
         <div id="right" ondrop="return dragDrop(event)" ondragover="return dragOver(event)">
-            <span id="item-4" draggable="true" ondragstart="return dragStart(event)">item 4</span>
-            <span id="item-5" draggable="true" ondragstart="return dragStart(event)">item 5</span>
-            <span id="item-6" draggable="true" ondragstart="return dragStart(event)">item 6</span>
+            <span id="item-4" draggable="true" ondragstart="return dragStart(event)" ondragend="dragEnd(event)">item 4</span>
+            <span id="item-5" draggable="true" ondragstart="return dragStart(event)" ondragend="dragEnd(event)">item 5</span>
+            <span id="item-6" draggable="true" ondragstart="return dragStart(event)" ondragend="dragEnd(event)">item 6</span>
         </div>
         <script>
             function dragStart(ev){
+                console.log('dragStart: Ativado quando começa a arrastar');
                 ev.dataTransfer.setData("ID",ev.target.getAttribute('id'));
             }
             function dragOver(action){
+                console.log('dragOver: Ativado quando esta acima de um elemento');
                 return false;
             }
             function dragDrop(action){
+                console.log('dragDrop: Ativado quando o elemento eh largado');
                 let produtoSelecionado = action.dataTransfer.getData('ID');
                 action.target.appendChild(document.getElementById(produtoSelecionado));
+            }
+            function dragEnd(ev){
+                console.log('dragEnd: Ativado quando a operacao Drag eh encerrado.');
             }
         </script>
     </body>
