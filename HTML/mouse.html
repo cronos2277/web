@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exemplo de eventos com Mouse</title>
+        <style>
+            #main-box{
+                background-color: blue;
+                color:white;
+                width: 30%;
+                height: 30vh;
+                margin-left:30%;
+            }
+            #result{
+                font-size: 36px;
+                font-weight: 900;                
+            }
+            #print{
+                font-size: 24px;
+                font-weight: 900;
+                margin-left: 10%;
+            }
+        </style>
+    </head>
+    <body onkeypress="keyPress()" onkeydown="keyDown()" onkeyup="keyUp()" ondblclick="dblClick()">
+
+        <div id="main-box" onclick="clicar()" onmousedown="mouseDown()" onmouseup="mouseUp()" 
+        onmousemove="mouseMove()" onmouseout="mouseOut()" onmouseover="mouseOver()"
+        onmousewheel="mouseWheel()" 
+        >
+            <span id="result">Sem Evento</span>            
+        </div>
+        <p id="print">
+            Os eventos do mouse apenas vai funcionar quando o cursor estiver sobre o retangulo azul.<br />
+            O evento de teclado, funcione independente da posicao do cursor.<br />
+            O evento de clique duplo funciona no elemento body fora do retangulo, mas apenas esse evento.
+        </p>
+        <script>
+            function clicar(){ // onclick = Evento ativado quando der um click.
+                document.getElementById("result").innerText = "Evento: onclick";
+                console.log("Evento: onclick");
+            }           
+            function mouseDown(){ //onmousedown = Evento ativado ao pressionar algum botao do mouse.
+                document.getElementById("result").innerText = "Evento: onmousedown";
+                console.log("Evento: onmousedown");
+            }           
+            function mouseUp(){ //onmouseup = Evento ativado quando o botao do mouse eh solto.
+                document.getElementById("result").innerText = "Evento: onmouseup";
+                console.log("Evento: onmouseup");
+            }           
+            function mouseMove(){ //onmousemove = Evento ativado quando o cursor eh movimentado.
+                document.getElementById("result").innerText = "Evento: onmousemove";
+                console.log("Evento: onmousemove");
+            }           
+            function mouseOut(){ //oumouseout = Evento eh ativado quando o mouse sai do elemento.
+                document.getElementById("result").innerText = "Evento: onmouseout";
+                console.log("Evento: onmouseout");
+            }           
+            function mouseOver(){ //onmouseover = Evento eh ativado quando o cursor esta em cima do elemento.
+                document.getElementById("result").innerText = "Evento: onmouseover";
+                console.log("Evento: onmouseover");
+            } 
+            function mouseWheel(){ //onmousewheel = Evento eh ativado quando voce move a rodinha do mouse.
+                document.getElementById("result").innerText = "Evento: onmousewheel";
+                console.log("Evento: onmousewheel");
+            }          
+            function keyPress(){ //Ativado quando eh pressionado uma tecla comum, no alfabeto, acentos e numeros.
+                document.getElementById("result").innerText = "Evento: onkeypress";
+                console.log("Evento: onkeypress");
+            }          
+            function keyDown(){ //Ativado quando eh pressionado qualquer tecla, no caso esse evento eh mais abrangente.
+                document.getElementById("result").innerText = "Evento: onkeydown";
+                console.log("Evento: onkeydown");
+            }          
+            function keyUp(){ //Ativado quando a tecla eh soltada.
+                document.getElementById("result").innerText = "Evento: onkeyup";
+                console.log("Evento: onkeyup");
+            }          
+            function dblClick(){ 
+                //Ativado quando voce der um clique duplo, esse evento costuma ativar o onclick junto, uma vez que para dar dois cliques,
+                //ao dar o primeiro voce ativa o evento onclick, por isso esse evento esta em um elemento diferente do onclick. 
+                document.getElementById("result").innerText = "Evento: ondblclick";
+                console.log("Evento: ondblclick");
+            }          
+        </script>
+    </body>
+</html>
