@@ -6,14 +6,19 @@
     <title>HTML5</title>
     <style>
         #desenho{
-            width:100%;
-            height: 100%;
+            width:90%;
+            height: 90%;
             background-color:lightgray;
+        }
+        #imagem{
+            width:90%;
+            height: 90%;
         }
     </style>
 </head>
 <body>
     <canvas id="desenho">Não tem suporte a Canvas</canvas>
+    <canvas id="imagem">Não tem suporte a Canvas</canvas>
     <script>
         //o getContext deve conter uma string sendo ou 3d ou 2d, em minusculo.
         //Das 4 coordenadas:(posicao x, posicao y, tamanho x, tamanho y)
@@ -79,6 +84,17 @@
         desenho.closePath();
         //Soh eh desenhado quando esse metodo eh chamado.
         desenho.stroke(); 
+
+        //Criando canvas com imagem
+        const imagem = document.getElementById("imagem").getContext('2d'); 
+        let img = new Image(); //Criando uma nova imagem.
+        //Pegando a imagem
+        img.src = 'https://mdn.mozillademos.org/files/222/Canvas_createpattern.png';
+        img.onload = function() { //Para que funcione o mesmo deve estar anexado ao onload da imagem.
+            let pattern = desenho.createPattern(img, 'repeat'); //Criando um padrao, aqui como a imagem sera renderizada.
+            imagem.fillStyle = pattern; //Como qualquer objeto canvas voce deve passar a referencia pelo metodo fillStyle.
+            imagem.fillRect(0, 0, 300, 300); //Aqui voce define a posicao, ao qual sera exibido o conteudo.
+        };
     </script>
 </body>
 </html>
