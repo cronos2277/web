@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5</title>
+    <style>
+        #desenho{
+            width:100%;
+            height: 100%;
+            background-color:lightgray;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="desenho">Não tem suporte a Canvas</canvas>
+    <script>
+        //o getContext deve conter uma string sendo ou 3d ou 2d, em minusculo.
+        //Das 4 coordenadas:(posicao x, posicao y, tamanho x, tamanho y)
+        const desenho = document.getElementById("desenho").getContext('2d'); 
+        desenho.fillStyle="#00f"; //Cria o preenchimento.
+        desenho.fillRect(10,10,30,30); //Desenha um retangulo com base no preenchimento acima, 
+        desenho.fillStyle="#f0f"; //Cria o preenchimento.        
+        desenho.fillRect(50,30,50,50); //Desenha um retangulo com base no preenchimento acima 
+        desenho.clearRect(70,70,20,20); //Cria um corte no ultimo retangulo criado
+        desenho.strokeStyle = "#ff0"; //criando borda amarela.
+        desenho.lineWidth = 5; //Definindo espessura da borda acima.
+        desenho.strokeRect(9,9,31,31); //Desenhando a borda, que pegue todo o objeto.
+    </script>
+</body>
+</html>
