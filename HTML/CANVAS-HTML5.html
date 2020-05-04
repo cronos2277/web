@@ -26,6 +26,59 @@
         desenho.strokeStyle = "#ff0"; //criando borda amarela.
         desenho.lineWidth = 5; //Definindo espessura da borda acima.
         desenho.strokeRect(9,9,31,31); //Desenhando a borda, que pegue todo o objeto.
+
+        //Criando retangulo com gradiente linear
+        /*
+            createLinearGradient(x0,y0,x1,y1);
+            x0 => cordenada inicial de X.
+            y0 => cordenada inicial de Y.
+            x1 => cordenada final de X.
+            y1 => cordenada final de Y.
+
+            Voce precisa do metodo fillStyle, para informar em qual
+            Canvas sera desenhado, o fillRect informa a coordenada
+            X e Y, na qual deve ser desenhado esse degrade.
+        */
+        const gradient = desenho.createLinearGradient(0,0,0,40);
+        gradient.addColorStop(0,"#0ff");
+        gradient.addColorStop(1,"#ff0");
+        desenho.fillStyle = gradient;
+        desenho.fillRect(120,10,40,40)       
+
+        //Criando retangulo com gradiente radial.   
+        /*
+            createRadialGradient(x0,y0,r0,x1,y1,r1);
+            x0 => cordenada inicial de X.
+            y0 => cordenada inicial de Y.
+            x1 => cordenada final de X.
+            y1 => cordenada final de Y.
+            ---Radius
+            r0 => O raio do círculo inicial. Deve ser não negativo e finito.
+            r1 => O raio do círculo final. Deve ser não negativo e finito.
+
+            Voce precisa do metodo fillStyle, para informar em qual
+            Canvas sera desenhado, o fillRect informa a coordenada
+            X e Y, na qual deve ser desenhado esse degrade.
+        */     
+        const radial = desenho.createRadialGradient(20,20,10,70,70,200);
+        radial.addColorStop(0,"#f0f");
+        radial.addColorStop(1,"#0f0");
+        desenho.fillStyle = radial;
+        desenho.fillRect(120,70,40,40)
+
+        //Criando linhas
+        //Obrigado, aqui informamos para o canvas desenhar.
+        //move[line]To("cordenada X", "Cordenada Y")
+        desenho.beginPath();
+        //O moveTo contem a coordenada da onde deve conter a ser iniciado
+        desenho.moveTo(90,50);
+        //Da segunda coordenada em diante, usa-se o lineTo().
+        desenho.lineTo(20,100);
+        desenho.lineTo(80,100);
+         //Não eh obrigatorio, mas ela fecha a figura automaticamente.
+        desenho.closePath();
+        //Soh eh desenhado quando esse metodo eh chamado.
+        desenho.stroke(); 
     </script>
 </body>
 </html>
