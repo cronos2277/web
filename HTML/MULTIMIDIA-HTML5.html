@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .roxo{
+            background-color:purple;
+            color: white;
+            font-weight: 900;
+        }
+        .vermelho{
+            background-color:red;
+            color: white;
+            font-weight: 900;
+        }
+        .verde{
+            background-color:green;
+            color: white;
+            font-weight: 900;
+        }
+        .azul{
+            background-color:blue;
+            color: white;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <h1>Audio</h1>
+    <!-- 
+        controls = Habilita/desabilita a exibição de um player improvisado pelo navegador.
+        autoplay = Inicializa o audio automaticamente, dependendo das configurações do navegador.
+        loop = especifica se o audio vai rodar em loop ou nao.
+        preload = carrega previamente o arquivo, opcoes: {
+            Auto: deve carregar o arquivo de áudio inteiro quando a página carregar. (Padrão)
+            metadata: deve carregar apenas metadados quando a página carregar.
+            none: NÃO deve carregar o arquivo de áudio quando a página carregar.
+        }
+        src = Se for um arquivo de audio e em formato conhecido, você pode usar esse atributo e evitar os sources.
+        type = Aqui você especifica o codec para rodar o audio, caso o mesmo não seja de um formato popular, MP3 geralmente não precisa.
+    -->
+    <audio id="audio" controls autoplay="true" loop preload="metadata">
+        <!-- 
+            Source traz opções mais robustas para execução, no caso o navegador tenta executar o primeiro arquivo,
+            caso não funciona, ele tenta o segundo, e por ai vai. Aqui dentro da tag audio você coloca os audios
+            alternativos, ou a mensagem alternativa caso aconteça algum problema. Você pode ou não informar o codec.
+        -->        
+        <source src="multimidia/Eyes_of_Glory.wav" type="audio/wav"/> 
+        <source src="multimidia/Eyes_of_Glory.ogg" type="audio/ogg; codecs=vorbis"/>
+        <source src="multimidia/Eyes_of_Glory.mp3" type="audio/mpeg; codecs=mp3"/>
+        <p>O Seu navegador não suporta esse recurso. <a href="multimidia/Eyes_of_Glory.mp3">Clique aqui para download.</a></p>
+    </audio>
+    <hr>
+    <!-- 
+        O Player de audio está com o ID audio, no caso: "document.getElementById('audio')", se refere a ao player. 
+        As funções dos botões estão nos atributos onclick.
+        No caso do volume 1 => 100%, 0 => mudo. Se você aumentar em 1 o volume, você dobra o volume, recomenda-se
+        reduzir ou aumentar o volume em casa decimais do atributo volume.
+        Tambem existes certos atributos que podem ajudar a programar eventos.
+        --- MÉTODOS ---
+        .ended => Atributo booleano que informa se a execução foi concluida.
+        .error => Caso tenha erros, o mesmo será apresentado nesse atributo.
+        .muted => Atributo booleno que retorna se o audio está mudo ou não.
+        .paused => atributo booleano que retorna se o audio está pausado.        
+    -->
+    <button class="verde" onclick="document.getElementById('audio').play()">PLAY</button> <!-- o método play() executa. Todo elemento html audio tem esse js associado -->
+    <button class="verde" onclick="document.getElementById('audio').pause()">PAUSE</button> <!-- o método pause() para. Todo elemento html audio tem esse js associado -->  
+    <!-- currentTime é o atributorelativo ao tempo do audio, ele retorna o exato segundo que o audio esta reproduzindo. -->
+    <button class="verde"  onclick="document.getElementById('audio').currentTime += 1.5">FORWARD</button> <!-- quando aumenta o atributo currentTime o audio avança.-->
+    <button class="verde"  onclick="document.getElementById('audio').currentTime -= 1.5">BACK</button> <!-- quando diminui o atributo currentTime o audio retrocede.-->
+    <!-- Para parar, uma estratégia é zerar o atributo currentTime e depois pausar. -->
+    <button class="verde"  onclick="document.getElementById('audio').currentTime = 0;document.getElementById('audio').pause()">STOP</button> 
+    <button class="azul"  onclick="document.getElementById('audio').volume += 0.1">VOL+</button> <!-- Para aumentar o volume, você soma o valor lá. O padrão do volume é 1.-->
+    <button class="azul"  onclick="document.getElementById('audio').volume -= 0.1">VOL-</button> <!-- Para diminuir o volume, você subtrai o valor. O padrão do volume é 1.-->
+    <button class="azul"  onclick="document.getElementById('audio').volume = 0">MUTE</button> <!-- Ao colocar o atributo volume em zero, você deixa mudo. -->
+    <!-- Alterna a exibição/Ocultação do player-->
+    <button id="ctr" onclick="document.getElementById('audio').toggleAttribute('controls');" class="vermelho">Controls ON/OFF</button>    
+    <!-- Alterna se o audio vai rodar em loop ou não -->
+    <button id="loop" onclick="document.getElementById('audio').toggleAttribute('loop');" class="roxo">Loop ON/OFF</button> 
+    <!-- O atributo "currentSrc" exibe o Path do arquivo. -->
+    <button class="roxo"  onclick="document.getElementById('output').innerText = document.getElementById('audio').currentSrc">PATH</button> 
+    <!-- O atributo duration exibe a duração do audio. se você dividir a duração, pelo .currentTime você tem o tempo exato que está sendo exibido. -->
+    <button class="roxo"  onclick="document.getElementById('output').innerText = document.getElementById('audio').duration+' segundos'">DURATION</button>   
+    <hr>  
+    <span id="output"/>    
+</body>
+</html>
