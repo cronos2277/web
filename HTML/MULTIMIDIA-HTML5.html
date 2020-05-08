@@ -59,7 +59,7 @@
         No caso do volume 1 => 100%, 0 => mudo. Se você aumentar em 1 o volume, você dobra o volume, recomenda-se
         reduzir ou aumentar o volume em casa decimais do atributo volume.
         Tambem existes certos atributos que podem ajudar a programar eventos.
-        --- MÉTODOS ---
+        --- ATRIBUTOS ---
         .ended => Atributo booleano que informa se a execução foi concluida.
         .error => Caso tenha erros, o mesmo será apresentado nesse atributo.
         .muted => Atributo booleno que retorna se o audio está mudo ou não.
@@ -84,6 +84,8 @@
     <!-- O atributo duration exibe a duração do audio. se você dividir a duração, pelo .currentTime você tem o tempo exato que está sendo exibido. -->
     <button class="roxo"  onclick="document.getElementById('output').innerText = document.getElementById('audio').duration+' segundos'">DURATION</button>   
     <hr>  
+    
+    <!-- NESSA DIV SERÁ EXIBIDA A RESPOSTAS DE ALGUNS BOTÕES -->
     <span id="output"/>    
 </body>
 </html>
