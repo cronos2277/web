@@ -87,5 +87,32 @@
     
     <!-- NESSA DIV SERÁ EXIBIDA A RESPOSTAS DE ALGUNS BOTÕES -->
     <span id="output"/>    
+
+    <br /><br /><br />
+    <h1>Vídeo</h1>
+    <!-- 
+        A Tag video permite anexar um video a pagina, seus atributos são semelhantes ao de audio.
+        O Atributo Poster te permite colocar uma capa customizável em um video, dessa forma você pode criar thumbnails customizáveis.
+    -->
+    <video id="video" width="640px" height="480px" controls autoplay loop poster="multimidia/capa.png">
+        <source src="multimidia/lotus.mp4"/>
+    </video>
+    <hr>
+    <!-- No video repare que tem as mesmas funções que o Audio e algumas coisas a mais. Detalhe: O video colocado aqui é mudo.-->
+    <button class="verde" onclick="document.getElementById('video').play()">PLAY</button>
+    <button class="verde" onclick="document.getElementById('video').pause()">PAUSE</button>
+    <button class="verde"  onclick="document.getElementById('video').currentTime += 1.5">FORWARD</button> 
+    <button class="verde"  onclick="document.getElementById('video').currentTime -= 1.5">BACK</button>
+    <button class="verde"  onclick="document.getElementById('video').currentTime = 0;document.getElementById('video').pause()">STOP</button> 
+    <button class="azul"  onclick="document.getElementById('video').volume += 0.1">VOL+</button>
+    <button class="azul"  onclick="document.getElementById('video').volume -= 0.1">VOL-</button>
+    <button class="azul"  onclick="document.getElementById('video').volume = 0">MUTE</button>
+    <button id="ctr" onclick="document.getElementById('video').toggleAttribute('controls');" class="vermelho">Controls ON/OFF</button>  
+    <button id="loop" onclick="document.getElementById('video').toggleAttribute('loop');" class="roxo">Loop ON/OFF</button> 
+    <button class="roxo"  onclick="document.getElementById('output').innerText = document.getElementById('video').currentSrc">PATH</button> 
+    <button class="roxo"  onclick="document.getElementById('output').innerText = document.getElementById('video').duration+' segundos'">DURATION</button>  
+    <!-- No caso dos videos você pode aumentar ou reduzir o tamanho do video, manipulaando o atributo width e height. -->
+    <button class="vermelho"  onclick="document.getElementById('video').width *= 2;document.getElementById('video').height *= 2">Aumentar</button>
+    <button class="vermelho"  onclick="document.getElementById('video').width /= 2;document.getElementById('video').height /= 2">Reduzir</button>
 </body>
 </html>
