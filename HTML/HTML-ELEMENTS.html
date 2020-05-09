@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        Dentro do details fica todo o conteúdo, uma vez que o usuario clique
+        para ver. No summary é exibido um breve resumo, que ao ser clicado,
+        mostra o conteúdo do Detals.
+    -->
+    <details>
+        <p>Aqui fica os detalhes</p>
+        <p>Mais detalhes.</p>
+        <summary>Apenas o resumo :)</summary>
+    </details>
+    <br />
+    <menu>
+        <!-- Dessa forma você cria um menu. -->
+        <command>Menu-item: 1</command>
+        <command>Menu-item: 2</command>
+        <command>Menu-item: 3</command>
+    </menu>
+    <br />
+    <!-- mark serve para fazer uma marcação, por padrão coloca um fundo amarelo no texto. -->
+    <p>Exemplo de texto com <mark>marcação</mark></p>
+    <br>
+    <!-- 
+        Exibe uma barra, caso o navegador não suporte por algum motivo, exibe o conteúdo
+        de dentro das tags.
+        Obrigatório min, max, value. O value significa o valor que está agora.
+    -->
+    <div>        
+        <span>A Animação é feita por Javascript, tag "meter"</span><br />
+        <meter id="meter" min=0 max=100 value=0>Exibir essa mensagem, caso o navegador não suporte</meter>
+    </div>
+    <div>        
+        <span>A Animação é feita por Javascript, tag "progess"</span><br />
+        <progress id="progress" min=0 max=100 value=0>Exibir essa mensagem, caso o navegador não suporte</progress>
+    </div>
+    <br />
+    <time datetime="2020-05-09" pubdate>Data de publicação</time>
+    <script>        
+        let regularMeter = setInterval(function(){ 
+            if( document.getElementById('meter').value > 99){
+                document.getElementById('meter').value = 0;
+            }else{
+                document.getElementById('meter').value +=1;
+            }
+        }, 100);
+        let regularProgress = setInterval(function(){ 
+            if( document.getElementById('progress').value > 99){
+                document.getElementById('progress').value = 0;
+            }else{
+                document.getElementById('progress').value +=1;
+            }
+        }, 100);
+        
+    </script>
+</body>
+</html>
