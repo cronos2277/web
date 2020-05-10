@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HTML-elements</title>
 </head>
 <body>
     <!-- 
@@ -42,6 +42,67 @@
     </div>
     <br />
     <time datetime="2020-05-09" pubdate>Data de publicação</time>
+    <br />
+    <!-- 
+        oninput é um evento ativado quando se tem qualquer entrada de dados, diferente do onchange esse evento
+        é chamado assim que é inserido algum dado no campo, por exemplo:
+        Se você digitar 15, assim que você terminar de digitar 1 o "oninput" é acionado, ao tempo de que
+        o onchange é ativado quando você confirma o dado dando enter ou fazendo algo que confirma o valor do
+        input. Ao ser feito um input é executado a função myinput.
+    -->
+    <form method="get" name="formulario" oninput="out.value = myinput()">
+        <input type="number" id="num1" value="0" /> <br />
+        <select id="operacao">
+            <option value="+">Soma</option>
+            <option value="-">Subtração</option>
+            <option value="*">Multiplicação</option>
+            <option value="/">Divisão</option>
+        </select>        <br />
+        <input type="number" id="num2" value="0"/><br />
+        ------------------------------------ <br />        
+        <output name="out" value="0" />
+    </form>
+    <br />
+    <ruby>
+        Exemplo de texto.
+        <rt>Texto abaixo explicado</rt>
+        <rp>Texto caso não tenha suporte para a tag ruby.</rp>
+    </ruby>
+    <br />
+    <!-- 
+        O WBR da uma quebra de linha se necessário. O Br faz isso automaticamente, 
+        porém o WBR, Faz isso de acordo com o tamanho da tela. Se tiver espaço
+        mostra todo o conteúdo sem dar a quebra de linha, caso contrário da a 
+        quebra de linha. Isso pode ajudar na responsividade dos textos.
+    -->
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. <wbr>
+    Nunc placerat eleifend mauris eget feugiat.  <wbr>
+    Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. <wbr>
+    Sed mattis mauris non ultrices sollicitudin. In posuere maximus egestas. <wbr>
+    Ut elementum congue massa. <wbr>
+    Nullam a libero mauris. <wbr>
+    Ut nisi erat, placerat eget laoreet vel, suscipit at lectus. <wbr>
+    Vivamus rhoncus, libero sit amet pretium pretium, purus elit facilisis elit, a sagittis sem diam nec sem. <wbr>
+    Curabitur mollis enim ligula. <wbr>
+    Interdum et malesuada fames ac ante ipsum primis in faucibus. <wbr>
+    Curabitur diam ex, eleifend non erat a, volutpat consectetur metus. <wbr>
+    Nullam lectus ex, viverra quis interdum nec, iaculis sit amet mi. <wbr>
+    Maecenas in arcu magna. <wbr>
+    Quisque sit amet tellus ac turpis feugiat porta.<wbr>
+    Proin a erat nec metus elementum varius. <wbr>
+    Nulla aliquam mauris mi, ut fermentum nulla pulvinar sit amet.<wbr>
+    Phasellus iaculis consectetur tortor, eu faucibus est efficitur quis.   <wbr>  
+    <br />
+    <!-- O hgroup permite criar um container para os H -->
+    <hgroup>
+        <h1>Exemplo De H1</h1>
+        <h2>Exemplo De H2</h2>
+        <h3>Exemplo De H3</h3>
+        <h4>Exemplo De H4</h4>
+        <h5>Exemplo De H5</h5>
+        <h6>Exemplo De H6</h6>
+    </hgroup>
+    <br />
     <script>        
         let regularMeter = setInterval(function(){ 
             if( document.getElementById('meter').value > 99){
@@ -58,6 +119,26 @@
             }
         }, 100);
         
+        function myinput(){
+            const num1 = document.getElementById('num1').value;
+            const operacao = document.getElementById('operacao').value;
+            const num2 = document.getElementById('num2').value;
+            /* 
+                Eval executa uma String como um código javascript, 
+                no caso se você quer que um código seja executado,
+                voce pode colocar o algoritimo dentro de uma string 
+                e mandar executar com eval. Exemplo:
+                const exiba = true;
+                const codigo = "alert('Executando codigo javascript')";
+                if(exiba){
+                    eval(codigo);
+                } 
+
+                Se a variavel exiba for verdadeira, é exibido uma janela
+                modal no navegador com a seguinte mensagem: 'Executando codigo javascript'
+            */    
+            return eval(num1+operacao+num2);
+        }             
     </script>
 </body>
 </html>
