@@ -11,27 +11,52 @@
         Local Storage => mantém os dados mesmo que saia pagina ou fecha o navegador.
         Ambos possuem as mesmas estruturas, ou seja os mesmos metodos e atributos.
     -->
+    <br>
+    <h2>Session Storage e Local Storage</h2>
+    <hr>
     <div>
-        <label>Setting Session Storage:<input type="number" id="num1" oninput="setting()"></label>
+        <label>Setting Session Storage:<input type="number" id="num1" oninput="setting()" style="margin-left: 10px;"></label>
         <br />
-        <label>Setting Local Storage: <input type="number" id="num2" oninput="setting()"></label>
+        <label>Setting Local Storage: <input type="number" id="num2" oninput="setting()" style="margin-left: 19px;"></label>
     </div>
+    <br />
     <table border="1px">
-        <tr>
-            <td>Session Storage</td>
-            <td>Local Storage</td>       
-        </tr>
-        <tr>
-            <td id="session">Null</td>
-            <td id="local">Null</td>        
-        </tr>
+        <thead>
+            <th>Session Storage</th>
+            <th>Local Storage</th>       
+        </thead>
+        <tbody>
+            <tr>
+                <td id="session">Null</td>
+                <td id="local">Null</td>        
+            </tr>            
+        </tbody>
     </table>
+    <br>
     <div>                
         <button onclick="remover(true)">Remove Session Storage</button>
         <button onclick="remover(false)">Remove Local Storage</button>
         <button onclick="clearAll()">Clear</button>
     </div>
-    <script>
+    <br>
+    <h2>Web SQL</h2>
+    <hr>
+    <table border="1px">
+        <thead>
+            <th>Codigo</th>
+            <th>Valor</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="codigo"></td>
+                <td id="valor"></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <td id="hasWebSqlSuport" colspan="2">Sem JS</td>
+        </tfoot>
+    </table>
+    <script language="javascript">
         function getting(){
             let session = document.getElementById('session');
             let local = document.getElementById('local');
@@ -90,6 +115,84 @@
         console.log("Quantidade de sessionStorage: "+ sessionStorage.length+", Chaves do sessionStorage:"+sessionStorage.key(0));     
         console.log("Quantidade de localStorage: "+ localStorage.length+", Chaves do localStorage:"+localStorage.key(0));     
         getting();
+        /*
+            WebSql.
+            Tratar a funcao como um atributo, se ela existe retorna true, caso contrario retorna false. No javascript,
+            valores como null ou undefined retornam o valor como falso se avaliado em uma analise booleana, caso
+            a funcao "openDatabase" nao exista, sera retornada false, uma vez que undefined eh falso quando em contexto
+            booleano, porem caso essa funcao exista, esse valor existe e com isso, dentro de um contexto de booleano,
+            temos um valor verdadeiro. 
+        */
+        if(window.openDatabase){ //Dessa forma voce pode saber se o navegador vai ter suporte.
+            document.getElementById('hasWebSqlSuport').innerText = "Ativado";
+            const nomeDoBancoDeDados = "Banco"; //Primeiro Parametro, o nome do banco de dados.
+            const versaoDoBancoDeDados = "1.0"; //Segundo Parametro, a versao do banco de dados.
+            const descricaoDoBancoDeDados = "Exemplo de um Web SQL"; //Terceiro Parametro, uma descricao do que eh o banco de dados.
+            const tamanhoDoBancoDeDadosEmBytes = 1 * (1024 * 1024); //Ultimo parametro, voce precisa informar quantos bytes vai ter o BD.
+            var banco = openDatabase(nomeDoBancoDeDados,versaoDoBancoDeDados,descricaoDoBancoDeDados,tamanhoDoBancoDeDadosEmBytes);
+            //Com o metodo transaction, permite executar Query no WebSql, ela aceita uma callback como parametro, essa callback deve ter um parametro.
+            banco.transaction(
+                callbackTransacoesNoBancoDeDados    //use o metodo transaction para isso, mais explicado abaixo, na linha Callback do Transaction.        
+            );  
+        }else{
+            //No firefox não deu suporte, parece que foi desabilitado nesse navegador. Recomendo nao usar Web SQL em ambiente de producao.
+            document.getElementById('hasWebSqlSuport').innerText = "Desativado";
+        }
+
+        //Callback do Transaction do Web SQL.
+        function callbackTransacoesNoBancoDeDados(parametroTransacao){
+            
+            //Voce pode executar comandos DDL, perceba que nao eh especificado o tipo do valor, parece que alguns atributos do SQL eh aceito.
+            parametroTransacao.executeSql('create table if not exists tabela (codigo,valor)');
+            //Voce pode inserir valores como um banco de dados relacional.
+            parametroTransacao.executeSql('insert into tabela values (1,"Valor1")');  
+            /*
+                Voce pode tambem usar o executeSql de outra forma, no caso apenas o primeiro parametro eh obrigatorio, e os outros 3 opcionais.
+                .executeSql(QUERY,ARRAY,CALLBACK_SUCESSO,CALLBACK_ERRO);
+
+                Query => {
+                    Obrigatório, aqui voce coloca a query a ser executada, com os ? caso voce nao queria fazer concatenacao de strings, exemplo:
+                    insert into tabela (codigo,valor) values (?,?), aonde esta os interrogacoes eh aonde deve ser colocado os valores.
+                }
+
+                ARRAY => {
+                    Aqui voce coloca em sequencia os parametros equivalente aos interrogacoes na query. Sendo o primeiro valor do array
+                    equivalente ao primeiro interrogacao, o segundo valor ao segundo interrogacao da String e por ai vai... Use 
+                    um array vazio caso nao tenha parametros e voce queira usar uma callback de erro e ou acerto ou omita se nao.
+                }
+
+                CALLBACK_SUCESSO => {
+                    Aqui voce passa a funcao, caso a execucao ocorra sem problemas, sendo o primeiro parametro SQL TRansaction, ou seja
+                    o objeto que executa a query, e o segundo um do tipo SQLResultSet que tem os seguintes atributos:{
+                        "insertId" => Retorna o ID gerado automaticamente, "rowsAffected" => retorna a quantidade de linhas afetadas,   
+                        e um objeto "rows" que contém um atributo length                         
+                    }
+                }
+
+                CALLBACK_ERRO =>{
+                    Aqui o primeiro atributo eh do mesmo tipo que o da callback de sucesso do tipo SQL TRansaction, porem o que
+                    difere eh exatamante o segundo parametro, que eh do tipo SQLError que contem dois atributos.
+                    SQLError => {
+                        "code" => retorna um codigo numerico.
+                        "message" => retorna uma string explicando em ingles a natureza do erro.
+                    }
+                }
+            */          
+            
+            //Callback para Sucesso. O resultado eh o proprio objeto SQLTransaction e a mensagem o objeto SQLResultSet
+            const sucesso = (resultado,mensagem) => {console.log("SUCESSO!");console.log("Objeto Resultado:",resultado);console.log("Objeto Mensagem:",mensagem)};
+            
+            //Callback para Erro. O resultado eh o proprio objeto SQLTransaction e a mensagem o objeto SQLResultSet
+            const erro = (resultado,mensagem) => {console.log("ERRO!");console.log("Objeto Resultado:",resultado);console.log("Objeto Mensagem:",mensagem);console.warn("Erro acima eh proposital:");};
+            
+            //A outra forma de se executar o executeSql. Repare que dessa forma eh semelhante ao Prepare das outras linguagens de programacao.
+            parametroTransacao.executeSql('insert into tabela (codigo,valor) values (?,?)',[2,'valor2'],sucesso,erro); 
+
+            //Um terceiro exemplo, esse dara errado devido a query defeituosa colocando1 nos valores, para ver como funciona a callback de erro.            
+            parametroTransacao.executeSql('insert into tabela (codigo1,valor1) values (3,"valor3")',[],sucesso,erro); 
+            
+        }
+
     </script>
 </body>
 </html>
