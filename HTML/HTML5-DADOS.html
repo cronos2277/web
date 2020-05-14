@@ -47,10 +47,8 @@
             <th>Valor</th>
         </thead>
         <tbody>
-            <tr>
-                <td id="codigo"></td>
-                <td id="valor"></td>
-            </tr>
+            <tr id="codigo"></tr>
+            <tr id="valor"></tr>
         </tbody>
         <tfoot>
             <td id="hasWebSqlSuport" colspan="2">Sem JS</td>
@@ -124,6 +122,7 @@
             temos um valor verdadeiro. 
         */
         if(window.openDatabase){ //Dessa forma voce pode saber se o navegador vai ter suporte.
+            var atributo = null;  //Essa variavel contem os dados do banco de dados WebSql
             document.getElementById('hasWebSqlSuport').innerText = "Ativado";
             const nomeDoBancoDeDados = "Banco"; //Primeiro Parametro, o nome do banco de dados.
             const versaoDoBancoDeDados = "1.0"; //Segundo Parametro, a versao do banco de dados.
@@ -133,7 +132,7 @@
             //Com o metodo transaction, permite executar Query no WebSql, ela aceita uma callback como parametro, essa callback deve ter um parametro.
             banco.transaction(
                 callbackTransacoesNoBancoDeDados    //use o metodo transaction para isso, mais explicado abaixo, na linha Callback do Transaction.        
-            );  
+            );
         }else{
             //No firefox não deu suporte, parece que foi desabilitado nesse navegador. Recomendo nao usar Web SQL em ambiente de producao.
             document.getElementById('hasWebSqlSuport').innerText = "Desativado";
@@ -164,8 +163,12 @@
                 CALLBACK_SUCESSO => {
                     Aqui voce passa a funcao, caso a execucao ocorra sem problemas, sendo o primeiro parametro SQL TRansaction, ou seja
                     o objeto que executa a query, e o segundo um do tipo SQLResultSet que tem os seguintes atributos:{
-                        "insertId" => Retorna o ID gerado automaticamente, "rowsAffected" => retorna a quantidade de linhas afetadas,   
-                        e um objeto "rows" que contém um atributo length                         
+                        "insertId" => Retorna o ID gerado automaticamente, "rowsAffected" => retorna a quantidade de linhas afetadas.   
+                        "rows" => {
+                            "length" => Array que contém um atributo length com a quantidade de dados retornados
+                            Alem disso esse array contem dentro de si uma serie de objetos, cada um sendo uma tupla retornada
+                            do banco de dados de uma consulta do tipo "select * from tabela", eh dentro desse atributo
+                            que voce vai pegar os valores.
                     }
                 }
 
@@ -180,14 +183,26 @@
             */          
             
             //Callback para Sucesso. O resultado eh o proprio objeto SQLTransaction e a mensagem o objeto SQLResultSet
-            const sucesso = (resultado,mensagem) => {console.log("SUCESSO!");console.log("Objeto Resultado:",resultado);console.log("Objeto Mensagem:",mensagem)};
+            const sucesso = (resultado,mensagem) => {
+                console.trace("SUCESSO!");
+                console.log("Objeto Resultado:",resultado);
+                console.log("Objeto Mensagem:",mensagem);
+            };
             
             //Callback para Erro. O resultado eh o proprio objeto SQLTransaction e a mensagem o objeto SQLResultSet
-            const erro = (resultado,mensagem) => {console.log("ERRO!");console.log("Objeto Resultado:",resultado);console.log("Objeto Mensagem:",mensagem);console.warn("Erro acima eh proposital:");};
+            const erro = (resultado,mensagem) => {
+                console.trace("Erro!");
+                console.warn("Erro eh proposital:");                
+                console.log("Objeto Resultado:",resultado);
+                console.log("Objeto Mensagem:",mensagem);
+            };
             
             //A outra forma de se executar o executeSql. Repare que dessa forma eh semelhante ao Prepare das outras linguagens de programacao.
             parametroTransacao.executeSql('insert into tabela (codigo,valor) values (?,?)',[2,'valor2'],sucesso,erro); 
 
+            //Repare que podemos tambem executar uma query do tipo select, aqui estamos preenchendo a variavel atributo.
+            parametroTransacao.executeSql('select * from tabela',[],(_,msg) => atributo = msg);
+            
             //Um terceiro exemplo, esse dara errado devido a query defeituosa colocando1 nos valores, para ver como funciona a callback de erro.            
             parametroTransacao.executeSql('insert into tabela (codigo1,valor1) values (3,"valor3")',[],sucesso,erro); 
             
