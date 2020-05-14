@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 DADOS</title>
+</head>
+<body>
+    <!-- 
+        Session Storage => mantem os dados até sair da pagina de alguma forma.
+        Local Storage => mantém os dados mesmo que saia pagina ou fecha o navegador.
+        Ambos possuem as mesmas estruturas, ou seja os mesmos metodos e atributos.
+    -->
+    <div>
+        <label>Setting Session Storage:<input type="number" id="num1" oninput="setting()"></label>
+        <br />
+        <label>Setting Local Storage: <input type="number" id="num2" oninput="setting()"></label>
+    </div>
+    <table border="1px">
+        <tr>
+            <td>Session Storage</td>
+            <td>Local Storage</td>       
+        </tr>
+        <tr>
+            <td id="session">Null</td>
+            <td id="local">Null</td>        
+        </tr>
+    </table>
+    <div>                
+        <button onclick="remover(true)">Remove Session Storage</button>
+        <button onclick="remover(false)">Remove Local Storage</button>
+        <button onclick="clearAll()">Clear</button>
+    </div>
+    <script>
+        function getting(){
+            let session = document.getElementById('session');
+            let local = document.getElementById('local');
+            /*
+                para resgatar valor no Session ou local storage,
+                usa-se o metodo getItem, passando como parametro
+                em formato de String a chave. O || significa que
+                se o valor estiver falso, ou seja (valor == false),
+                na comparacao com 2 iguais e não 3, logo assume-se
+                o valor apos o ||.
+            */
+            session.innerText = sessionStorage.getItem('num1') || 0;
+            local.innerText = localStorage.getItem('num2') || 0;
+        } 
+        function setting(){
+            const num1 = document.getElementById('num1').value;
+            const num2 = document.getElementById('num2').value;
+            /*
+                Para setar usa-se o metodo setItem, passando a chave
+                e em seguida o valor a ser registrado.
+            */
+            sessionStorage.setItem('num1',num1);          
+            localStorage.setItem('num2',num2);
+            getting(); 
+        } 
+        function remover(bool){
+            /*
+                Para remover, usa-se o removeItem,
+                passando a chave, serve tanto para
+                o SessionStorage, como para o
+                LocalStorage.
+            */
+            if(bool){
+                sessionStorage.removeItem('num1');
+            }else{
+                localStorage.removeItem('num2');
+            }
+            getting();
+        }
+        function clearAll(){
+            /*
+                O clear limpa todos os valores
+                tanto de sessionStoragem, assim
+                como de localStorage.
+            */
+            sessionStorage.clear();
+            localStorage.clear();
+            getting();
+        }
+        /*
+            O atributo length retorna a quantidade de valores registrados no Session ou LocalStorage.
+            o metodo key, ele retorna o nome da chave, ao qual corresponde aquele indice, no caso o
+            zero retorna o primeiro valor. As chaves sao organizadas por ordem alfabetica, se tiver
+            duas chaves, uma x e outra y, o indice zero retorna x e o indice 1 retorna y.
+        */
+        console.log("Quantidade de sessionStorage: "+ sessionStorage.length+", Chaves do sessionStorage:"+sessionStorage.key(0));     
+        console.log("Quantidade de localStorage: "+ localStorage.length+", Chaves do localStorage:"+localStorage.key(0));     
+        getting();
+    </script>
+</body>
+</html>
