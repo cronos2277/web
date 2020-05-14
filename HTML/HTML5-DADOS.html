@@ -206,7 +206,13 @@
                 //Aqui colocamos os arrays que está dentro do atributo rows, para ser o conteudo da variavel atributo.
                 atributo = Array.from(atributo.rows); //Nessa linha o atributo passa a conter apenas o rows, que é o suficiente.
 
-                atributo.forEach(function(v){                  
+                atributo.forEach(function(v){     
+                    /*
+                        Com o metodo createElement você cria um novo no no html. Você deve passar por string a tag que
+                        voce deseja criar. document.createElement('Tag'); e dai o retorno desse metodo eh um no html.
+                        O metodo append adiciona um novo elemento dentro do no html selecionado, o append ele adiciona
+                        depois do ultimo elemento.
+                    */             
                     const td1 = document.createElement('td');
                     const td2 = document.createElement('td');
                     const tr = document.createElement('tr');
