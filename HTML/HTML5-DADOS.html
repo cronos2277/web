@@ -46,9 +46,8 @@
             <th>Codigo</th>
             <th>Valor</th>
         </thead>
-        <tbody>
-            <tr id="codigo"></tr>
-            <tr id="valor"></tr>
+        <tbody id="tabela">
+            
         </tbody>
         <tfoot>
             <td id="hasWebSqlSuport" colspan="2">Sem JS</td>
@@ -132,7 +131,8 @@
             //Com o metodo transaction, permite executar Query no WebSql, ela aceita uma callback como parametro, essa callback deve ter um parametro.
             banco.transaction(
                 callbackTransacoesNoBancoDeDados    //use o metodo transaction para isso, mais explicado abaixo, na linha Callback do Transaction.        
-            );
+            );       
+
         }else{
             //No firefox não deu suporte, parece que foi desabilitado nesse navegador. Recomendo nao usar Web SQL em ambiente de producao.
             document.getElementById('hasWebSqlSuport').innerText = "Desativado";
@@ -201,13 +201,27 @@
             parametroTransacao.executeSql('insert into tabela (codigo,valor) values (?,?)',[2,'valor2'],sucesso,erro); 
 
             //Repare que podemos tambem executar uma query do tipo select, aqui estamos preenchendo a variavel atributo.
-            parametroTransacao.executeSql('select * from tabela',[],(_,msg) => atributo = msg);
+            parametroTransacao.executeSql('select * from tabela',[],(_,msg) => {
+                atributo = msg; //Aqui pegamos o resultado da Query e colocamos dentro de uma variavel existente.
+                //Aqui colocamos os arrays que está dentro do atributo rows, para ser o conteudo da variavel atributo.
+                atributo = Array.from(atributo.rows); //Nessa linha o atributo passa a conter apenas o rows, que é o suficiente.
+
+                atributo.forEach(function(v){                  
+                    const td1 = document.createElement('td');
+                    const td2 = document.createElement('td');
+                    const tr = document.createElement('tr');
+                    td1.innerText = v.codigo;                   
+                    td2.innerText = v.valor;
+                    tr.append(td1);
+                    tr.append(td2);
+                    document.getElementById('tabela').append(tr);
+                });                
+            });
             
             //Um terceiro exemplo, esse dara errado devido a query defeituosa colocando1 nos valores, para ver como funciona a callback de erro.            
-            parametroTransacao.executeSql('insert into tabela (codigo1,valor1) values (3,"valor3")',[],sucesso,erro); 
-            
+            parametroTransacao.executeSql('insert into tabela (codigo1,valor1) values (3,"valor3")',[],sucesso,erro);            
         }
-
-    </script>
-</body>
+        
+        </script>
+    </body>
 </html>
