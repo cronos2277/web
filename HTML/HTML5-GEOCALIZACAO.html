@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocalização</title>
+</head>
+<body>
+    <h1>Geolocalização: <span id="estaFuncionando">Sem JS</span></h1>
+    <table border="1px">
+        <thead>
+            <th>Accuracy</th>
+            <th>altitude</th>            
+            <th>altitudeAccuracy</th>
+            <th>heading</th>
+            <th>latitude</th>
+            <th>longitude</th>
+            <th>speed</th>            
+        </thead>
+        <tbody>
+            <td id="accuracy">null</td>
+            <td id="altitude">null</td>            
+            <td id="altitudeAccuracy">null</td>
+            <td id="heading">null</td>
+            <td id="latitude">null</td>
+            <td id="longitude">null</td>
+            <td id="speed">null</td>     
+        </tbody>
+    </table>
+    <script>
+        if(navigator.geolocation){
+            document.getElementById("estaFuncionando").innerText = "Ativado";
+            /*
+                Com o metodo getCurrentPosition, voce pega todos os valores
+                de geolocalizacao dos dados do usuário, primeiro se ele 
+                permiir e aceitar no popup do browser, depois como parametro dessa
+                callcaback, a callback deve ter um parametro, ao qual voce
+                pegara os dados no atibuto coords.
+            */
+            navigator.geolocation.getCurrentPosition(callbackGeolocation);
+        }else{
+            document.getElementById("estaFuncionando").innerText = "Desativado";
+        }
+
+        function callbackGeolocation(parametro){
+            console.log(parametro.coords);  //Aqui esta as coordenadas do usuario.
+
+             //pega a precisao.
+            console.log(parametro.coords.accuracy);
+            document.getElementById("accuracy").innerText = parametro.coords.accuracy || 0;
+
+            //Pegar altitude
+            console.log(parametro.coords.altitude);
+            document.getElementById("altitude").innerText = parametro.coords.altitude || 0;
+
+            //Pegar precisao da altitude.
+            console.log(parametro.coords.altitudeAccuracy);
+            document.getElementById("altitudeAccuracy").innerText = parametro.coords.altitudeAccuracy || 0;
+
+            //Pegar a posicao.
+            console.log(parametro.coords.heading);
+            document.getElementById("heading").innerText = parametro.coords.heading || 0;
+
+            //pegar a latitude.
+            console.log(parametro.coords.latitude);
+            document.getElementById("latitude").innerText = parametro.coords.latitude || 0;
+
+            //Pegar longitude.
+            console.log(parametro.coords.longitude);
+            document.getElementById("longitude").innerText = parametro.coords.longitude || 0;
+
+            //Pegar a velocidade.
+            console.log(parametro.coords.speed);
+            document.getElementById("speed").innerText = parametro.coords.speed || 0;
+        }
+    </script>
+</body>
+</html>
