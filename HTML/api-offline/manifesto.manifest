@@ -1,0 +1,11 @@
+CACHE MANIFEST
+#com hashtag voce coloca os comentarios.
+
+FALLBACK:
+/ /offline.html
+
+NETWORK:
+*
+
+CACHE:
+offline.jpg

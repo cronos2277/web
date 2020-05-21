@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" manifest="manifesto.manifest">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online/Offline</title>
+    <script>
+        window.ononline = function(){
+            document.getElementById("status").innerText = "Esta online";
+        } 
+        window.onoffline = function(){
+            document.getElementById("status").innerText = "Esta offline";
+        } 
+    </script>
+</head>
+<div>
+    <h1 id="status">NONE</h1>
+    <h2>window.applicationCache.status = <span id="applicationStatus">0</span></h2>
+    <h3>Esta online? <span id="isOnline">NONE</span></h3>
+</div>
+<div>
+    <h3>NETWORK: </h3>
+    <img src="online.jpg" />
+    <h3>CACHE: </h3>
+    <img src="offline.jpg" />
+</div>
+<body>
+    <table border="1px">
+        <caption>window.applicationCache.</caption>
+        <thead>
+            <th>.UNCACHED</th>
+            <th>.IDLE</th>
+            <th>.CHECKING</th>
+            <th>.DOWNLOADING</th>
+            <th>.UPDATEREADY</th>
+            <th>.OBSOLETE</th>
+        </thead>
+        <tbody>
+            <td id="th0"></td>
+            <td id="th1"></td>
+            <td id="th2"></td>
+            <td id="th3"></td>
+            <td id="th4"></td>
+            <td id="th5"></td>
+        </tbody>
+    </table>
+    <script>
+        if(window.applicationCache){
+            document.getElementById("applicationStatus").innerText = window.applicationCache.status;
+            document.getElementById("th0").innerText = window.applicationCache.UNCACHED;
+            document.getElementById("th1").innerText = window.applicationCache.IDLE;
+            document.getElementById("th2").innerText = window.applicationCache.CHECKING;
+            document.getElementById("th3").innerText = window.applicationCache.DOWNLOADING;
+            document.getElementById("th4").innerText = window.applicationCache.UPDATEREADY;
+            document.getElementById("th5").innerText = window.applicationCache.OBSOLETE;
+            document.getElementById("isOnline").innerText = (window.navigator.onLine)?"SIM":"NÃO";
+        }
+    
+    </script>
+</body>
+</html>
