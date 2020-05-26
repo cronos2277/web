@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #ex1{
+            border: 5px solid black;
+            background-color:gray;
+            width:200px;
+            height:200px;                        
+            margin:5%;
+            /* 
+                Antes do primeiro argumento você pode colocar a palavra
+                "inset", fazendo com que dessa forma a sombra seja projetada
+                para dentro do elemento (Opcional).
+
+                primeiro número => {
+                    A distancia com relação a posição X do Elemento. 
+                    Positivo a direita, negativo a esquerda do elemento,
+                    zero é a posição exata aonde está o elemento.
+                }
+
+                segundo número   => {
+                    A distancia com relação a posição Y do Elemento. 
+                    Positivo a baixo, negativo a cima do elemento,
+                    zero é a posição exata aonde está o elemento.
+                } 
+
+                Com relação aos dois primeiros números, lembre do
+                seguinte, se o numero for positivo, sera somado a 
+                posição dessa sombra para a direita e para baixo,
+                respectivamente, porem quando você usa numeros 
+                negativos, você subtrai a posição do Eixo X e Y
+                respectivamente e com isso joga a sombra para 
+                a esquerda e para cima, respectivamente.
+
+                terceiro número => {
+                    Quanto as cores serão espalhadas, esse 
+                    valor pode ser omitido. Quanto maior
+                    esse valor, mais espalhado fica a sombra
+                    e consequentemente mais blur. O valor
+                    deve ser positivo, caso seja negativo
+                    dará erro.
+                }
+
+                Quarto número =>{
+                    Aqui estamos mexendo no tamanho da sombra,
+                    esse quarto parametro pode ser omitido,
+                    caso maior que zero a sombra será maior
+                    que o elemento, caso menor que zero o
+                    elemento será menor, e zero o mesmo tamanho
+                    ao qual a sombra é projetada.
+                }
+            */
+            box-shadow: 15px -15px 15px -10px black;            
+        }
+        #texto{
+            margin-left:20%;
+            margin-top:20%;
+            color:black;
+            /*
+                Primeiro número => {
+                    A distancia com relação a posição X do Elemento. 
+                    Positivo a direita, negativo a esquerda do elemento,
+                    zero é a posição exata aonde está o elemento.
+                }
+
+                segundo número   => {
+                    A distancia com relação a posição Y do Elemento. 
+                    Positivo a baixo, negativo a cima do elemento,
+                    zero é a posição exata aonde está o elemento.
+                } 
+
+                Com relação aos dois primeiros números, lembre do
+                seguinte, se o numero for positivo, sera somado a 
+                posição dessa sombra para a direita e para baixo,
+                respectivamente, porem quando você usa numeros 
+                negativos, você subtrai a posição do Eixo X e Y
+                respectivamente e com isso joga a sombra para 
+                a esquerda e para cima, respectivamente.
+
+                terceiro número => {
+                    Quanto as cores serão espalhadas, esse 
+                    valor pode ser omitido. Quanto maior
+                    esse valor, mais espalhado fica a sombra
+                    e consequentemente mais blur. O valor
+                    deve ser positivo, caso seja negativo
+                    dará erro.
+                }
+            */
+            text-shadow: -5px 15px 7px green; 
+            font-size:20px;
+        }
+
+        #exemplo2{
+            border: 5px solid black;
+            /*
+                linear-gradient =>{
+                    exemplo mais básico: linear-gradient(cor1, cor2);
+                    quando não informado a posição o espaço será dividido
+                    de maneira mais igualitária, o minimo de cores que
+                    você precisa informar são duas.
+                }
+            */
+            background: linear-gradient(red,green);
+            width:200px;
+            height:200px;                        
+            margin:5%;            
+        }
+
+        #exemplo3{
+            border: 5px solid black;    
+            /*
+                Você pode informar mais de duas cores e a posição nas cores,
+                no caso como não é informado a posição, nesse caso em específco
+                de zero a 20% é preenchido com vermelho, entre 20 a 50 a cor
+                azul é preenchida, e apartir dos 80% começa a ser preenchido 
+                com verde.
+            */        
+            background: linear-gradient(red 20%,blue 50%,green 80%);
+            width:200px;
+            height:200px;                        
+            margin:5%;            
+        }
+
+        #exemplo4{
+            border: 5px solid black;    
+            /*
+                Repare que após o "90deg" temos as mesmas cores que o 
+                exemplo acima. Aqui estamos informando a posição inicial,
+                que nesse caso é a 90 graus, ou seja a esquerda.
+                Quando for trabalhar com isso, lembre-se do seguinte
+                0 ou 360 é a posição atual, 90 é esquerda, 180 baixo,
+                270 direita, repare que temos um circulo sendo feito
+                em sentido anti-horário.
+            */        
+            background: linear-gradient(90deg,red 20%,blue 50%,green 80%);
+            width:200px;
+            height:200px;                        
+            margin:5%;            
+        }
+
+        #exemplo5{
+            border: 5px solid black;    
+            /*
+                Aqui temos o efeito linear começando da direita, uma vez que o
+                ponto zero é 270 graus
+            */        
+            background: linear-gradient(270deg,red 20%,blue 50%,green 80%);
+            width:200px;
+            height:200px;                        
+            margin:5%;            
+        }
+
+        #exemplo6{
+            border: 5px solid black;     
+            /*
+                exemplo mais básico: radial-gradient(cor1, cor2);
+                quando não informado a posição o espaço será dividido
+                de maneira mais igualitária, o minimo de cores que
+                você precisa informar são duas
+            */           
+            background: radial-gradient(red,cyan);
+            width:200px;
+            height:200px;                        
+            margin:5%;            
+        }
+
+        #exemplo7{
+            border: 5px solid black;     
+            /*
+                Aqui temos um exemplo um pouco mais complexo, caso
+                você queria definir a posicao do gradient radial
+                você deve definir isso antes de definir as cores:
+                primeiro a forma =>{
+                    radial-gradient("<ESSE VALOR AQUI>" farthest-side at top,red,cyan,green);
+                    a forma pode ser "circle" ou "ellipse"(padrão)
+                }
+                segundo a posição do circulo =>{
+                    radial-gradient(circle <ESSE VALOR AQUI> at top,red,cyan,green);
+                    valores possíveis:                    
+                    farthest-corner (default) => canto mais distante.
+                    closest-side => lado mais próximo.
+                    closest-corner => canto mais próximo
+                    farthest-side => mais distante
+                }
+
+                terceiro a posição dentro do elemento =>{
+                    radial-gradient(circle farthest-side "<ESSE VALOR AQUI>",red,cyan,green);
+                    at bottom => baixo,
+                    at top => cima,
+                    at left => esquerda
+                    at right = direita
+
+                    Você pode informar a posição X e Y, no caso após a palavra at, você
+                    pode colocar o Eixo X e Y respectivamente da onde começará o circulo.
+                }
+            */           
+            background: radial-gradient(circle farthest-side at 60% 75%,red,cyan,green);
+            width:200px;
+            height:200px;                        
+            margin:5%;            
+        }
+    </style>
+</head>
+<body>
+    <div id="ex1">
+        <p id="texto">Exemplo</p>
+    </div>
+    <hr>
+    <h1>Controles</h1>
+    <h2>Caixa</h2>
+    <hr>
+    <label>Borda <input type="color" id="borda" onchange="borda(this.value)"/></label> <br />
+    <label>Cor de fundo <input type="color" id="bg" value=gray onchange="fundo(this.value)"/></label>   <br />
+    <h2>Texto</h2> 
+    <hr>    
+    <label>Texto: <input type="text" oninput="texto(this.value)" value="Exemplo"/></label> <br />
+    <label>Tamanho: <input type="number" oninput="tamanho(this.value)" value=20 /></label><br />
+    <hr>
+    <h3>Exemplo2: simples</h3>
+    <div id="exemplo2"></div>   
+    <h3>Exemplo3: 3 cores com as posições.</h3> 
+    <div id="exemplo3"></div>    
+    <h3>Exemplo4: começando da esquerda</h3>
+    <div id="exemplo4"></div>    
+    <h3>Exemplo5: começando da Direita</h3>
+    <div id="exemplo5"></div>    
+    <h3>Exemplo6: Gradiente radial Básico</h3>
+    <div id="exemplo6"></div>    
+    <h3>Exemplo7: Gradiente radial Básico</h3>
+    <div id="exemplo7"></div>    
+    <script>
+        function borda(valor){
+            //Equivale ao "border-color" do css.
+            document.getElementById('ex1').style.borderColor = valor;
+        }
+        function fundo(valor){
+            //Equivale ao "background-color"  do css.
+            document.getElementById('ex1').style.backgroundColor = valor;
+        }        
+        function texto(valor){
+            document.getElementById('ex1').innerText = valor;            
+        }
+        function tamanho(valor){
+            //Equivalente a font-size no css.
+            document.getElementById('texto').style.fontSize = valor+"px";
+        }
+    </script>
+</body>
+</html>
