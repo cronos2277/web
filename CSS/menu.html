@@ -4,29 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <style>        
+    <style> 
+        nav{
+            text-align: center; /*Alinha o texto de todos os elementos filhos*/            
+        }
+
         li{
-            list-style-type: none;            
+            list-style-type: none;  /*Tira as bolinhas da lista*/      
         }
+
         nav ul{
-            float: left;            
+            float: left; /*Se faz necessario se voce quiser colocar um elemento ao lado do outro.*/
         }
+
         nav ul li{
             background-color: gray;
             color:white;
-            padding:10px;             
-        }        
+            padding:10px; 
+            /*posicao x, y e a quantidade de dissolucao, cor da sombra sobre o elemento.*/
+            box-shadow: 5px 5px 15px black;                        
+        }
+
         nav ul li:hover{
             background-color: aqua;
-            color:black;
+            color:black;                        
         }
+
         nav ul ul{            
             margin: 0;
             padding: 0;  
-            visibility: hidden;          
+            visibility: hidden; /* Oculta o elemento. */              
         }
+        /*
+            Voce pode usar o hover assim como qualquer outro estado, mesmo com o elemento estando no meio,
+            tipo elemento, elemento no hover, filho, nesse caso aqui estamos aplicando o estilo do filho
+            quando o hover do pai eh acionado.
+        */
         nav ul:hover ul{            
-            visibility: visible;
+            visibility: visible; /* Mostra o elemento quando eh dado o hover. */              
         }
         
         nav ul ul li:hover{            
@@ -54,6 +69,33 @@
                 <li>Item 2.2</li>
                 <li>Item 2.3</li>
                 <li>Item 2.4</li>
+            </ul>            
+        </ul>
+        <ul>            
+            <li>Menu 3</li>
+            <ul>
+                <li>Item 3.1</li>
+                <li>Item 3.2</li>
+                <li>Item 3.3</li>
+                <li>Item 3.4</li>
+            </ul>            
+        </ul>
+        <ul>            
+            <li>Menu 4</li>
+            <ul>
+                <li>Item 4.1</li>
+                <li>Item 4.2</li>
+                <li>Item 4.3</li>
+                <li>Item 4.4</li>
+            </ul>            
+        </ul>
+        <ul>            
+            <li>Menu 5</li>
+            <ul>
+                <li>Item 5.1</li>
+                <li>Item 5.2</li>
+                <li>Item 5.3</li>
+                <li>Item 5.4</li>
             </ul>            
         </ul>
     </nav>
