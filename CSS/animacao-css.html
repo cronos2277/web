@@ -120,7 +120,12 @@
             ease-out - Especifica uma animação com um final lento
             ease-in-out - Especifica uma animação com início e término lentos
             cubic-bezier(n,n,n,n) - Permite definir seus próprios valores em uma função de cubic-bezier
-
+            Lembre-se do seguinte, o linear é um movimento retilineo e padrao. Quanto aos easy
+            o padrao para decorar eh o seguinte: O que vier depois hifen "ease" ficara lento,
+            sendo o in a entrada e o out a saida, ou seja ease-in comeca lento, ease-out termina lento,
+            ease-in-out comecao e termina lento. Ease sem hifem eh movimento rapido. Ease significa
+            facilidade e essa facilidade significa suavidade, ou seja ease-in-out seria facilidade-entrada-saida,
+            ou seja lento e calmo na entrada e saida e ease sem hifem eh sem essa suavidade.
         */
         #div1 {animation-timing-function: linear;}
         #div2 {animation-timing-function: ease;}
