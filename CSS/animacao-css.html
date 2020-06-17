@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #animacao1{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            color:white;
+            /*Aqui eh denifinido o nome do @keyframes */            
+            animation-name: primeiro_exemplo; 
+            /*Aqui o tempo de duracao dessa animacao*/
+            animation-duration: 5s;
+            margin-left:20%;
+        }
+        /*
+            Aqui, conforme definido no animation-name temos o @keyframe
+            sintaxe @keyframes "<nome do seu animation-name>"{ }
+        */
+        @keyframes primeiro_exemplo{ 
+            /*Condicao ao iniciar */
+            from{
+                background-color: red;
+                color: white;
+                margin-left: 0%;
+            }
+
+            /*Condicao ao concluir*/
+            to{
+                background-color: green;
+                color: white;
+                margin-left: 20%;
+            }
+            /*
+                Depois de terminado a animacao que arrasta
+                o elemento para a esquerda, com a cor iniciando
+                do verde e indo para o vermelho, o elemento em
+                questao assume as caracteristicas definido em #animacao1
+                Ou seja como apenas a cor e a margen eh alvo da animacao,
+                entao a condicao inicial desses dois atributos eh iniciada
+                com base no from e vai seguindo ate chegar em to, depois
+                a animacao assume as caracteristicas fora do from e do to.
+                Lembrando que toda essa animacao acima ocorre em 5 segundos.
+            */
+        }
+        #animacao2{
+            width: 100px;
+            height: 100px;
+            background-color:blue;
+            /*Agora o segundo exemplo*/
+            animation-name: segundo_exemplo;
+            animation-duration: 5s;
+            /*Aque voce pode definir um atraso no inicio da animacao. */
+            animation-delay: 1s;
+            /*Quantas vezes a animacao deve ocorrer, no caso ela vai ocorrer 2 vezes. */
+            animation-iteration-count: 2;
+            margin-left: 20%;
+        }
+        /*Voce tambem pode dentro de um keyframes usar de porcentagens. */
+        @keyframes segundo_exemplo{
+            0%{background-color: red; margin-left: 0%;}
+            25%{background-color: orange; margin-left: 5%;}
+            50%{background-color: green; margin-left: 10%;}
+            75%{background-color: cyan; margin-left: 15%;}
+            100%{background-color: blue; margin-left: 20%;}
+        }
+        #animacao3{
+            width: 100px;
+            height: 100px;
+            background-color:blue;
+            animation-name: terceiro_exemplo;
+            /*Voce pode pedir para uma animacao executar de maneira infinita.*/
+            animation-iteration-count: infinite;
+            /* Esse parametro eh obrigatorio. */
+            animation-duration: 5s;
+            /*
+                Para esse parametro voce tem 4 alternativas:                
+                normal - Padrao, executa normal, apenas no sentido from para to ou 0% para 100%.
+                reverse - Inverte a execucao, comecando no to e terminando para o from por exemplo.
+                alternate - Alterna, executa no sentido from para to e depois inverte a execucao.
+                alternate-reverse - Alterna comecando a execucao de maneira invertida, do to para from
+                e depois no sentido normal.
+
+            */
+            animation-direction: alternate;
+            margin-left:20%;
+        }
+        @keyframes terceiro_exemplo{
+            0%{background-color:black;margin-left: 0%;}
+            25%{background-color: darkgray;margin-left: 5%;}
+            50%{background-color: gray;margin-left: 10%;}
+            75%{background-color: lightgray;margin-left: 15%;}
+            100%{background-color: whitesmoke;margin-left: 20%;}
+        }
+        /*Exemplos mais avancados: */
+        .grupo {
+            width: 100px;
+            height: 50px;
+            background-color: red;
+            font-weight: bold;
+            position: relative;
+            /*
+                Voce pode passar os 3 atributos principais direto ao animation da forma abaixo:
+                O primeiro eh o nome do keyframes, o segundo o tempo de duracao e por fim a
+                quantidade de vezes a ser executado. Repare que o movimento eh passado para 
+                6 divs diferentes, ou seja voce nao eh obrigado a criar 1 para cada elemento
+                HTML.
+            */
+            animation: movimento 10s infinite;
+            left: 80%;
+        }
+        /*
+            Opcoes para o animation-timing-function:            
+            ease - Especifica uma animação com início lento, rápido e final lento (esse é o padrão)
+            linear - Especifica uma animação com a mesma velocidade do início ao fim
+            ease-in - Especifica uma animação com um início lento
+            ease-out - Especifica uma animação com um final lento
+            ease-in-out - Especifica uma animação com início e término lentos
+            cubic-bezier(n,n,n,n) - Permite definir seus próprios valores em uma função de cubic-bezier
+
+        */
+        #div1 {animation-timing-function: linear;}
+        #div2 {animation-timing-function: ease;}
+        #div3 {animation-timing-function: ease-in;}
+        #div4 {animation-timing-function: ease-out;}
+        #div5 {animation-timing-function: ease-in-out;}
+        /*
+            Se todos os parametros forem iguais, ele se comportara
+            como linear. Os valores vao de 0 ate 1, no caso
+            variam como se fosse a porcentagem, aonde 0 é zero
+            e 1 eh 100%.
+            QUalquer duvida pesquise por Curva de Belzier:
+            https://pt.wikipedia.org/wiki/Curva_de_B%C3%A9zier#Curva_de_B%C3%A9zier_Linear            
+        */
+        #div6 {animation-timing-function: cubic-bezier(.5,.2,.5,.2);}
+
+        @keyframes movimento {
+        from {left: 0%;}
+        to {left: 80%;}
+}
+    </style>
+</head>
+<body>
+    <div id="animacao1">
+        Exemplo1
+    </div>
+    <hr>
+    <div id="animacao2">
+        Exemplo2
+    </div>
+    <hr>
+    <div id="animacao3">
+        Exemplo3
+    </div>
+    <h2>animation-timing-function</h2>
+    <div id="div1" class="grupo">linear</div>
+    <div id="div2" class="grupo">ease</div>
+    <div id="div3" class="grupo">ease-in</div>
+    <div id="div4" class="grupo">ease-out</div>
+    <div id="div5" class="grupo">ease-in-out</div>
+    <div id="div6" class="grupo">Custom cubic-bezier</div>    
+</body>
+</html>
