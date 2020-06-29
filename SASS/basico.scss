@@ -1,0 +1,15 @@
+ //Assim se coloca comentario no SASS
+ $minha-cor:red; //Com $ voce cria variaveis que podem ser reutilizadas no css.
+ $fonte:40px;
+ //Definindo a sombra no texto, uma variavel para cada valor.
+ $PosicaoXDaSombra: 1px;
+ $PosicaoYDaSombra: 1px;
+ $NivelDeDispersao:5px;
+ $CorDaSombra:blue;
+ //Voce pode passar variaveis como parte de variaveis
+ $sombra: $PosicaoXDaSombra $PosicaoYDaSombra $NivelDeDispersao $CorDaSombra;
+ h1{
+   color:$minha-cor; //Aqui voce define qual variavel corresponde a esse atributo.
+   font-size:$fonte;
+   text-shadow:$sombra; //Podendo a mesma ser composta.
+ }
