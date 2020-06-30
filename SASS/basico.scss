@@ -1,15 +1,64 @@
- //Assim se coloca comentario no SASS
- $minha-cor:red; //Com $ voce cria variaveis que podem ser reutilizadas no css.
- $fonte:40px;
- //Definindo a sombra no texto, uma variavel para cada valor.
- $PosicaoXDaSombra: 1px;
- $PosicaoYDaSombra: 1px;
- $NivelDeDispersao:5px;
- $CorDaSombra:blue;
- //Voce pode passar variaveis como parte de variaveis
- $sombra: $PosicaoXDaSombra $PosicaoYDaSombra $NivelDeDispersao $CorDaSombra;
- h1{
-   color:$minha-cor; //Aqui voce define qual variavel corresponde a esse atributo.
-   font-size:$fonte;
-   text-shadow:$sombra; //Podendo a mesma ser composta.
+@charset "utf-8"; //Aqui você define o formato de codificacao
+//Assim se coloca comentario no SASS
+$minha-cor:red; //Com $ voce cria variaveis que podem ser reutilizadas no css.
+$fonte:40px;
+//Definindo a sombra no texto, uma variavel para cada valor.
+$PosicaoXDaSombra: 1px;
+$PosicaoYDaSombra: 1px;
+$NivelDeDispersao:5px;
+$CorDaSombra:blue;
+//Voce pode passar variaveis como parte de variaveis
+$sombra: $PosicaoXDaSombra $PosicaoYDaSombra $NivelDeDispersao $CorDaSombra;
+h1{
+  color:$minha-cor; //Aqui voce define qual variavel corresponde a esse atributo.
+  font-size:$fonte;
+  text-shadow:$sombra; //Podendo a mesma ser composta.
+}
+
+p{
+ /*
+   Aqui abaixo temos um exemplo de namespace, no caso voce basicamente coloca um atributo
+ mais generico como font no exemplo abaixo e ai dentro das chaves, os subatributos.
+ */
+ font: {
+   size:24px;
+   width:900;
  }
+} 
+
+ul{
+ /*
+   Aqui temos a propriedade de aninhamento, quando o sass for renderizado no css, 
+   sera "ul li{}" porem no sass voce trabalhar de maneira aninhada, como visto aqui.
+ */
+ li{
+   color:red;
+   list-style:none;
+ }
+ /*
+   Aqui abaixo temos um seletor que se refere ao elemento pai, o "&". Esse simbolo
+   seria o equivalente ao .parent() dele. Nesse caso o & esta fazendo referencia ao 
+   "ul".
+ */
+ &{
+   background-color:cyan;
+ }
+} 
+
+/*
+ Aqui temos um exemplo de interpolacao, atraves do "# {$suaVariavel}" permite com que 
+ o valor da variavel seja interpolado. Isso tambem funciona com comentarios.
+*/
+$interpolacao: h2; 
+$atributoInterpolado: green;
+#{$interpolacao}{ //Essa eh a sintaxe de interpolacao, na compilacao isso virara o valor.
+ color:red;
+ text-decoration:underline;
+ //Isso tambem funciona com atributos.
+ background-color:#{$atributoInterpolado};
+}
+
+//Comentario apenas no SASS.
+/*comentario que vai para o css no modo expended, mas no compressed. */
+/*! Esse tipo de comentario vai tambem no arquivo mimificado. */
+
