@@ -61,7 +61,7 @@ Repare que a diferença entre a entrada de pasta é que a pasta não é informad
 
 **sting** => qualquer valor textual ou valor dentro de aspas.
 
-**map** => arrays mais complexos
+**map** => do tipo objeto, 
 
 ## Shell interativo
 Voce pode chamar o shell interativo usando o comando ``sass -i``
