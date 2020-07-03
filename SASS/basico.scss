@@ -1,4 +1,13 @@
 @charset "utf-8"; //Aqui você define o formato de codificacao
+/*
+  Dessa forma voce importa um arquivo, usando a diretiva import, porem o que deve ser 
+  lembrado eh a nomenclatura, quando voce usa o underline na frente do nome, isso
+  significa que o arquivo nao sera compilado a parte e sim que ele eh parte de um arquivo.
+  um arquivo "part.scss" sera compilado caso haja alteracao, porem o "_part.scss" nao,
+  uma vez que o underline identifica que ele eh parte do arquivo.
+  Veja o arquivo _part para exemplos mais avancados.
+*/
+@import "_part.scss"; 
 //Assim se coloca comentario no SASS
 $minha-cor:red; //Com $ voce cria variaveis que podem ser reutilizadas no css.
 $fonte:40px;
@@ -60,5 +69,8 @@ $atributoInterpolado: green;
 
 //Comentario apenas no SASS.
 /*comentario que vai para o css no modo expended, mas no compressed. */
-/*! Esse tipo de comentario vai tambem no arquivo mimificado. */
+/*! 
+  Esse tipo de comentario vai tambem no arquivo mimificado. Que tambem pode interpolar 
+  valores, como por exemplo: "#{$interpolacao}" ou processar valores, como por exemplo: #{$atributoInterpolado}.
+*/
 

@@ -1,0 +1,58 @@
+@charset "UTF-8";
+%classePai{
+    /*
+        O operador % eh um operador proprio do SASS.
+    Ele indica nesse exemplo que a "classePai" eh uma
+    especia de classe abstrata, ela nao sera usada diretamente,
+    mas extende as suas caracteristicas    
+    */
+    color:yellow;
+    background-color:blue;
+}
+
+.classeFilha{
+    /*
+        Dessa forma voce herda do pai as caracteristicas, exatamente
+    como funciona a herencao entre uma classe abstrata e uma classe
+    concreta. Nesse exemplo a classe filha pega todos os atributos
+    do pai.
+    */
+    @extend %classePai; //Voce herda dessa forma: operador+nome.
+    font-size: 20px; //A classe filha pode ter atributos proprios.
+}
+
+/*
+    O maxin eh uma forma de se aproveitar codigos no SASS. Ele funciona
+    de maneira semelhante a uma trait em PHP, ele seria uma forma de 
+    se reaproveitar codigos.
+*/
+@mixin basico { 
+//Essa eh a sintaxe mais basica, quando nao se tem parametros.
+    color:white; 
+}
+
+@mixin parametro($cor) {
+//Voce pode colocar parametros em um @mixin, nesse caso um parametro chamado cor.    
+    background-color: $cor;
+}
+
+@mixin padrao($param1, $param2, $param3, $param4:black) {
+//Voce pode criar um valor padrao para os parametros, partindo da direita a esquerda.
+//Semelha-se a regras de construtores e funcoes e metodos em PHP.
+    box-shadow: $param1 $param2 $param3 $param4;   
+}
+
+/*
+    o @mixin pode receber infinitos valores, aqui funciona semelhante ao java, aonde o
+    parametro deve ser o ultimo de dentro da funcao, metodo, ou construtor.
+*/
+@mixin infinito($valores...) {
+    padding: $valores;
+}
+.minhaDiv{
+    //Para usar um @mixin, voce deve usar o @include.
+    @include basico; //Implementando uma maxin sem parametros.
+    @include parametro(red); //@Mixin com parametros.
+    @include padrao(5px,5px,20px); //Repare que aqui o ultimo parametro de cor nao eh informado.
+    @include infinito(5px,5px,5px,5px); //Esse @mixin aceita quantos valores voce quiser colocar.
+}
