@@ -9,6 +9,8 @@ Você pode instalar através do NPM usando a tag global: "**npm install -g sass*
 [SASS Meister](https://www.sassmeister.com/)
 
 ## Arquivos
+Aqui nesse arquivos temos um exemplo básico de como funciona o sass. Clique no(s) arquivo(s) abaixo(s) e veja mais informações de como criar um arquivo SASS.
+
 [basico.sass](./basico.scss)
 
 [basico.sass](./_part.scss)
