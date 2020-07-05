@@ -11,9 +11,11 @@ Você pode instalar através do NPM usando a tag global: "**npm install -g sass*
 ## Arquivos
 Aqui nesse arquivos temos um exemplo básico de como funciona o sass. Clique no(s) arquivo(s) abaixo(s) e veja mais informações de como criar um arquivo SASS.
 
-[basico.sass](./basico.scss)
+[basico.sass](./basico.scss) => Exemplos básicos no SASS.
 
-[basico.sass](./_part.scss)
+[part.sass](./_part.scss) => Mixin e Herança
+
+[operacao.sass](./_operacao.scss) => operações matematica, desvio condicional e laço de repetição no SASS
 
 [Arquivo HTML](./index.html)
 

@@ -1,0 +1,27 @@
+.operacao{
+    /* 
+        Voce pode fazer operacoes matematicas no SASS, mas fique atento a algumas coisas.
+    1) Procure deixar um espaco entre o operando e os operadores, isso pode dar problemas
+    com operandos, principalmente na divisao ou no resto de divisao, uma vez que o mesmo
+    pode entender 4/2 como valor ao inves de calcular o valor disso.
+    2) Use a mesma medida sempre, ou seja  so tire pixel de pixel, polegadas de polegadas e etc..
+    Nao misture unidades de medida, pois isso pode dar erro na compilacao do SASS.
+    3) Procure usar parenteses para isso, isso evite problemas lexicos com o compilador.
+    */
+    width: (20px + 80px); //Soma 100px
+    height: (75 * 2px); //Multiplicacao 150px, um dos operandos pode ficar sem unidade de medida sem problemas.
+    border: (300px / 150); //Aqui o operando esta no primeiro numero, o oposto do de cima.
+    margin-top: (30px - (2 * 5)); //Voce pode tambem fazer operacoes de matematica aqui, no caso 30 que diminui a multiplicacao de 2 e 5.
+    /*
+        funcoes como lighten e darken recebem dois parametros a cor em questao e o quanto sera aplicado de efeito nela
+        em porcentagem, nesse caso o fundo eh clareado 40% e o texto escurecido 50%.
+    */
+    background-color: lighten($color: #000000, $amount: 40); //Essa funcao deixa a cor mais clara
+    color: darken($color: #FFF, $amount: 40); //Essa funcao deixa a cor mais escura.
+    /*
+        adjust-hue muda a posicao da cor, no caso escolhemos o vermelho e movemos a cor, no disco de cores
+        180 graus.
+    */
+    box-shadow: (4 % 5px) (2 * 3px) (44px / 4) adjust-hue($color: red, $degrees: 180); //Essa funcao muda a matriz na cor, no disco de cores.
+    padding: 15 + px; //Concatenacao. No caso aqui o SASS entende como uma string, logo o mesmo trabalha como se fosse uma string.
+}
