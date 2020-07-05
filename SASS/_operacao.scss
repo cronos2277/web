@@ -25,3 +25,24 @@
     box-shadow: (4 % 5px) (2 * 3px) (44px / 4) adjust-hue($color: red, $degrees: 180); //Essa funcao muda a matriz na cor, no disco de cores.
     padding: 15 + px; //Concatenacao. No caso aqui o SASS entende como uma string, logo o mesmo trabalha como se fosse uma string.
 }
+/*Tambem tem a opcao de desvio condicional no SASS. */
+@if 1 == 1 and true { //Esse eh o exemplo mais simples, porem recomenda-se usar o parentes, esse eh um if simples.
+    .desvio{
+        @if(2 < -1 and not false){ //Aqui temos um IF dentro de parentes.
+            //Nao vai executar.
+        }@else if(3 % 2 != 1 or true){ //Else if
+            width:100px;
+            height:200px;
+            background-color:blue;
+            color:white;
+        }@else{ //Caso o if e else seja falso.
+            //Nao vai executar
+        }
+        /*
+            O if, else if e else funcionam da mesma forma que qualquer outra linguagem de programacao, porem de maneira com uma quantidade mais restrita
+            de operadores, logo temos os operadores: (<, <=, >, >=, ==, !=).
+            Tambem use o "not" como operador de negacao, "and" no lugar de &&, uma vez que o & eh o equivalente ao super do Java ou o parent do PHP.
+            Por fim nao use o duplo pipe como operador, ao inves disso use o: "or".
+        */
+    }
+}
