@@ -17,6 +17,8 @@ Aqui nesse arquivos temos um exemplo básico de como funciona o sass. Clique no(
 
 [operacao.scss](./_operacao.scss) => operações matematica, desvio condicional e laço de repetição no SASS
 
+[funcoes.scss](./_funcoes.scss) => Aqui esta as funções e os exemplos com funções.
+
 [Arquivo HTML](./index.html) => Arquivo HTML.
 
 [Output](./basico.css) => O arquivo de saida quando compila o **basico.scss**.
@@ -59,7 +61,7 @@ Repare que a diferença entre a entrada de pasta é que a pasta não é informad
 
 **bool** => Valor do tipo booleano.
 
-**list** => seria o equivalente a arrays, exemplo: [2,3,4]
+**list** => seria o equivalente a arrays, exemplo: [2 3 4]
 
 **sting** => qualquer valor textual ou valor dentro de aspas.
 

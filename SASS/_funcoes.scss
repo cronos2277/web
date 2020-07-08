@@ -1,0 +1,64 @@
+/*
+    Uma funcao tem uma estrutura muito parecida com um Mixin, porem a funcao sempre deve retornar
+    um valor, enquanto que a mixin se comporta de maneira parecida a uma procedure. Voce pode
+    colocar valor padrao nos parametros, você usa o @function e o @return para retornar valores.
+    @function nomeDaFuncao(parametro){
+        @return null;
+    }
+*/
+@function funcaoOperacaoLetra($cor:white,$acao:0){    
+    @if($acao > 0){        
+        //Deixa a cor mais clara, no amount voce informa a intensidade em porcentagem.
+        @return lighten($color: $cor, $amount: $acao);
+    }@else if($acao < 0){
+        //Deixa a cor mais escura, no caso como o amount trabalha com numero positivo tem que multiplicar por -1.
+        @return darken($color: $cor, $amount: ($acao * -1));
+    }@else{
+        //Essa funcao inverte a cor informada, se a cor for #FFF ela vira #000, ou #333 fica #CCC, etc...         
+        @return invert($color:$cor);
+    }
+}
+
+@function criarCor($cor1:white,$cor2:black,$porcentagem:50){
+    /*
+        Essa funcao faz uma mistura das duas cores, essa funcao cria procura o meio termo entre as duas caso
+        a porcentagem que seria o terceiro parametro, se menor que 50 a cor pende mais para a primeira se
+        o valor for maior que 50, ai a cor pende mais para a segunda, lembre-se que o numero informado
+        no terceiro parametro eh porcentagem, entao o range vai de 0 a 100.
+    */
+    @return mix($cor1,$cor2,$porcentagem);
+}
+
+@function tomDeCinza($cor){
+    //Retorna a cor em um tom de cinza, ou seja tira a saturacao da cor.
+    @return grayscale($cor);
+}
+
+@function posicaoSombra($x,$y){
+    @return $x+px+" "+$y+px; //Voce pode retornar valores tambem se quiser.
+}
+
+@function tamanhoSombra($pos){
+    @return $pos+px; //Aqui estamos colocando uma unidade de medida no valor retornado.
+}
+
+@function semaspas($valor){
+    /*
+        Temos a funcao unquote e quote, a primeira com o "un" na frente tira as aspas do
+        valor, o segundo faz o oposto e coloca os valores dentro de aspas.
+    */
+    @return unquote($valor);
+}
+
+@function porcentagem($valor){
+    //Aqui ele pega o numero e devolve em porcentagem, sendo 0 => 0% e 1 => 100%
+    @return percentage($valor);
+}
+
+.funcao1{
+    color: funcaoOperacaoLetra(#CCC); //Tem parametros opcionais, entao aqui o $acao fica zero, logo a cor eh invertida.
+    background-color: criarCor(red,blue,75);
+    box-shadow:  posicaoSombra(5,5) tamanhoSombra(10) tomDeCinza(red); //Voce pode compor um valor por N funcoes.
+    width: semaspas("300px");
+    height: porcentagem(.05);
+}
