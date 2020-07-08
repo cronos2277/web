@@ -46,3 +46,51 @@
         */
     }
 }
+
+/*
+    Essa eh a sintaxe do @for, ele funciona como um laco for das linguagens de programacao. Apesar da funcionalidade a sintaxe eh um pouco diferente.
+    @for VariavelDeContagem from ValorInicial to ValorFinal; Inicialmente voce define uma variavel de contador, depois do from voce informa o valor
+    inicial do contador e o valor final, no caso o step ai esta como 1.
+    to => Seria equivalente ao menor, no exemplo abaixo o 5 nao eh incluso no $contador1
+    through => Equivalente ao menor igual, no exemplo eh incluido o numero 9.
+*/
+@for $contador1 from 1 to 5 {
+    #id#{$contador1}{
+        background-color: adjust-hue($color: green, $degrees: $contador1 * 180);
+        color: adjust-hue($color: #F0F, $degrees: $contador1 * 180);
+    }
+}
+@for $contador2 from 5 through 9 {
+    #id#{$contador2}{
+        background-color: adjust-hue($color: aqua, $degrees: $contador2 * 180);
+        color: adjust-hue($color: red, $degrees: $contador2 * 180);
+    }
+}
+
+/*
+    Aqui temos um exemplo de como funciona o @while, o mesmo ele exige uma condicao
+    booleana para parada. Lembre-se de criar uma condicao que ativa o criterio de
+    parada dentro do while para evitar laco infinitos.
+*/
+$condicao: 1;
+@while ($condicao < 10){
+    #id#{$condicao}{
+        width: 150px;
+        border-width: 3px;
+        border-color: darken($color: #FFF, $amount: 100);
+        display: inline-block;        
+    }
+    $condicao: ($condicao + 1);
+}
+
+/*
+    O @each funciona exatamente como os forEach das linguagens de programacao.
+    @each "cada item do array" in "o array";
+*/
+$lista: [classe1 classe2 classe3]; //O array a ser usado
+@each $item in $lista {    
+    .#{$item}{
+        box-shadow: 5px 5px 10px black;
+        margin-top: 10px;
+    }
+}
