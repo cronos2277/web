@@ -29,7 +29,13 @@ console.table(texto.split(regex2));
     indica que se tiver um e apenas 1 caracter entre o numero 1 e 2, o
     mesmo deve ser retornado. Seria algo se tiver comecando com 1 e terminando
     com 2, e se tiver um e apenas um caracter, independente de qual seja o caracter, 
-    entao retorna o valor, repare que sera dado match em "1.2" e "1,2"
+    entao retorna o valor, repare que sera dado match em "1.2" e "1,2":
+    ┌─────────┬────────┐
+    │ (index) │ Values │
+    ├─────────┼────────┤
+    │    0    │ '1.2'  │
+    │    1    │ '1,2'  │
+    └─────────┴────────┘
 */
 console.log("Usando o Ponto: '/1.2/'")
 const regex3 = /1.2/g;
@@ -43,3 +49,36 @@ console.table(texto.match(regex3));
 console.log("Usando o meta-caractere ponto com o literal Ponto: '/.\\./'");
 const regex4 = /.\./g;
 console.table(texto.match(regex4));
+
+/*
+    No javascript o metodo Split usa a expressao regular como um separador, no caso cada
+    vez que eh encontrada tal ocorrencia, o mesmo eh desmembrado. Nesse exemplo:
+    "0.1.2.3.4.5.6.7.8.9.0,1,2,3,4,5,6,7,8,9,0"; com a regex: '/.|,/'
+    se houver uma expressao para procurar por ponto ou virgula, o split vai usar o ponto
+    ou a virgula como um separador, ficando assim:
+    ┌─────────┬────────┐
+    │ (index) │ Values │
+    ├─────────┼────────┤
+    │    0    │  '0'   │
+    │    1    │  '1'   │
+    │    2    │  '2'   │
+    │    3    │  '3'   │
+    │    4    │  '4'   │
+    │    5    │  '5'   │
+    │    6    │  '6'   │
+    │    7    │  '7'   │
+    │    8    │  '8'   │
+    │    9    │  '9'   │
+    │   10    │  '0'   │
+    │   11    │  '1'   │
+    │   12    │  '2'   │
+    │   13    │  '3'   │
+    │   14    │  '4'   │
+    │   15    │  '5'   │
+    │   16    │  '6'   │
+    │   17    │  '7'   │
+    │   18    │  '8'   │
+    │   19    │  '9'   │
+    │   20    │  '0'   │
+    └─────────┴────────┘
+*/
