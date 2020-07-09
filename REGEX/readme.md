@@ -20,4 +20,4 @@
 
 `\s` => Procura por tabulação ou Quebra de linha e espaço em branco (Quando da um tab, um espaço ou um enter).
 
-`\u` => Esse meta-caracter é o unicode, ele permite procurar algorismos de outros alfabetos passando o código [https://unicode-table.com/pt/](Tabela de Unicode), para usar você coloca o meta-caracter concatenado com o código do caracter que voce quer avaliar, por exemplo: "**\u02AC**" sendo esse caracter equivalente a "**ʬ**"
+`\u` => Esse meta-caracter é o unicode, ele permite procurar algorismos de outros alfabetos passando o código, aqui uma tabela para saber quais são esses códigos: [Tabela de Unicodes](https://unicode-table.com/pt/), para usar você coloca o meta-caracter concatenado com o código do caracter que voce quer avaliar, por exemplo: "**\u02AC**" sendo esse caracter equivalente a "**ʬ**"
