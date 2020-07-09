@@ -14,6 +14,12 @@ const texto3 = ``;
 const regex3 = /\s/g;
 console.log(texto3.match(regex3));
 
-const texto4 = ` `;
-const regex4 = /\f/g;
-console.log(texto4.match(regex4));
+/*
+    O meta-caractere unicode "\u", no caso esse meta-caracter permite que voce procure
+    por letras de letras que nao esteja no alfabeto americano. Nesse caso voce coloca
+    o meta-caracter "\u"+"codigo", como no exemplo abaixo: "\u02AC" sendo => "ʬ"
+
+    link com uma tabela dos caracteres: https://unicode-table.com/pt
+*/
+const palavra= "aʬaʬklakslakslʬ";
+console.log(palavra.match(/\u02AC/g));
