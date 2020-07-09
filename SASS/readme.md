@@ -19,7 +19,11 @@ Aqui nesse arquivos temos um exemplo básico de como funciona o sass. Clique no(
 
 [funcoes.scss](./_funcoes.scss) => Aqui esta as funções e os exemplos com funções.
 
+[avancada.scss](./avancada.scss) => Aqui esta Exemplos avançados e uma dica de como usar padroes como CSSOO e BEM.
+
 [Arquivo HTML](./index.html) => Arquivo HTML.
+
+[Avancado HTML](./avancado.html) => Arquivo HTML do exemplo avançado.
 
 [Output](./basico.css) => O arquivo de saida quando compila o **basico.scss**.
 

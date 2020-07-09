@@ -1,0 +1,91 @@
+html{
+    /*
+      !global => indica que a variavel tem escopo global. Como a variavel
+      esta sendo criado dentro do escopo do html{}, logo a variavel fica
+      restrita por padrao a esse bloco, esse eh o padrao das variaveis no 
+      SASS ficar restrito ao bloco, com o !global voce quebra essa regra.
+    */
+    $cor_alerta: red !global; 
+    $cor_titulo: purple !global;
+    $cor_subt:green !global;
+  }
+  /*
+    Exemplo de BEM, o SASS se adapta bem ao BEM. Nesse caso o & eh usado pra isso.
+    &__ => indica que esse eh um elemento do bloco ao qual ele esta inserido.
+    &-- => indica que eh um modificador do bloco ao qual ele esta inserido.
+  
+  */
+  .title{ //resolve como .title.
+    color: $cor_titulo;
+  //Quando voce coloca o &__ ele entende que voce esta usando um elemento seguindo normas BEM  
+    &__sub{ //resolve como .title__sub.
+      color:$cor_subt;
+    }
+  //O mesmo serve quando voce usa o --, que no caso indica estado.  
+    &--info{ //resolve como .title--info.
+      color:$cor_alerta;
+    }
+  }
+  
+  /*
+    Mixins avancado:
+    Voce pode usar o @content, quando com uso do @content, voce indica o
+    conteudo do mixin em tempo de execucao, ou seja voce indica aonde o
+    mixin deve colocar os valores.
+  */
+  
+  @mixin mixin_avancado{
+    /*
+      Aqui o mixin vai colocar os atributos informados dentro, aonde esta indicado
+      com o @content
+    */
+    &__item{@content};
+  }
+  
+  .items{
+    @include mixin_avancado{
+      /*
+        Para fazer uso do @content, voce deve usar uma estrutura como essa. 
+        Todos esses valores incluidos aqui serao colocados dentro do @content.
+        Repare que o uso eh semelhante a de um elemento HTML quando voce faz
+        uso de um mixin dessa forma, no caso esse mixin sera resolvido como:
+          .items__item {
+            color: blue;
+            font-size: 12px;
+          }
+      */
+      color:blue;
+      font-size:12px;
+    }
+  }
+  /*
+    Aqui temos aplicado os conceitos do CSS Orientado a Objetos. No caso
+    usamos o @extend para isso no sass.
+  */
+  .texto{
+    color:orange;
+    font-size:16px;
+  }
+  
+  %width{
+    min-width:100px;
+    max-width:200px;
+  }
+  
+  %height{
+    min-height:20px;
+    max-height:40px;
+  }
+  
+  .corDeFundo{
+    background-color:red;
+    border:2px solid black;
+    box-shadow:5px 5px 5px black;
+  }
+  .divisao{
+    
+    @extend .corDeFundo; //Sera resolvido como: .corDeFundo, .divisao
+    @extend %width; //Sera resolvido como: ".divisao", no caso sera incluso nessa mesma classe.
+    @extend %height; //Sera resolvido como: ".divisao", no caso sera incluso nessa mesma classe.
+    @extend .texto; //Sera resolvido como: .texto, .divisao
+  }
