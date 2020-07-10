@@ -72,3 +72,64 @@ console.log(simbolos.match(
     */
     /[-0-9]/ig
 ));
+
+//Alguns detalhes devem ser percebidos no caso dos conjuntos.
+const texto = "ABC [a,b,c] a-c";
+console.log("/[A-z]/g");
+console.table(
+    /*
+        Primeiro quando for buscar por letras misturando letras minusculas e maiuscula, nessa consulta
+        tambem entraria por exemplo o colchetes, uma vez que os colchetes esta dentro do range entre
+        "A"(maiusculo) que tem codigo 65 e "z"(minusculo) que tem codigo "122", nesse range entra o
+        colchete que tem o codigo na tabela ascii de "91", logo ele eh incluso como resultado. Lembre-se
+        sempre que o range eh feito com base na tabela ASCII.
+        String: "ABC [a,b,c] a-c";
+        output
+        ┌─────────┬────────┐
+        │ (index) │ Values │
+        ├─────────┼────────┤
+        │    0    │  'A'   │
+        │    1    │  'B'   │
+        │    2    │  'C'   │
+        │    3    │  '['   │
+        │    4    │  'a'   │
+        │    5    │  'b'   │
+        │    6    │  'c'   │
+        │    7    │  ']'   │
+        │    8    │  'a'   │
+        │    9    │  'c'   │
+        └─────────┴────────┘
+    */
+    texto.match(/[A-z]/g)
+);
+
+console.table(
+    /*
+        Segundo o hifem fora de um conjunto nao funciona como metacaracter e eh interpretado de
+        maneira literal:
+        String: "ABC [a,b,c] a-c";
+        Output
+        ┌─────────┬────────┐
+        │ (index) │ Values │
+        ├─────────┼────────┤
+        │    0    │ 'a-c'  │
+        └─────────┴────────┘
+    */
+    texto.match(/a-c/g)
+);
+
+try {
+    console.log("Analizando a expressao '/[z-A]/g'")
+    console.log(
+        /*
+            Essa expressao vai ficar ate dentro de um catch, porque vai dar erro. Ou seja voce
+            eh obrigado a respeitar o range do Ascii. O "z"(minusculo) tem codigo "122", ao
+            tempo que "A"(maiusculo) tem o codigo "65", em resumo a esquerda do hifem sempre
+            deve ter o caracter com o menor valor e a direita do hifem o com maior valor, senao
+            pode dar erro, como esse codigo abaixo.
+        */
+        texto.match(/[z-A]/g)
+    );
+} catch (error) {
+    console.log("Essa expressao regular '/[z-A]/g' sem respeitar o range da erro");
+}
