@@ -126,10 +126,56 @@ try {
             eh obrigado a respeitar o range do Ascii. O "z"(minusculo) tem codigo "122", ao
             tempo que "A"(maiusculo) tem o codigo "65", em resumo a esquerda do hifem sempre
             deve ter o caracter com o menor valor e a direita do hifem o com maior valor, senao
-            pode dar erro, como esse codigo abaixo.
+            pode dar erro, como esse codigo abaixo. No caso dara o seguinte erro:
+            "Invalid regular expression: /[z-A]/: Range out of order in character class"
         */
         texto.match(/[z-A]/g)
     );
 } catch (error) {
     console.log("Essa expressao regular '/[z-A]/g' sem respeitar o range da erro");
 }
+
+//Negacao
+console.log("Negacao!");
+console.table(caracteres.match(
+    /*
+        O acento circunflexo tem uma funcao diferente dependendo do contexto, entao 
+        a funcao dele pode mudar de acordo com a posicao dele, por exemplo se ele tiver
+        no final do conjunto ou no meio do conjunto por exemplo ele passa a ser interpretado 
+        de maneira literal, agora quando ele esta dentro de um conjunto, ou seja dentro dos
+        colchetes e no inicio da expressao dentro dos colchetes, resumindo se ele estiver
+        dentro dos colchetes e for rigorosamente o primeiro caracter dentro dos colchetes,
+        entao ele passar a ser o meta-caracter de negacao.
+        Na expressao abaixo ele esta negando, logo ele ira procurar todo e qualquer caracter
+        que nao esteja entre zero e nove na String, expecificamente no exemplo abaixo.
+        String: 0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f
+        Output
+        ┌─────────┬────────┐
+        │ (index) │ Values │
+        ├─────────┼────────┤
+        │    0    │  ','   │
+        │    1    │  ','   │
+        │    2    │  ','   │
+        │    3    │  ','   │
+        │    4    │  ','   │
+        │    5    │  ','   │
+        │    6    │  ','   │
+        │    7    │  ','   │
+        │    8    │  ','   │
+        │    9    │  ','   │
+        │   10    │  'a'   │
+        │   11    │  ','   │
+        │   12    │  'b'   │
+        │   13    │  ','   │
+        │   14    │  'c'   │
+        │   15    │  ','   │
+        │   16    │  'd'   │
+        │   17    │  ','   │
+        │   18    │  'e'   │
+        │   19    │  ','   │
+        │   20    │  'f'   │
+        └─────────┴────────┘
+
+    */
+    /[^0-9]/g
+));
