@@ -57,3 +57,11 @@ Qualquer meta-caracter dentro de colchetes, exceto: "**[**" "**]**" "**^**" "**-
 No modo guloso os metacaracteres quantificadores procuram retornar a maior quantidade de resultados possíveis, enquanto que o preguiçoso prioriza pelo menor.
 Por exemplo o **'*'** no modo preguiçoso tenta na medida do possível enviar zero ocorrência, que é o seu mínimo e quando no modo guloso ele prioriza o máximo que pode ser N. O mesmo vale para o "**+**" que no preguiçoso prioriza retornar uma ocorrência e no guloso N ocorrencias, ao tempo que no **?** prioriza zero no preguiçoso e 1 no guloso.w
 mais informações aqui: **06 - Quantificadores.js**
+
+## Regex Úteis
+
+`/\d{3}\.\d{3}\.\d{3}\-\d{2}/g` => **CPF**
+
+`/\(?\d{0,2}\)?\s?\d{4,5}\-\d{4}/g` => **Telefone do Brasil com DDD**
+
+`/[\w\.]+@[\w\.]+/g` => **Email Simples**
