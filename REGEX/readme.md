@@ -14,6 +14,14 @@
 
 `.` => Substitui 1 caracter, ex: /1.2/ => nesse caso ele substitui qualquer caracter que esteja entre 1 e 2, porem caso a String seja "12" ou "1,,2" o mesmo deve dar falso, pois so deve estar apenas 1 caracter entre o 1 e o 2, nesse caso, sendo verdadeiro: "1,2", "1.2", "1e2", "132", etc... Porem o '.' pode nao substituir o "**\n**" se a linguagem não tiver suporte a **dotall**. Ou seja se voce dar um enter, o enter o ponto não considera se a flag "**s**", porem algumas linguagens não tem suporte a flag "**s**" como o Javascript. 
 
+`?` => Como quantificador substitui zero ou um caracter, ou seja ele é chamado de quantificador opcional, porém se houver mais de uma ocorrencia ele dá falso. Se colocado após um codificador, ou seja após de um "**+**" ou seja após um "**'*'**" ou valores entre chaves, o mesmo opera como um modificador para lazy. Por padrão os modificadores operam como guloso, pegando a maior quantidade de resultado possível, quando você usa o interrogação como um operador lazy, então ele passa a pegar a menor quantidade possível de resultados, ou seja a lógica é invertida. 
+
+`*` => Coringa, esse quantificador indica zero ou mais, ou seja pode ter zero ocorrencias ou várias ocorrências.
+
+`+` => Obrigatório, indica que deve ter uma ou mais ocorrências.
+
+`{m,n}` => Indica que a ocorrência deve ocorrer no mínimo o numero de ocorrencias do "**m**" e no máximo o número de ocorrências do "**n**", por exemplo: **/a{3,5}/**, no mínimo deve ter três ocorrências e no máximo cinco ocorrências, o **n** pode ser omitido, nesse caso apenas tem um limite mínimo, exemplo: **/{2,}/** Ou seja precisa ter uma ocorrênica mínima de duas vezes.
+
 `\n` => Procura por quebra de linhas na String (quando da um Enter).
 
 `\t` => Procura por tabulação na String (Quando da um tab).
@@ -44,3 +52,8 @@ Acento circunflexo ao inicio de uma expressão regular, mas fora de colchetes, i
 
 ### Sobre Colchetes.
 Qualquer meta-caracter dentro de colchetes, exceto: "**[**" "**]**" "**^**" "**-**", sempre serão tratados como literais, com relação a esses caracteres mencionados, a não ser que eles estejam dentro do contexto correto, eles serão tratados como literais ou poderão dar um erro no Regex.
+
+### Modo Guloso ou preguiçoso.
+No modo guloso os metacaracteres quantificadores procuram retornar a maior quantidade de resultados possíveis, enquanto que o preguiçoso prioriza pelo menor.
+Por exemplo o **'*'** no modo preguiçoso tenta na medida do possível enviar zero ocorrência, que é o seu mínimo e quando no modo guloso ele prioriza o máximo que pode ser N. O mesmo vale para o "**+**" que no preguiçoso prioriza retornar uma ocorrência e no guloso N ocorrencias, ao tempo que no **?** prioriza zero no preguiçoso e 1 no guloso.w
+mais informações aqui: **06 - Quantificadores.js**
