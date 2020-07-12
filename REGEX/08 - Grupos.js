@@ -35,3 +35,37 @@ console.log("Resultado: ",
         */
         texto.match(/(?:a)?(b)\1/g)
 );
+
+console.log( "Looking ahead: ",
+    letras.match(
+        /*
+            Aqui tem um exemplo de como funciona o operador looking ahead,
+            no caso a expressao abaixo vai retornar uma caracter l, que tenha
+            a sua direita um outro caracter "l". Ou seja sao duas condicoes,
+            a primeira eh que o l eh obrigatorio e o segundo eh que alem
+            do caracter ser um l, ele tambem deve ter o "l" a sua direita.
+            No caso ele procura por um "ll" segundo a expressao abaixo e
+            retorna o "l". Logo colocar "?=" dentro de um grupo faz com que
+            o grupo opera como o operador looking ahead, no caso o operador
+            looking ahead ele usa o carater a direita para fazer analise
+            no caracter a esquerda.
+            String: "abcdefghijkll"
+            Output: Looking ahead:  [ 'l' ]
+        */
+        /l(?=l)/gi
+    )
+);
+
+console.log("Not Looking ahead: ",
+    /*
+        Aqui temos a negacao do looking ahead acima, no caso para se ter a
+        negacao voce troca o igual por exclamacao. No caso a expressao abaixo
+        vai dar match em qualquer caracter que contenha a letra "a" e nao esteja
+        a esquerda do caracter "l".
+        String: "abcdefghijkll"
+        Output: Not Looking ahead:  [ 'a' ]
+    */
+    letras.match(
+        /a(?!l)/g
+    )
+);
