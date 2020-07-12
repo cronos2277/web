@@ -34,11 +34,15 @@
 
 `\u` => Esse meta-caracter é o unicode, ele permite procurar algorismos de outros alfabetos passando o código [Tabela de Unicode](https://unicode-table.com/pt/), para usar você coloca o meta-caracter concatenado com o código do caracter que voce quer avaliar, por exemplo: "**\u02AC**" sendo esse caracter equivalente a "**ʬ**"
 
-`[]` => Tudo que estiver dentro de colchetes eh interpretado como grupo. Ex: **[sar]** se colocado de maneira literal dentro do operador dessa forma, primeiro ele procura por um "**s**" ou "**a**" ou "**r**". Quando se tem um hífem no meio, apenas no meio pois se estiver no início ou no fim, o hífem é interpretado de maneira literal, nesse caso ele procurará por um range de caracter **[1-4]** ou seja ele ira nesse caso procurar por "**1**","**2**","**3**","**4**". Ou **[1-4a-c]**, nesse caso ele vai procurar por algarismos numericos de um a quatro e depois por
+`[]` => Tudo que estiver dentro de colchetes eh interpretado como conjunto. Ex: **[sar]** se colocado de maneira literal dentro do operador dessa forma, primeiro ele procura por um "**s**" ou "**a**" ou "**r**". Quando se tem um hífem no meio, apenas no meio pois se estiver no início ou no fim, o hífem é interpretado de maneira literal, nesse caso ele procurará por um range de caracter **[1-4]** ou seja ele ira nesse caso procurar por "**1**","**2**","**3**","**4**". Ou **[1-4a-c]**, nesse caso ele vai procurar por algarismos numericos de um a quatro e depois por
 letras: "**a**","**b**","**c**" se nao houver a flag *i*, lembre se que o hifem ele deve estar a direita do primeiro valor da sequencia, geralmente 0, 1 ou a e a direita do ultimo valor do range, caso voce queira procurar mais de um range lembre que o hifem nao eh um separador de range, alem disso o hifem em lugar errado vira caracter literal a ser pesquisado. A sequencia desse
 range é definida pla tabela ASCII podendo ser acessada aqui: [Tabela ASCII](https://web.fe.up.pt/~ee96100/projecto/Tabela%20ascii.htm), por exemplo em um range do tipo [A-Z], sera procurado por caracteres que estejam no range entre o código **65** que eh a letra **A** no ascii, até o **90** que é a letra **Z** no ascii. Lembre-se de sempre respeitar o range, a esquerda do hifem o caracter com o menor valor na tabela ascii e a direita o maior.
 
 `^` => Se dentro de colchetes indica que ele nega o grupo de dentro dos colchetes, ou seja para procurar por qualquer caracter que não seja os do grupo. Se no início de uma expressão regular logo após a primeira **/**, indica que aquela expressão regular deve estar obrigatóriamente no início do texto, se estiver no meio ou no fim, não bate.
+
+`()` => Tudo que estiver dentro de parenteses é um grupo, que diferente do conjunto ele procura por toda a sequencia informada dentro dos parenteses, por exemplo **(sar)**, nesse caso ele vai procura por **sar** dentro da String.
+
+`\Numeros` => Aqui temos exemplos de retrovisores, no caso os retrovisores fazem referências a grupos, por exemplo: **\1** faz referencia ao primeiro grupo de caracteres de dentro de parenteses, **\2** segundo e por ai vai... Exemplo: `/(\d)(\w)/g` nessa expressão regular o **\1** seria o **\d** e o **\2** seria o **\w**, porem tem uma diferença a mais do que simplesmente repetir a expressão, por exemplo para dar match em **\1** não basta apenas ser dígito, mas tem que ser o mesmo dígito que o do **\d** informado, assim como o **\2** não apenas tem que ser um **\w** nesse exemplo, mas como também tem que ter o mesmo carácter que naquela posição. Você pode excluir a funcionalidade de retrovisor de um grupo usando a expressão **?:** na frente de qualquer caracter do grupo, exemplo: `/(\d)(?:\s)(\w)/g`, nesse exemplo como o segundo grupo tem o **?:**, logo o segundo retrovisor seria **\w**.
 
 ## Observações
 ### Respeite o Range.
@@ -57,6 +61,13 @@ Qualquer meta-caracter dentro de colchetes, exceto: "**[**" "**]**" "**^**" "**-
 No modo guloso os metacaracteres quantificadores procuram retornar a maior quantidade de resultados possíveis, enquanto que o preguiçoso prioriza pelo menor.
 Por exemplo o **'*'** no modo preguiçoso tenta na medida do possível enviar zero ocorrência, que é o seu mínimo e quando no modo guloso ele prioriza o máximo que pode ser N. O mesmo vale para o "**+**" que no preguiçoso prioriza retornar uma ocorrência e no guloso N ocorrencias, ao tempo que no **?** prioriza zero no preguiçoso e 1 no guloso.w
 mais informações aqui: **06 - Quantificadores.js**
+
+### A diferença entre Grupos e Conjuntos
+Em conjuntos é feito uma pesquisa por cada caracter, ao passo que nos grupos todos os caracteres de dentro dos parênteses formam uma unidade.
+
+`/[sar]/g` => Pesquisa ou por **s** ou por **a** ou por **r** dentro do texto. 
+
+`/(sar)/g` => pesquisa por **sar** dentro do texto.
 
 ## Regex Úteis
 
