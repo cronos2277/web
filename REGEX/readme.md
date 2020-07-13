@@ -4,7 +4,13 @@
 
 `/EXPRESSAO/i` => Ignora maiúsculo e minúsculo e trata ambos como iguais, no caso faz uma verificação case-insensitive.
 
-`/EXPRESSAO/s` => **Dotall**, faz com que o **'.'** tambem possa substituir o **\n** algo desabilitado por padrao.
+`/EXPRESSAO/s` => **Dotall**, faz com que o **'.'** tambem possa substituir o **\n** algo desabilitado por padrao. Não é compatível com todas as linguagens, como javascript por exemplo, uma alternativa a essa flag, seria usar na expressão `[\s\S]` ao invés de `.`, nesse caso estamos incluindo tudo que for espaço e tudo que não for espaço, logo irá pegar qualquer caracter.
+
+`/EXPRESSAO/m` => Multiline, nesse caso o regex trata Strings com multiplas linhas de maneira independente, ou seja para o regex cada **\n** passa a ser de fato uma nova linha, ou seja uma borda. Sem essa flag o regex não entende o **\n** como uma borda em toda a string, ou seja na ausência dessa flag, mesmo com \n a String inteira é analisada de maneira contínua, com a flag cada \n vira uma borda. Se por exemplo tiver duas linhas a primeira **Oi mundo** e a segunda **Tchau planeta**, e um **\n** entre elas, ou seja:
+
+`Oi mundo\nTchau planeta`
+
+Com a flag **m** ativada, tanto o **Oi** como o **Tchau** podem ser enchergado pelo caracter de borda `^`, assim como tanto o **mundo** como o **planeta** poderiam ser enchergado por `$`, uma vez que o regex entende que se trata de 2 linhas separadas, devido ao "**\n**", agora com a flag **m** desabilitada, apenas o **Oi** é atendido pelo `^`, assim como apenas o **planeta** seria atendido pelo `$`, pois o regex atende tudo como sendo uma linha só.
 
 ## Meta-caracteres 
 
@@ -34,11 +40,15 @@
 
 `\u` => Esse meta-caracter é o unicode, ele permite procurar algorismos de outros alfabetos passando o código [Tabela de Unicode](https://unicode-table.com/pt/), para usar você coloca o meta-caracter concatenado com o código do caracter que voce quer avaliar, por exemplo: "**\u02AC**" sendo esse caracter equivalente a "**ʬ**"
 
+`\b` => Caracter de borda, na prática, esse meta-caracter se comporta como um `\W`, ou seja a negação do `\w`.Se colocado antes da expressao ele da match em todas as ocorrências que sejam  `\W` na frente do caracter, se depois ele faz o mesmo com os caracteres a direita, essa estratégia de bordas por palavras funciona bem quando não se tem acentos na String. Se a String tiver acentos, os acentos são interpretados com borda, logo para Strings com caracteres unicode ela é inútil. A negação seria `\B`
+
 `[]` => Tudo que estiver dentro de colchetes eh interpretado como conjunto. Ex: **[sar]** se colocado de maneira literal dentro do operador dessa forma, primeiro ele procura por um "**s**" ou "**a**" ou "**r**". Quando se tem um hífem no meio, apenas no meio pois se estiver no início ou no fim, o hífem é interpretado de maneira literal, nesse caso ele procurará por um range de caracter **[1-4]** ou seja ele ira nesse caso procurar por "**1**","**2**","**3**","**4**". Ou **[1-4a-c]**, nesse caso ele vai procurar por algarismos numericos de um a quatro e depois por
 letras: "**a**","**b**","**c**" se nao houver a flag *i*, lembre se que o hifem ele deve estar a direita do primeiro valor da sequencia, geralmente 0, 1 ou a e a direita do ultimo valor do range, caso voce queira procurar mais de um range lembre que o hifem nao eh um separador de range, alem disso o hifem em lugar errado vira caracter literal a ser pesquisado. A sequencia desse
 range é definida pla tabela ASCII podendo ser acessada aqui: [Tabela ASCII](https://web.fe.up.pt/~ee96100/projecto/Tabela%20ascii.htm), por exemplo em um range do tipo [A-Z], sera procurado por caracteres que estejam no range entre o código **65** que eh a letra **A** no ascii, até o **90** que é a letra **Z** no ascii. Lembre-se de sempre respeitar o range, a esquerda do hifem o caracter com o menor valor na tabela ascii e a direita o maior.
 
-`^` => Se dentro de colchetes indica que ele nega o grupo de dentro dos colchetes, ou seja para procurar por qualquer caracter que não seja os do grupo. Se no início de uma expressão regular logo após a primeira **/**, indica que aquela expressão regular deve estar obrigatóriamente no início do texto, se estiver no meio ou no fim, não bate.
+`^` => Se dentro de colchetes indica que ele nega o grupo de dentro dos colchetes, ou seja para procurar por qualquer caracter que não seja os do grupo. Se no início de uma expressão regular logo após a primeira **/**, indica que aquela expressão regular deve estar obrigatóriamente no início do texto, se estiver no meio ou no fim, não bate, ou seja fora dos colchetes ele vira um caracter de borda, logo o meta-caracter `^` na posição `/^EXPRESSAO/` é diferente de `/[^EXPRESSAO]/`, no primeiro caso é um caracter de borda, no segundo um caracter de negação.
+
+`$` => Esse caracter é um caracter de borda que indica que a expressão deve estar no final, exemplo `/ola$/`, essa expressão indica que a string deve terminar em **ola** para ser válida.
 
 `()` => Tudo que estiver dentro de parenteses é um grupo, que diferente do conjunto ele procura por toda a sequencia informada dentro dos parenteses, por exemplo **(sar)**, nesse caso ele vai procura por **sar** dentro da String.
 
@@ -78,3 +88,5 @@ Em conjuntos é feito uma pesquisa por cada caracter, ao passo que nos grupos to
 `/\(?\d{0,2}\)?\s?\d{4,5}\-\d{4}/g` => **Telefone do Brasil com DDD**
 
 `/[\w\.]+@[\w\.]+/g` => **Email Simples**
+
+`/[/s/S]` => Essa expressão pode servir como o equivalente ao ponto dotall, caso a linguagem não de suporte a flag **s**, no caso essa expressão pega todo e qualquer caracter, uma vez que se pega o **/s** e a negação dele.
