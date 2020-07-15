@@ -87,10 +87,12 @@ Em conjuntos é feito uma pesquisa por cada caracter, ao passo que nos grupos to
 
 `/(\(\d{2}\)\s?)?\d{4,5}-\d{4}/g` => **Telefone do Brasil com DDD**
 
-`/[\w\.]+@[\w\.]+/g` => **Email Simples**
+`/\S+@\w+\.\w{2,}(\.\w{2})?/g` => **Regex para validação de e-mail**
 
 `/[/s/S]` => Essa expressão pode servir como o equivalente ao ponto dotall, caso a linguagem não de suporte a flag **s**, no caso essa expressão pega todo e qualquer caracter, uma vez que se pega o **/s** e a negação dele.
 
 `/\b(\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\b/g` => Pega qualquer IPV4 válido, incluindo endereço de loopback e endereços privados.
+
+`/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{X,Y}$/gm` => Regex para senha complexa, que tenha números, letras e simbolos. Observação, se for usar substitua o **X** dentro das chaves pelo número mínimo de caracteres que deve ter a senha e o **Y** dentro das chaves, pela ocorrência máxima que pode ter, por exemplo, se a senha deve ter de 6 a 20 caracteres, teriamos o seguinte: `/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{6,20}$/gm`. Apenas faça a substituição dentro das chaves.
 
 [Receitas de Regex](./Receitas.js) => Exemplo de como usar o Objeto RegExp do Javascript.
