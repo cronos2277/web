@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+
+            /* * => seleciona qualquer coisa */
+            border:1px solid black;
+            background-color: lightgray;
+            /* Seleciona apenas o body uma vez que existem mais abaixo seletores mais qualificados.*/
+        }        
+
+        div + span{
+            /*
+                O seletor '+' significa basicamente, um elemento que tenha
+            ele como um irmao "mais velho", vamos dizer assim, ou seja
+            um irmao que venha entes, nesse caso vai ser selecionado uma
+            SPAN que venha depois de uma div, ou seja toda SPAN que vem
+            depois de uma div, vai ser selecionado, esse seletor para
+            funcionar, exige que o elemento esteja colado com o irmao mais
+            velho.
+            */
+            background-color: blue;
+            color:white;
+            border:1px solid cyan;
+            /* Seleciona o: SPAN1, SPAN2 */
+        }
+
+        div ~ div{
+            /*
+                O seletor '~' significa basicamente, um elemento que tenha
+            ele como um irmao "mais velho", vamos dizer assim,porem diferente
+            do '+', esse seletor nao exige que o irmao mais velho esteja 
+            colada com o irmao mais velho.
+            */
+            background-color: red;
+            color:white;
+            border:1px solid yellow;
+            /* Seleciona o: Segunda DIV, terceiro, Ultima Div*/
+        }
+        #primeiro span{
+            /*
+                Aqui estamos selecionando uma span que seja filho ou neto do #primeiro, 
+                independente da posicao aonde esse(s) filhos e netos estejam.
+                Ou seja qualquer span dentro do #primeiro sera selecionado.
+            */
+            background-color: yellow;
+            color:black;
+            border:1px solid blue;
+            /* Seleciona o: SPAN4, SPAN5*/
+        }
+        #ultimo > span{
+            /*
+                Seleciona um filho imediato do #ultimo que seja span. Ou seja
+                netos do elemento #ultimo nao sera selecionado, apenas filhos,
+                essa eh a diferenca do espaco em branco.
+            */
+            background-color: purple;
+            color:white;
+            border:1px solid white;
+            /* Seleciona o: SPAN6 */
+        }
+        [attr]{
+            /*
+                Quando esta entre colchetes, seleciona qualquer elemento que
+                tenha o atributo attr.
+            */
+            background-color:cyan;
+            color:white;
+            border:1px solid red;
+            /* Seleciona o: Primeira Div */
+        }
+        [valor=ss]{
+            /*
+                Seleciona elementos que tem o atributo valor que contenha como 
+                valor o numero "ss". Seleciona o: SPAN3
+            */
+            background-color: chartreuse;
+            color:black;
+            border:1px solid blue;
+        }
+        /*
+            Como o :nth-child() voce pode selecionar um filho em especifico,
+            existe varias pseudo classes o css que seriam os ":", assim
+            como temos os Pseudos elementos com "::". O nth-child() tambem
+            aceita numeros se voce quiser pegar um elemento em especifico.
+        */
+        table tr td:nth-child(odd){
+            /* a pseudo classe :nth-child(odd) => seleciona os elementos impares */
+            background-color: red;
+            color:white;            
+        }
+        table tr td:nth-child(even){
+            /* a pseudo classe :nth-child(even) => seleciona os elementos pares */
+            background-color:blue;
+            color:white;
+        }
+        table tr td::first-letter{
+            /*
+                Aqui temos um exemplo de como funciona os pseudo elementos, no 
+                caso sera selecionado todos os "V" e valor da tabela, uma vez
+                que essa eh a primeira letra
+            */
+            color:greenyellow;
+            background-color: black;
+        }        
+    </style>
+</head>
+<body>
+    <div id="externo">
+        <div id="primeiro" attr>
+            Primeira Div
+            <span id="span4">SPAN4</span>
+            <span id="span5">SPAN5</span>
+        </div>
+        <div id="segundo">Segunda Div</div>
+        <span id="span1">SPAN1</span>
+        <div id="terceiro">Terceiro</div>
+        <span id="span2">SPAN2</span>
+        <span id="span3" valor=ss>SPAN3</span>
+        <div id="ultimo">
+            Ultima Div
+            <span id="span6">SPAN6</span>            
+        </div>
+    </div>
+    <table>
+        <tr>
+            <td>Valor 1</td>
+            <td>Valor A</td>
+        </tr>
+        <tr>
+            <td>Valor 2</td>
+            <td>Valor B</td>
+        </tr>
+        <tr>
+            <td>Valor 3</td>
+            <td>Valor C</td>
+        </tr>
+        <tr>
+            <td>Valor 4</td>
+            <td>Valor D</td>
+        </tr>
+    </table>
+</body>
+</html>
