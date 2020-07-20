@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        .none{
+            /* display none, oculta elementos*/
+            display:none;
+        }        
+        .inline{
+            /* 
+                o dispal inline coloca todos na mesma linha 
+            */
+            display: inline;
+            background-color: red;
+            color:white;
+            padding-left: 30px;
+            padding-right: 30px; 
+            padding-top:5px;
+            padding-bottom: 5px;
+            margin-left: 10px;
+            margin-right: 10px;
+            /*   
+            Esses atributos abaixo serao sumariamente ignorados:
+            height, width, margin-top margin-bottom
+            Com o display inline voce apenas pode configurar as
+            propriedades x do elemento, qualquer propriedade 
+            y sera ignorada, uma vez que a ideia desse display
+            eh colocar a maior quantidade de elementos possiveis
+            na mesma linha. Repare tambem que esse elemento pode
+            sobrepor qualquer outro elemento acima ou abaixo.
+            */
+        }
+        .block{
+            /*
+                No display block um elemento ele ocupa um bloco inteiro,
+                por mais que caiba um elemento ao lado, o elemento vai
+                ficar em baixo mesmo assim, no outro bloco. Ou seja
+                o elemento tem como espaco todo o bloco
+            */
+            display: block;
+            background-color: blue;
+            color:white;
+            padding:5px;
+            margin-bottom: 5px;      
+            /*
+                Por mais que a largura seja 33% e caiba 3 elementos um 
+                ao lado do outro, nesse modo vai ficar em bloco do
+                mesmo jeito.
+            */                  
+            width: 33%;
+        }
+        .inline-block{
+            /*
+                Tambem coloca o elemento como bloco, mas diferente do 
+                modo block, se houver um espaco ele coloca ao lado.
+                Primeiro ele tenta colocar ao lado, se os elementos
+                passarem de 100% da largura, ai ele coloca em baixo.
+                Lembrando tambem que o espaco conta, ou seja se houver
+                um espaco, isso pode fazer com que o elemento ocupe
+                a linha de baixo. Lembrese que nesse modo a quebra de
+                linha, espaco e a tabulacao eh contado quando na renderizacao
+                do elemento, diferente dos dois modos acima.
+            */
+            display: inline-block;
+            margin-bottom: 5px;
+            background-color: green;
+            color:white;
+            width: 34%;
+        }
+        span{
+            color:white;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="none">Essa div nao sera exibida</div>
+    <div class="inline">DIV INLINE 1</div>
+    <div class="inline">DIV INLINE 2</div>
+    <div class="inline">DIV INLINE 3</div>    
+    <div class="block">DIV BLOCK 1</div>
+    <div class="block">DIV BLOCK 2</div>
+    <div class="block">DIV BLOCK 3</div>
+    <!-- Aqui como nao tem espaco entre os elementos, um ira ficar colado com o outro -->
+    <span>Um elemento colado com o outro, por nao ter espaco, no inline-bloco como voce pode ver esse espaco faz diferenca, qualquer espaco entre os elementos sao contabilizados.</span>
+    <div class="inline-block">DIV INLINE-BLOCK 1</div><div class="inline-block">DIV INLINE-BLOCK 2</div>
+    <!-- Aqui devido ao espaco, esse espaco que tem entre os elementos abaixos sera exibido como espaco, no caso a quebra de linha -->
+    <span>Aqui a quebra de linha eh transformado em espaco em branco devido ao modo inline-block, espaco ocorre porque no html, um esta abaixo do outro, existe um \n entre eles.</span>
+    <div class="inline-block">DIV INLINE-BLOCK 3</div>
+    <div class="inline-block">DIV INLINE-BLOCK 4</div>
+</body>
+</html>
