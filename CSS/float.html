@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float</title>
+    <style>
+        body{
+            background-color: yellow;
+        }
+        div{
+            width: 20%;
+            height:10vh;
+            border:1vw;            
+        }
+        .verde{
+            background-color: green;
+            color:white;
+            /* Faz flutuar para a esquerda */
+            float: left;            
+        }
+        .vermelho{
+            background-color:red;
+            color:white;
+            /* Faz flutuar para a direita */
+            float:right;
+        }
+        .clear{
+            border: 5px solid black;
+            color:black;
+            /*
+                Limpa a flutuacao dos elementos renderizados
+                antes dele, na prativa ele serve como um 
+                divisor de elementos flutuantes, uma especie
+                de HR para floats, Reoare que gracas a esse
+                elemento tem uma divisao entre os floats
+            */
+            clear:both;
+            text-align: center;
+            font-size: xx-large;
+            background-color: white;
+        }
+        .azul{
+            background-color: blue;
+            color:white;
+            float: right;
+        }        
+        .magenta{
+            background-color: magenta;                        
+            color:white;            
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="vermelho"></div>    
+    <div class="verde"></div>
+    <div class="clear">PROPRIEDADE CLEAR</div>
+    <div class="magenta"></div>
+    <div class="azul"></div>
+    <div class="clear">PROPRIEDADE CLEAR</div>
+    <!-- 
+        Aqui temos um exemplo de como se comporta
+        os elementos, repare que aqui temos os 
+        elementos flutuantes a esquerda indo sempre
+        para a esquerda e os da direita para a direita,
+        repare que ambos envitam o meio, uma vez que
+        procuram flutuar para o lado deles, o clear
+        procura evitar essa bagunca.        
+    -->
+    <div class="verde"></div>
+    <div class="magenta"></div>    
+    <div class="azul"></div>
+    <div class="vermelho"></div>    
+    <div class="azul"></div>
+    <div class="vermelho"></div>    
+    <div class="magenta"></div>
+    <div class="verde"></div>    
+</body>
+</html>
