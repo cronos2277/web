@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posicionamento</title>
+    <style>
+        body{
+            height: 200vh;
+        }
+        div{
+            width: 90vw;
+            height: 10vh;  
+            text-align: center;
+            font-size: xx-large;                 
+        }
+        .static{
+            /*
+                O Estatico eh o padrao, ou seja esse eh o valor
+                assumido quando voce nao define position, diferente
+                de todos os outros positions, ele nao aceita parametros
+                como "left,right,top,bottom", a posicao de um elemento
+                estatico geralmente eh definido com margens. De todo
+                modo ele tambem deixa de ser uma referencia para 
+                elementos absolutos, uma vez que elementos absolutos
+                tem como referencia elementos hierarquicamente superior
+                para posicionamento que nao sejam estaticos.
+            */
+            position: static;
+            background-color: black;
+            color:white;            
+        }        
+        .relative{
+            /*
+                Funciona de maneira semelhante ao static,
+                porem com o relative voce pode posicionar
+                usando o top,right, left, bottom. O Relative
+                tem como referencia o seu ponto, ou seja ele
+                usa a si mesmo como uma referencia, diferente
+                do absolute por exemplo que tem como pai um 
+                elemento superior na hierarquia.
+            */
+            position: relative;
+            background-color: red;
+            color:white;
+            top:210px;
+            right:20px;
+        }      
+        .absolute{
+            /*
+                Nesse modo eh posicionado como base em 
+                algum elemento pai que nao tenha o 
+                posicionamento como "static". No caso voce
+                pode usar o "left","right","top", "button",
+                com essas propriedades voce define a
+                posicao x e y dele. A referencia de posicionamento
+                dele eh sempre o elemento acima dele.
+            */
+            position: absolute;
+            background-color:blue;
+            color:white;
+            right:auto;
+            bottom: auto;
+            left:50px;
+            top:110px;
+        }
+        .fixed{
+            /*
+                Um bloco com esse posicionamento, fica
+                fixo em uma posicao, no caso voce
+                pode usar o "left","right","top", "button",
+                com essas propriedades voce define a
+                posicao x e y dele. A referencia da posicao
+                fixa eh a janela do navegador, no caso
+                essa seria a diferenca entre ele e o absolute,
+                de resto eh todo igual, ou seja a posicao dele
+                depende do tamanho que o seu navegador.
+                Ele tambem independe de rolagem, eh a area
+                que aparece para o usuario, ou seja ele ignora 
+                a barra de rolagem e sempre aparece em um lugar
+                visivel ao usuario, um exemplo do uso dele sao
+                aqueles icones de rede sociais, que independente
+                que quanto voce da scroll eles estao ali sempre
+                naquela posicao lateral.               
+            */
+            position: fixed;
+            background-color: green;
+            color:white;
+            bottom:0px;
+            left:100px;
+        }
+        .sticky{
+            /*
+                O sticky eh uma propriedade nova, colocado recentemente.
+                Basicamente quando o elemento chega no posicao informado
+                pelo "top, left, right ou bottom" ele congela naquela posicao,
+                ele cria aquela forma de posicionamento muito comum em 
+                menus de sites wordpress aonde voce navega pelo conteudo
+                e o menu fica preso naquela posicao do topo enquanto voce
+                navega. Quando o elemento que tem a propriedade sticky
+                chegar na posicao informada por um daqueles 4 atributos:
+                "top, left, right ou bottom", ele trava ali e se comporta
+                como um elemento fixo, como os menus do wordpress quando
+                voce esta dando scroll por exemplo, mas quando ele fica
+                fora daquele posicao, ele passa a se comportar como um 
+                relative.
+            */
+            position: sticky;
+            background-color:purple;
+            color:white;    
+            margin-top:10px; 
+            top: 20px;       
+        }
+        /*
+            Em resumo:
+            STATIC => Fica estatico na tela, nao eh posivel definir a posicao dele. (Padrao)
+            RELATIVE => Tem como referencia de posicionamento o proprio elemento.
+            ABSOLUTE => Tem como referencia o primeiro elemento acima dele que nao seja estatic.
+            FIXED => Ele tem como referencia a janela do navegador e sempre fica naquela posicao.
+            STICKY => Ele se move ate chegar a posicao dele, uma vez la ele fica congelado.
+        */
+    </style>
+</head>
+<body>    
+    <div class="static">Static</div>    
+    <div class="absolute">Absolute</div>
+    <div class="relative">Relative</div>    
+    <div class="sticky">Sticky</div>
+    <div class="fixed">Fixed</div>    
+</body>
+</html>
