@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamanho</title>
+</head>
+<style>
+    html,body{
+        /*
+            Se faz necessario declarar, pois os valores relativos como
+            porcentagem depende disso, por padrao o body e html so tem width
+            e nao tem height. Repare que a omissao desse valor nesses atributos,
+            vai fazer com que o height dos valores relativos nao funcionem.
+            Isso ocorre porque os elementos pai dessas divs, body e html sao
+            flexiveis no que tange a altura e vao definindo a altura de maneira
+            relativa de acordo com a soma da altura dos elementos internos, logo
+            a omissao desse valor faz com que os elementos filhos, como sao
+            filhos diretos de body e estao com a posicao estatica, nao tenha uma 
+            altura, mesmo que determinado.
+        */
+        height: 100%;
+    }
+    div{
+        color:white;    
+        border:2px solid black;
+        text-align: center;
+        display: block;
+    }
+.pixel{
+    /* 
+        Aqui definimos em pixel a altura e a largura, lembrando que isso nao significa
+        que o elemento tera exatamente 50px na tela, uma vez que um pixel da tela
+        nao representa um pixel real.
+    */
+    width:200px;
+    height:200px;    
+    background-color:red;
+}
+.porcentagem{
+    width: 20%;
+    height: 20%;
+    /*
+        Aqui definimos um tamanho minimo, ou seja esse eh o tamanho minimo necessario
+        para ser exibido na tela. No caso elemento nunca vai ter menos de 20px de
+        largura e altura.
+    */
+    min-width: 20px;
+    min-height: 20px;    
+    background-color: blue;
+}
+.relativo{
+    /*
+        No caso a altura quando se usa vw ou vh, basicamente o navegador vai pegar 
+        todo o tamanho do documento e vai dividir em 100 partes, e assim sendo:
+        Xvw => corresponde a "X"% de todo o espaco horizontal da tela.
+        Xvh => corresponde a "X"% de todo o espaco horizontal da tela.
+        Lembrando, como se tem um tamanho maximo para largura e altura, assim que
+        o elemento chegar aos tamanhos maximo ele para de crescer, logo lembre-se
+        disso quando for ver o exemplo.
+    */
+    width: 40vw; /*Pega 40% de todo o espaco horizontal.*/
+    height: 20vh; /*Pega 40% de todo o espaco vertical.*/
+    background-color: green;   
+    /*
+        Assim como voce pode definir um tamanho minimo, voce pode definir um valor maximo.
+        No caso o elemento com essa classe nunca vai passar de 500px de largura e 
+        300px de altura. No caso o elemento vai crescer ate chegar essas dimensoes abaixo.
+    */ 
+    max-width: 700px;
+    max-height: 400px;
+}
+.vmax_vmin{
+    /*
+        Incialmente eh analisado qual eh a maior dimensao e a menor dimensao, ou seja
+        primeiro verifica-se se o maior seria a altura ou a largura, dentre a que tiver
+        mais pixels, esse corresponderia ao vmax e a largura ou altura que tiver menos
+        pixel seria o correspondente ao vmin. Por exemplo, se a largura for maior que
+        a altura, o vmax eh a largura e o vmin a altura, caso seja a altura maior, logo
+        esses valores se inverte. Ou seja vmax sempre pega o valor da maior dimensao,
+        podendo ser largura ou altura, vale o maior. vmin eh o contrario do vmax e
+        sempre pega o menor valor entre a altura e largura, o que tiver menor valor
+        eh escolhido, isso pode ser util caso voce tenha um celular por exemplo
+        e queira que o conteudo se adapte tanto no sentido vertical como horizontal,
+        caso o usuario mude a orientacao de uso do celaluar por exemplo.
+        Xvmax => Pega "X"% do valor com base na dimensao maior.
+        Xvmin => Pega "X"% do valor com base na dimensao menor.
+    */
+    width: 20vmax;
+    height: 20vmin;
+    background-color: blueviolet;
+}
+h1{
+    /*
+        Rem eh usado para tamanho da fonte, no caso aqui estamos dizendo que 
+        queremos 3x o tamanho do elemento raiz, que pode variar de navegador
+        para navegador, e a configuracao do tamanho da fonte do usuario,
+        o padrao para H1 eh 2rem.
+    */
+    font-size:3rem;
+}
+h2{
+    /*
+        em pega por heranca o tamanho dos valores pais, no caso como nao
+        existe polimorfismo no meio do caminho, voce vera o h2 do mesmo
+        tamanho que o h1, porem o rem vem da raiz e ignora o polimorfismo
+        e o em leva em conta o polimorfismo e herda a caracteristica do
+        elemento pai mais proximo.
+    */
+    font-size: 3em;
+}
+</style>
+<body>
+    <h1>H1</h1>
+    <h2>H2</h2>
+    <div class="pixel">Pixel: 200px - 200px</div>
+    <div class="porcentagem">Pixel: 20% - 20% (min 20px)</div>
+    <div class="relativo">Relativo 20vw - 20vh</div>
+    <div class="vmax_vmin"><span id="vmin"></span>vmin - <span id="vmax"></span>vmax</div>        
+</body>
+</html>
