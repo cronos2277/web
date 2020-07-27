@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fonte</title>
+    <style>
+        .monospace{
+            font-family: monospace;
+            color:blue;
+            /*
+                Espessura da fonte, no caso para a negrito o valor gira em
+                torno dos 700, nesse caso a fonte sera mais forte que o
+                negrito.
+            */
+            font-weight: 900;
+            font-size: 2rem;
+        }
+        .serif{
+            font-family: serif;
+            color:green;
+            /*
+                Nesse valor voce pode colocar a fonte como oblique e 
+                italic, caso voce queira um efeito italico ou obliquo,
+                voce pode usar esse valor.
+            */
+            font-style:oblique;
+            font-size:2rem;
+        }
+        .sans-serif{
+            font-family: sans-serif;
+            color:red;
+            font-size: 2rem; 
+            /*
+                Aqui definimos o espaco vertical entre os textos, no 
+                caso 50px top de margin e 50px bottom de margin tambem.
+            */
+            line-height: 50px;           
+        }
+        .cursive{
+            font-family: cursive;
+            color:orange;
+            /*
+                Aqui voce transforma o texto, pode ser uppercase, lowercase
+                capitalize, ou seja aqui voce pode forcar o texto ser
+                maiuscula, minuscula ou capitalize.
+            */
+            text-transform: uppercase;
+            font-size: 2rem;
+        }
+        #cursive-span{
+            text-transform: lowercase;
+            /*
+                Aqui voce define o espaco entre os caracteres, no caso
+                com isso todos os caracteres tem o exato mesmo espaco
+                entre eles, nesse caso 2px.
+            */
+            letter-spacing: 2px;
+        }
+        .fantasy{
+            font-family: fantasy;
+            color:blueviolet;
+            font-size: 2rem;
+            /* Alinha o texto ao centro horizontalmente */
+            text-align: center;                                 
+        }
+        #fantasy{
+            /* 
+                Aqui temos um exemplo de sombra em texto, posicao x,
+                posicao y, dispersao e a cor da sombra, nesse caso
+                o azul.
+            */
+            text-shadow: 5px 5px 10px  blue;            
+        }
+
+    </style>
+</head>
+<body>
+    <p class="monospace">MONOSPACE</p>
+    <p class="serif">SERIF: A,Q,G,H,I</p>
+    <p class="sans-serif">SANS-SERIF: A,Q,G,H,I</p>
+    <p class="cursive">cursive <span id="cursive-span">CURSIVE</span></p>
+    <p class="fantasy">fantasy <span id="fantasy">FANTASY</span></p>
+</body>
+</html>

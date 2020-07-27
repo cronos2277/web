@@ -28,6 +28,12 @@
             border: 5px solid blue;
         }
 
+        div.orientation{
+            background-color: yellow;
+            color:black;
+            border: 5px solid lightgrey;            
+        }
+
         @media (max-width: 500px) {
             /* 
                 Essa media query para ser executada, deve se ter no maximo 500 pixels de largura.
@@ -82,6 +88,34 @@
             .observacao{
                 display:block;
             }
+        }
+        /* 
+            Quando a largura eh maior do que a altura, ou seja pc, celular e tablet de lado. 
+            Essa seria a orientacao landscape. Como a largura eh maior, a largura esta com
+            o vmax, ou seja o maior valor entre altura e largura e a altura fica com o
+            vmin que eh o menor.
+        */
+        @media (orientation : landscape){
+            div.orientation{
+                height: 50vmin;
+                width: 50vmax;
+                min-height: 10vmin;                
+                display: block;
+            }            
+        }
+        /*
+            Quando a altura eh maior que a largura, ou seja celular e tablet em pe,
+            e monitores verticalizados. Como a altura eh maior, logo a altura aqui
+            esta pegando o valor maior e a largura o menor, essa seria um excelente
+            exemplo do uso do vmin e vmax.
+        */
+        @media(orientation : portrait){
+            div.orientation{
+                height: 50vmax;
+                width: 50vmin;
+                min-width: 10vmin;
+                display: block;
+            }            
         }               
     </style>
 </head>
@@ -90,5 +124,6 @@
     <div id="medio">MEDIO</div>
     <div id="grande">GRANDE</div>
     <div class="observacao">PEQUENO OU GRANDE</div>
+    <div class="orientation">ORIENTATION</div>
 </body>
 </html>
