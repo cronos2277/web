@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Query</title>
+    <style>
+        html,body{
+            background-color: black;
+            height: 100%;
+        }
+        div{
+            background-color:magenta;
+            color:white;
+            border: 5px solid purple;
+            height: 10vh;
+            width: 90vw;
+            display: inline-block; 
+            text-align: center;  
+            font-size: xx-large;
+            margin-top: 10px;   
+            display: none;      
+        }
+
+        div.observacao{
+            background-color: aqua;
+            color:black;
+            border: 5px solid blue;
+        }
+
+        @media (max-width: 500px) {
+            /* 
+                Essa media query para ser executada, deve se ter no maximo 500 pixels de largura.
+                o "max-width" dentro dos parenteses impoe essa obrigacao, do contrario a div que
+                tem o id do pequeno nao passa a ter o valor do display setado em "block" e devido
+                a isso o valor do display fica em "none". Essa media impoe um tamanho maximo de 
+                tela para que ela possa ser exibida. Aqui eh a logica para a div de pequena.
+            */
+            #pequeno{
+                display: block;
+            }
+        }
+
+        @media (min-width: 1000px){
+            /*
+                Essa eh a oposta da media query acima, aqui a tela deve ter no minimo 1000px que
+                esse elemento seja exibido, caso a tela do navegador do usuario nao tenha os
+                1000px de largura, esse valor de display aqui eh ignorado. Essa medida impoe
+                um tamanho minimo gracas ao "min-width" para o tamamho de tela. Aqui eh a logica
+                para a div de grande.
+            */
+            #grande{
+                display: block;
+            }
+        } 
+
+        @media (min-width: 501px) and (max-width: 999px) {
+            /*
+                Aqui nos temos o "and", que no caso ao inves de impor uma condicao como nos
+                exemplos acima, aqui sao colocadas duas condicoes, ou seja: A tela do navegador
+                do usuario deve ter no minimo 501px e no maximo 999px, caso nao seja atendida
+                as duas condicoes, o valor da div nao eh alterada para block e nada eh exibido,
+                repare que aqui esta bem dentro do intervalo entre o pequeno e o grande, ou
+                seja a condicao para que essa seja exibida, eh ser maior que o tamanho maximo
+                do pequeno em 1px e ser menor que o tamanho minimo do grande em 1px.
+                Essa eh a logica para a div media.
+            */
+            #medio{
+                display: block;
+            }
+        }
+
+        @media (max-width: 500px), (min-width: 1000px){
+            /*
+                Por fim temos um exemplo da clausura "or", que tem a logica invertida da div 
+                media de cima, aqui temos o "ou", caso uma das condicoes acima seja verdadeira
+                a div com a classe de observacao eh exibida. A condicao eh:
+                menor que 500px ou maior que 1000px, nesse caso quando houver qualquer valor
+                de medio, ou seja, valore maiores que 500px e menores que 1000px, logo temos
+                a impressao dessa div.
+            */
+            .observacao{
+                display:block;
+            }
+        }               
+    </style>
+</head>
+<body>
+    <div id="pequeno">PEQUENO</div>
+    <div id="medio">MEDIO</div>
+    <div id="grande">GRANDE</div>
+    <div class="observacao">PEQUENO OU GRANDE</div>
+</body>
+</html>
