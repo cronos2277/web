@@ -18,6 +18,26 @@
             column => O sentido de cima para baixo, sendo o main-axis o eixo Y e o cross-axis o eixo X.
             column => O sentido eh de baixo para cima, sendo o main-axis o eixo Y e o cross-axis o eixo X.
 
+            JUSTIFY-CONTENT e ALIGN-ITENS. (Atributos de Container)
+            justify-content(main-axis) vs align-itens(cross-axis): Eles servem para alinhar, porem um alinha 
+            pelo main-axis e o outro para o cross-axis. No caso o justify-content define a posicao pelo
+            main-axis e o align-itens pelo cross-axis, main-axis eh o sentido dado para a distribuicao dos
+            elementos internos dentro do componente, podendo ser horizontal se for (row ou row-reverse) e
+            vertical se for (column ou column-reverse), o main-axis eh definido no atributo flex-direction, sendo 
+            o cross-axis o complemento de main-axis, ou seja se o main-axis esta na horizontal o cross esta na
+            vertical. Exemplo:            
+            "flex-direction:row ou row-reverse" => justify-content corresponde ao comportamento eixo X e o align-itens ao eixo Y.
+            "flex-direction:column ou column-reverse" => Inverte, nesse caso o justify seria o eixo Y e o align o eixo X.
+            "align-itens" => A posicao dos elementos com base no eixo definido no flex-direction.
+            "justify-content" => A posicao dos elementos complementar ao do flex-direction.
+            Esses dois atributos servem para definir elementos internos, ou seja como serao posicionados.
+            stretch => Ele estica o elemento verticalmente ou horizontalmente dependendo o flex-direction.
+            baseline => Ele alinha com base no conteudo ou seja faz um alinhamento de modo que o conteudo esteja alinhado.
+            space-around => Espaco envolta, ou seja ele da um espaco entre os elementos e as bordas.
+            space-between => Espaco apenas entre os elementos e exclui as bordas.
+            flex-start => Alinha tudo no eixo x=0 ou y=0 de acordo com o flex-direction.
+            flex-end => alinha tudo ao final, ou seja a direita se row, abaixo se column.
+
             FLEX-BASIS
             Se o main-axis for o eixo X ele passa a determinar o width, 
             sendo que o valor se sobrepoe ao width pois eh mais especifico.
@@ -28,15 +48,25 @@
             column ou column reverse voce pode usar o width como complementar e dessa forma ele pode selecionar
             o valor de height ou width para ser o tamanho que ele usara como cross-axis automaticamente.
 
-            ALIGN-SELF e JUSTIFY_SELF.
-            align-self(main-axis) vs justify-self(cross-axis): Eles servem para alinhar, porem um alinha 
-            pelo main-axis e o outro para o cross-axis, por exemplo se voce define o flex-direction como
-            row, o align-self e os seus valores irao corresponder ao posicionamento X e o justify-content
-            ao posicionamento Y, caso seja uma coluna, ai inverte, ai o align-self seria o Y e justify o X,
-            ou seja o align-self vai alinhar ele mesmo vamos dizer assim, ou seja com base no flex-direction,
-            ja o justify-content vai justifica-lo, ou seja posiciona-lo com base no seu cross-axis. Resumindo:
-            align-self => A posicao dos elementos com base no eixo definido no flex-direction.
-            justify-self => A posicao dos elementos complementar ao do flex-direction.
+            FLEX-WRAP
+            Habilita a quebra de linha em um container flex. Por padrao caso o conteudo exceda o tamanho maximo de
+            um flex container com o direction em row, ele da um overflow e continua colocando os elementos em linha
+            ignorando o width dele, quando voce ativa o wrap, voce passa a colocar o excedente abaixo e caso
+            voce informe um wrap-reverse ai ele coloca o excedente acima. Eh valido lembrar que se o direction
+            for column a "quebra de linha" sera a direita se for wrap ou a esquerda se for wrap-reverse. O Ponto eh,
+            um elemento filho dentro de um container flexbox nao respeita os limites do pai e flutua os seus limites,
+            ou seja se o pai tem um flex-direction:row e um width de 500px e cada filho tem 200px, por padrao o
+            teceiro filho ficaria ao lado do segundo filho, porem com o wrap setado ele poderia ir para baixo ou
+            para cima, uma vez que esse terceiro filho nao caberia, nessa situacao ao lado do segundo, pois excediria
+            o width do pai em 100px.
+
+            ALIGN-CONTENT
+            Caso voce use o flex-wrap, como a ultima linha ou coluna deve se comportar? Justamente para resolver
+            esse problema, serve esse atributo. No exemplo do flex-wrap acima de um flex-direct row, com 500px,
+            sendo que cada filho teria 200px, nesse caso nos iriamos definir como iria ser posicionado o terceiro
+            filho, aquele que esta na linha debaixo criado pelo wrap, se ele ficaria mais a esquerda, mais a direita,
+            ou se teria um stretch talvez... No so isso, ele alinha as multiplas linhas na aplicacao
+            
         */
         body,html{
             background-color: black;
@@ -131,7 +161,7 @@
                 uma nova fila ao lado. Essa propriedade habilita isso.
             */
             flex-wrap: wrap;
-            height: 25vh;
+            height: 25vh;            
         }   
         #wrap-row{
             /*
@@ -145,6 +175,7 @@
             flex-wrap: wrap-reverse;
             width: 60vw;
             margin-top:100px;
+            align-content: center;            
         }
         #flex-grow{
             /*
@@ -225,24 +256,27 @@
             order: 1;
             background-color:yellow !important;
             color:blue;
-        }
-        /*            
-            Valores possiveis a justify-content ou o align-self:
-            stretch => Ele estica o elemento verticalmente ou horizontalmente dependendo o flex-direction.
-            baseline => Ele alinha com base no conteudo, ou seja centraliza o conteudo e faz o alinhamento.
-            space-around => Espaco envolta, ou seja ele da um espaco entre os elementos e as bordas.
-            space-between => Espaco apenas entre os elementos e exclui as bordas.
-            flex-start => Alinha tudo no eixo x=0 ou y=0 de acordo com o flex-direction.
-            flex-end => alinha tudo ao final, ou seja a direita se row, abaixo se column.
-
-            *Obs, lembre-se que voce tem o row-reverse e column reverse caso queira inverter o posicionamento,
-            e voce tem o atributo order para ordenar os elementos, grow e shrink caso queira definir um tamanho
-            para eles.             
-        */
+        }        
         #justify-content{           
-            justify-content:space-around;            
+            /*
+                Aqui estamos definido a posicao dos elementos internos com base no main-axis, conforme explicado acima.
+            */
+            justify-content:space-around;
+            /*
+                Aqui estamos definido a posicao dos elementos internos com base no cross-axis, conforme explicado acima.
+            */
+            align-items: flex-end;                      
         }         
-        .align-self1{                
+        .align-self1{   
+            /*
+                Nao confundir com o align-items, o items ele eh focado no posicionamento cross-axis de elementos internos,
+                este atributo tem a mesma logica, mas o target eh o proprio elemento. Ele alinha o elemento com base no
+                cross-axis do pai, ou seja se voce quiser definir a posicao cross-axis de um elemento em especifico,
+                voce pode usar esse atributo o "align-self" que significa alinhe o proprio elemento. Mas lembre-se sempre
+                par nao confundir justify-content e align-items definem o comportamento de elementos internos, ou seja
+                dentro dele, ao tempo que o align-self define a posicao de cross-axis para o proprio elemento. O align-self
+                sempre sobrescreve o valor de align-items por ser mais especifico, fique atento a isso.
+            */             
             align-self: flex-end;
             background-color:green !important;
             color:magenta;
@@ -332,7 +366,7 @@
     <hr>
     <div class="container">          
         <div>
-            <h1>flex-direction:row;<br>flex-wrap:wrap-reverse;</h1>
+            <h1>flex-direction:row;<br>flex-wrap:wrap-reverse;<br>align-content:center;</h1>
         </div>
     </div>      
     <div class="container">
@@ -361,8 +395,7 @@
     <hr>
     <div class="container">
         <h1>ORDER:\d</h1>        
-        <h1>align-self:(flex-end|center)</h1>
-        <h1>justify-content:(space-around)</h1>
+        <h1>align-self:(flex-end|center)</h1>        
     </div>
     <div id="justify-content" class="container">
         <div id="flex-grow" class="flex-row" style="height: 20vh;background-color: lightgray;">
