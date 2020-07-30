@@ -5,6 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flex-Box</title>
     <style>
+        /*
+            BASICO de FLEXBOX:
+            display:flex => Eh o minimo necessario para que funcione o modo flex.
+
+            FLEX-DIRECTION
+            Aqui voce define quem eh o main-axis e quem eh o cross-axis, existe 4 opcoes possiveis,
+            row, row-reverse, column, column-reverse, por padrao eh row para desktops e column para
+            mobile, o padrao eh definido com base na orientacao da tela.
+            row => O sentido eh da esquerda para direita, sendo o main-axis o eixo X e o cross-axis o eixo Y.
+            row-reverse => O sentido eh da direita para esquerda, sendo o main-axis o eixo X e o cross-axis o eixo Y.
+            column => O sentido de cima para baixo, sendo o main-axis o eixo Y e o cross-axis o eixo X.
+            column => O sentido eh de baixo para cima, sendo o main-axis o eixo Y e o cross-axis o eixo X.
+
+            FLEX-BASIS
+            Se o main-axis for o eixo X ele passa a determinar o width, 
+            sendo que o valor se sobrepoe ao width pois eh mais especifico.
+            Se o main-axis for o Y ele passa a determinar o height, 
+            sendo que o valor se sobrepoe ao Height pois eh mais especifico.
+            Voce pode usar o width e o height de maneira complementar ao flex-basis, ou seja se ele estiver em 
+            sentido row ou row-reverse, voce pode usar o height como complementar ao passo que se tiver no sentido
+            column ou column reverse voce pode usar o width como complementar e dessa forma ele pode selecionar
+            o valor de height ou width para ser o tamanho que ele usara como cross-axis automaticamente.
+
+            ALIGN-SELF e JUSTIFY_SELF.
+            align-self(main-axis) vs justify-self(cross-axis): Eles servem para alinhar, porem um alinha 
+            pelo main-axis e o outro para o cross-axis, por exemplo se voce define o flex-direction como
+            row, o align-self e os seus valores irao corresponder ao posicionamento X e o justify-content
+            ao posicionamento Y, caso seja uma coluna, ai inverte, ai o align-self seria o Y e justify o X,
+            ou seja o align-self vai alinhar ele mesmo vamos dizer assim, ou seja com base no flex-direction,
+            ja o justify-content vai justifica-lo, ou seja posiciona-lo com base no seu cross-axis. Resumindo:
+            align-self => A posicao dos elementos com base no eixo definido no flex-direction.
+            justify-self => A posicao dos elementos complementar ao do flex-direction.
+        */
         body,html{
             background-color: black;
             height: 100%;
@@ -192,29 +225,33 @@
             order: 1;
             background-color:yellow !important;
             color:blue;
-        } 
-        .align-self1{ 
-            /*
-                Por default ele eh stretch, no caso ele faz o auto-alinhamento, como ele esta
-                como o valor flex-end ele vai procurar se alinhar com o eixo de debaixo, ou
-                seja ele estara alinhado abaixo com relacao aos elementos vizinhos.
-                
-            */           
+        }
+        /*            
+            Valores possiveis a justify-content ou o align-self:
+            stretch => Ele estica o elemento verticalmente ou horizontalmente dependendo o flex-direction.
+            baseline => Ele alinha com base no conteudo, ou seja centraliza o conteudo e faz o alinhamento.
+            space-around => Espaco envolta, ou seja ele da um espaco entre os elementos e as bordas.
+            space-between => Espaco apenas entre os elementos e exclui as bordas.
+            flex-start => Alinha tudo no eixo x=0 ou y=0 de acordo com o flex-direction.
+            flex-end => alinha tudo ao final, ou seja a direita se row, abaixo se column.
+
+            *Obs, lembre-se que voce tem o row-reverse e column reverse caso queira inverter o posicionamento,
+            e voce tem o atributo order para ordenar os elementos, grow e shrink caso queira definir um tamanho
+            para eles.             
+        */
+        #justify-content{           
+            justify-content:space-around;            
+        }         
+        .align-self1{                
             align-self: flex-end;
             background-color:green !important;
             color:magenta;
         }       
-        .align-self3{
-            /*
-                Aqui temos um outro exemplo de alinhamento, no caso ele fica no centro, se faz
-                necessario ter espaco para que o elemento possa se posicionar, no caso o 
-                cross axis, ou seja o oposto do definido do flex-direction, nesse caso o height
-                ele tem espaco o suficiente na vertical para permitir esse alinhamento.
-            */            
-            align-self: center;
+        .align-self3{              
+            align-self: center;            
             background-color: magenta !important;
-            color:green;
-        }
+            color:green;            
+        }        
         .align-self4{
             align-self: flex-end;
             background-color:green !important;
@@ -323,10 +360,11 @@
     </div>
     <hr>
     <div class="container">
-        <h1>ORDER</h1>        
-        <h1>align-self</h1>
+        <h1>ORDER:\d</h1>        
+        <h1>align-self:(flex-end|center)</h1>
+        <h1>justify-content:(space-around)</h1>
     </div>
-    <div class="container">
+    <div id="justify-content" class="container">
         <div id="flex-grow" class="flex-row" style="height: 20vh;background-color: lightgray;">
             <div class="align-self1">1st</div>
             <div class="preterize">2nd</div>
