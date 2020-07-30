@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex-Box</title>
+    <style>
+        body,html{
+            background-color: black;
+            height: 100%;
+        }
+        hr{
+            background-color: white;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        h1{
+            background-color:white;     
+            font-size: 1.8rem;  
+            margin-left: 10px;            
+        }
+        div.container{
+            /*
+                Definir o display eh o minimo necessario para definir o
+                display como flex, com ele voce tem um espaco unidimencional
+                para se mover, por padrao o "flex-direction" eh row, ou
+                seja o efeito seria semelhante ao "float:left", todos os 
+                itens vao sendo ordenados da esquerda para a direita, nao
+                respeitando o width, ou seja em uma posicao flex o elemento
+                ultrapassa a largura do elemento pai ficando parte dele para
+                fora, fique atento a isso, ele tem um comportamento muito
+                semelhante ao float, ou seja ele pode se sobrepor a elementos.
+            */
+            display: flex;         
+            margin-bottom: 10px;   
+        }
+        div.container div{
+            width: 25vw;
+            height: 10vh;  
+            font-size: xx-large;
+            font-weight: 900;          
+        }
+        div.container div div{
+            background-color: rgba(255,255,255,.7);
+            border-color: black;
+            border-width: 2px;
+            border-style: solid;
+        }
+
+        .flex-row{
+            background-color: magenta;
+            display: flex;       
+            /* 
+                Essa coluna poderia ser omitida, pois eh o valor padrao. Segue o
+            mesmo racicinio do float left, porem quando chega a 100% da largura 
+            ele continua colocando elemento, mesmo que isso ultrapasse a largura
+            maxima e fique invisivel ao usuario.
+            */  
+            flex-direction: row;   
+        }
+        .flex-column{
+            background-color: aqua;
+            display: flex;
+            /*
+                O Sentido com esse flex-direction, seria em coluna, ou seja comecando
+            no y=0 e sendo posicionado o proximo elemento abaixo do outro elemento.
+            */
+            flex-direction: column;
+        }
+        .flex-reverse-row{
+            background-color: yellow;
+            display:flex;
+            /*
+                Na pratica se comporta como um float:right, ou seja coloca todos os
+                elememtos posicionados a direita e os inverte, fique atento a isso,
+                o primeiro elemento fica a direita dos demais e o ultimo mais a 
+                esquerda.
+            */
+            flex-direction: row-reverse;
+        }
+        .flex-reverse-column{
+            background-color: chartreuse;
+            display:flex;
+            /*
+                Inverte a logica da coluna, nessa direcao o ultimo elemento passa
+            a ocupar a posicao y=0, e ficando o primeiro elemento mais abaixo.
+            */
+            flex-direction: column-reverse;
+        }     
+        #wrap-column{
+            /*
+                flex-wrap no caso caso nao caiba no main axis, ele passa a usar
+                o cross axis, ou seja, esse elemento esta usando o "flex-direction:column",
+                caso nao tenha espaco no flex-direction de coluna ele coloca o elemento
+                ao lado nesse exemplo, ou seja se for "row" ele coloca um elemento ao lado
+                do outro e caso nao caiba ele coloca em baixo, se for "column", entao ele
+                usara de colunas e se nao couber todos um em baixo do outro, ele comeca
+                uma nova fila ao lado. Essa propriedade habilita isso.
+            */
+            flex-wrap: wrap;
+            height: 25vh;
+        }   
+        #wrap-row{
+            /*
+                Aqui nos temos um outro exemplo de como funciona o flex-wrap, como esse
+                direction esta como row, entao ao habilitar o wrap, ao atingir o limite
+                de largura o elemento passa a ocupar a outra linha, mas como aqui estamos
+                usando o wrap-reverse, logo ao inves dessa linha ficar em baixo, como
+                eh de se esperar quando o direction eh row, essa linha vai para cima,
+                uma vez que o wrap esta invertido.
+            */
+            flex-wrap: wrap-reverse;
+            width: 60vw;
+            margin-top:100px;
+        }
+        #flex-grow{
+            /*
+                Esse atributo pode funcionar como width ou height conforme o contexto,
+                se for row, ela sempre vai se sobrepor ao width, se for column esse
+                valor ira se sobrepor ao height. Esse atributo basico do flex ele
+                determina o tamanho do elemento de acordo com o direction, correspondendo
+                ao width e sobscrevendo o valor dele ser a direcao for row e correspondendo
+                e sobrescrevendo o height, caso o direction seja column.
+            */
+            flex-basis: 90vw;            
+        }
+        #flex-grow div{
+            flex-basis: 10vw;
+        }
+        /*
+            O flex-grow ou shrink ele vai priorizar ou preterir esse elemento, caso tenha que redistribuir
+            o espaco extra. Por padrao se sobrar espaco dentro do elemento, o espaco fica em branco, 
+            mas quando se tem um grow e um shrink, voce define a maneira com que esse espaco extra sera
+            distribuido. Por exemplo se todos os elementos tem o grow 1 ou o shrink 1, todos receberam
+            igualmente o mesmo espaco.
+        */
+        .grow{      
+            /*
+                caso o grow seja maior que 1 ele comeca a receber mais espaco, ou seja se o grow for 2, 
+                ele passa a ter o peso de dois e ele tera 2 partes do espaco que sobrou, se for 3, sera
+                pego 3 partes e por ai vai de acordo com o numero do grow. Voce vera a presenca dele
+                quando sobrar espaco, no caso os espacos extras serao concentrados nos grow. Ou seja
+                quando sobrar espaco, quando houver um aumento nesse elemento que sera concentrado
+                esse espaco extra.
+            */      
+            flex-grow: 4;            
+            background-color: green !important;
+            color: white;
+            padding-left: 10px;
+        }
+        .shrink{
+            /*
+                O shrink eh o exato oposto do grow, no caso o elemento sera preterido, no caso se o shrink
+                for 2 ele recebera a metade da parte destinada a ele, enquanto todos receberam 1 parte do
+                espaco que sobrou, esse elemento recebe meio, ou seja ele eh preterido e a logica se assemelha
+                ao grow. O shrink voce vai perceber quando o espaco eh menor, no caso quando o tamnho eh reduzido
+                eh tirado mais dos shrink do que dos outros elementos, nesse caso ele eh visado quando o
+                momento propicio for tirar dimensao de um elemento, ou seja ele ira diminuir mais que os
+                outros elementos, quando faltar espaco e for necessario um redirecionamento.
+            */
+            flex-shrink: 4;            
+            background-color: red !important;
+            color: white;
+            padding-left: 10px;
+        }
+        .normal{
+            /*
+                Voce tambem pode colocar o grow e o shrink dentro de um shorthand, no caso o "flex".
+                O primeiro valor eh o grow, o segundo eh o shrink e o terceiro eh o basis dele, ou
+                seja quando nao for dado as condicoes de grow ou shrink, qual seria a dimensao dele?
+                Informe isso no terceiro parametro.
+            */
+            flex: 1 1 10vh;
+            background-color: yellow !important;
+            color: black;
+            padding-left: 10px;
+        }
+        /*
+            Por fim no display flex, existe o atributo order, que define a prioridade de renderizacao,
+            o zero eh o padrao, quanto menor o valor mais ao topo da fila o elemento vai estar,
+            quando maior o valor de ordem, mais preterido ele sera, ou seja ele sera renderizado
+            depois dos elementos tem um ordem maior, caso nao seja definido uma order, prevalece
+            a posicao do elemento mesmo, ou seja o que estiver em cima no codigo vem primeiro,
+            mas para quebrar essa regra temos o atributo order.
+        */
+        .priorize{
+            order: -1;
+            background-color:blue !important;
+            color:yellow;            
+        }
+        .preterize{
+            order: 1;
+            background-color:yellow !important;
+            color:blue;
+        } 
+        .align-self1{ 
+            /*
+                Por default ele eh stretch, no caso ele faz o auto-alinhamento, como ele esta
+                como o valor flex-end ele vai procurar se alinhar com o eixo de debaixo, ou
+                seja ele estara alinhado abaixo com relacao aos elementos vizinhos.
+                
+            */           
+            align-self: flex-end;
+            background-color:green !important;
+            color:magenta;
+        }       
+        .align-self3{
+            /*
+                Aqui temos um outro exemplo de alinhamento, no caso ele fica no centro, se faz
+                necessario ter espaco para que o elemento possa se posicionar, no caso o 
+                cross axis, ou seja o oposto do definido do flex-direction, nesse caso o height
+                ele tem espaco o suficiente na vertical para permitir esse alinhamento.
+            */            
+            align-self: center;
+            background-color: magenta !important;
+            color:green;
+        }
+        .align-self4{
+            align-self: flex-end;
+            background-color:green !important;
+            color:magenta;
+        }
+        .align-self6{
+            align-self: center;
+            background-color: magenta !important;
+            color:green;
+        }
+        #flex-column-altura{
+            height: 60vh;
+            width: 90vw;
+            background-color: black;
+        } 
+        .vertical-centro{
+            align-self: center;            
+            background-color: magenta !important;
+            color:black;
+        }
+        .vertical-fim{
+            align-self: flex-end;
+            background-color: yellow !important;
+            color:black;
+        }      
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1>Flex-Row</h1>
+        </div>
+        <div>
+            <h1>Flex-Column</h1>
+        </div>
+        <div>
+            <h1>Flex-Row-Reverse</h1>
+        </div>
+        <div>
+            <h1>Flex-Column-Reverse</h1>
+        </div>
+    </div>
+    <div class="container">        
+        <div class="flex-row">            
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+        <div class="flex-column">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+        <div class="flex-reverse-row">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+        <div class="flex-reverse-column">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+    </div>
+    <hr>  
+    <div class="container">          
+        <div>
+            <h1>flex-direction:column;<br>flex-wrap:wrap;</h1>
+        </div>
+    </div>    
+    <div class="container">        
+        <div id="wrap-column" class="flex-column">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>       
+    </div>
+    <hr>
+    <div class="container">          
+        <div>
+            <h1>flex-direction:row;<br>flex-wrap:wrap-reverse;</h1>
+        </div>
+    </div>      
+    <div class="container">
+        <div id="wrap-row" class="flex-row">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">        
+            <h1>Verde = flex-grow: 4;</h1>
+            <h1>Vermelho = flex-shrink: 4;</h1>            
+            <h1>Amarelo = none</h1>
+    </div>
+    <br>
+    <div class="container">        
+        <div id="flex-grow" class="flex-row">            
+            <div class="shrink">1</div>
+            <div class="grow">2</div>
+            <div class="normal">3</div>
+            <div class="grow">4</div>
+            <div class="shrink">5</div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <h1>ORDER</h1>        
+        <h1>align-self</h1>
+    </div>
+    <div class="container">
+        <div id="flex-grow" class="flex-row" style="height: 20vh;background-color: lightgray;">
+            <div class="align-self1">1st</div>
+            <div class="preterize">2nd</div>
+            <div class="align-self3">3rd</div>
+            <div class="align-self4">4th</div>
+            <div class="priorize">5th</div>
+            <div class="align-self6">6th</div>
+        </div>
+    </div>  
+    <hr>
+    <div class="container">          
+        <div>
+            <h1>align-self na vertical com flex-direction:column</h1>
+        </div>
+    </div>   
+    <div class="container">
+        <div id="flex-column-altura" class="flex-column">
+            <div>1</div>
+            <div class="vertical-centro">2</div>
+            <div class="vertical-fim">3</div>
+            <div class="vertical-centro">4</div>
+            <div class="vertical-fim">5</div>
+            <div>6</div>
+        </div>
+    </div>
+    <hr>
+</body>
+</html>
