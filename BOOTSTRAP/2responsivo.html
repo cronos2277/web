@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Bootstrap Responsivo</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            body{
+                background-color: aqua;
+            }    
+            .main{
+                background-color: blueviolet;
+                color: white;                
+                margin-top: 10px; 
+                min-height: 10vh; 
+                box-shadow: 10px 10px 10px blue;  
+                margin-bottom: 20px;            
+            }
+            .main div{
+                border: 2px solid black;
+            }
+        </style>
+    </head>
+    <body>                 
+        <section id="main-cont" class="container">
+            <div class="col-12">
+                <h1>Largura da janela:<span id="get"></span></h1>   
+            </div>
+            <div class="row main">
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">01</div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">02</div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">03</div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">04</div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">05</div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">06</div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">07</div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">08</div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">09</div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">10</div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">11</div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-1">12</div>
+            </div>
+            <div class="row">
+                <div class="col-2 col-md-2"><button class="btn btn-primary" onclick="action('575px')">MIN</button></div>
+                <div class="col-3 col-md-2"><button class="btn btn-primary" onclick="action('767px')">SMALL</button></div>
+                <div class="col-3 col-md-2"><button class="btn btn-primary" onclick="action('991px')">MEDIUM</button></div>
+                <div class="col-2 col-md-2"><button class="btn btn-primary" onclick="action('1199')">LARGE</button></div>            
+                <div class="col-2 col-md-2"><button class="btn btn-primary" onclick="action('1200')">MAX</button></div>            
+            </div>
+        </section>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script>
+            function action(width){
+                window.open(`2responsivo.html?size=${width}`,`Abrindo janela de: ${width}`,`width=${width},height=600px`);
+            }
+            $("#get").text(
+                window.innerWidth+" px"
+            );
+        </script>
+    </body>
+</html>
