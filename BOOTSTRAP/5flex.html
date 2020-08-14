@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Flexbox</title>    
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            section.container{
+                height: 10vh;    
+                background-color: cyan;
+                min-height: 100px;
+                min-width: 500px;
+            }            
+            nav.row{
+                background-color: darkblue;
+                color: white;
+                margin-top: 10px;
+            }            
+            div.row{
+                background-color: cyan;
+                color:black;                            
+            }
+            div.row div{
+                box-sizing: border-box;
+                border: 2px solid white;
+                background-color: brown;
+                color: white;
+            }           
+            footer{
+                background-color: darkcyan;    
+                color: white;            
+            }
+            #footer{
+                height: 50px;
+            }
+        </style>
+    </head>
+    <body>        
+        <section class="container">
+            <nav class="row">
+                <span class="col-1">01</span><span class="col-1">02</span><span class="col-1">03</span><span class="col-1">04</span><span class="col-1">05</span><span class="col-1">06</span>
+                <span class="col-1">07</span><span class="col-1">08</span><span class="col-1">09</span><span class="col-1">10</span><span class="col-1">11</span><span class="col-1">12</span>
+            </nav>
+            <div id="rows" class="row d-flex justify-content-start">
+                <div class="col-2">Coluna 1</div>
+                <div id="col2" class="col-2">Coluna 2</div>
+                <div id="col3" class="col-2">Coluna 3</div>
+            </div>            
+        </section>
+        <section id="footer" class="container">
+            <footer class="row">
+                <div class="col-12 col-md-4">
+                    <label>Row Position</label><br>
+                    <select onchange="justifyRow(this.value)">
+                        <option value="justify-content-start">justify-content-start</option>
+                        <option value="justify-content-end">justify-content-end</option>
+                        <option value="justify-content-center">justify-content-center</option>
+                        <option value="justify-content-between">justify-content-between</option>
+                        <option value="justify-content-around">justify-content-around</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-4">
+                    <label>2nd Column visibility</label><br>
+                    <select onchange="colhidden(this.value)">
+                        <option>visible</option>
+                        <option>invisible</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-4">
+                    <label>3rd Shadow</label><br>
+                    <select onchange="shadow(this.value)">
+                        <option value="">none</option>
+                        <option value="shadow">shadow</option>
+                    </select>
+                </div>                
+            </footer>
+        </section>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script>
+            function justifyRow(value){
+                $("#rows").removeClass();
+                $("#rows").addClass(`row d-flex ${value}`);
+            }
+            function colhidden(value){
+                $("#col2").removeClass();
+                $("#col2").addClass(`col-2 ${value}`);
+            }
+            function shadow(value){
+                $("#col3").removeClass();
+                $("#col3").addClass(`col-2 ${value}`);
+            }
+        </script>
+    </body>
+</html>
