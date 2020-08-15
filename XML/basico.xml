@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<!-- 
+    Essa parte acima eh o prologo
+    version => Versao, enconding => a codificacao usada,
+    standalone => se o documento é considerado autônomo (standalone).    
+-->
+
+<raiz> <!-- O raiz eh considerado o elemento raiz -->
+<!-- Componente eh considerado um no filho de raiz -->
+    <componente id="comp"> <!-- id => Atributo, no caso o valor do atributo ID eh comp-->
+        Meu componente <!-- "Meu Componente" seria o valor. -->
+    </componente>
+    <javascript>
+    <!--
+        Mais um bloco de declaração de um documento é conhecido como seção CDATA.
+        As seções CDATA são seções de um documento XML que podem conter texto, 
+        caracteres reservados (por exemplo, <) e caracteres espaços em branco. 
+        Os caracteres contidos nas seções CDATA são excluídos da interpretação do analisador XML.
+        Um uso comum das seções CDATA é o código de criação de scripts (Javascript ou VBScript)
+        que frequentemente contêm os caracteres (&, <, >, e “). 
+    -->
+        <![CDATA[
+            <script>
+                alert("Exemplo");
+            </script>
+        ]]>
+    </javascript>
+</raiz>
