@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<root xlmns:main="http://qualquer.coisa/isso/mesmo" xlmns:child="http://diferente.do.primeiro/ai/funciona">
+    <main:name main:familia="pai">
+        José Maria da Silva
+    </main:name>
+    <main:function>
+        Operário
+    </main:function>
+    <main:dependentes children:familia="filho">
+        <child:name>
+            Maria José da Silva
+        </child:name>
+        <child:function>
+            Estudante
+        </child:function>
+    </main:dependentes>
+</root>
+<!-- 
+    Muitas vezes se faz necessario usar namespaces, caso voce queira otimizar algum sistema de busca dentro
+    do XML, dessa forma, fazendo uso de namespace, voce permite diferenciar as tags. Por exemplo existe
+    a tag name e function aqui nesse exemplo, caso nao tenha nenhum namespace, o contexto nao eh analizado,
+    por exemplo perceba que existe name como filho direto de "root" e o neto de "root", nesse caso para que
+    essa hierarquia seja melhor percebido, recomenda-se o uso do namespace, sem o namespace essa nuancia por
+    exemplo nao seria percebido, a rigor as tags passam a ser diferentes, quando se usa um namespace, essa
+    mesma logica se extende tambem aos atributos.
+    Para definir um namespace voce precisa definir-lo e isso ocorre quando informado na tag pai.
+    <tag xlmns:prefixo="UmaUrlQualquer"></tag>
+    No xlmns apos os dois pontos voce define o namespace e no igual voce define o URL. Lembrando que a 
+    URL nao precisa existir, ela apenas deve seguir a forma para funcionar.
+-->

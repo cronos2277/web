@@ -31,5 +31,10 @@ CDATA não é processado pelo XML, caso você queira passar um código ou algo d
 ### Comentários
 Usa se o `<!-- -->` para comentários como no HTML.
 
+### Namespaces
+sintaxe básica, coloque isso na sua tag: `xlmns:[prefixo]="[url]"` substitua o `[prefixo]` pelo o namespace que você quer colocar na sua tag e `[url]` como a url do seu namespace, voce pode definir **N** namespaces dentro da sua tag, mas cuidado para não os repetir prefixos.
+
 ## Arquivos de exemplo
 [Exemplo Básico](./basico.xml)
+
+[NAMESPACE](./namespace.xml)
