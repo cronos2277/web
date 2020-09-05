@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root[
+    <!ELEMENT root (obs*,children)>
+    <!ELEMENT children (child+)>
+    <!ELEMENT child (id?,name,(description|desc))>
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT id (#PCDATA)>
+    <!ELEMENT description (#PCDATA)>
+    <!ELEMENT desc (#PCDATA)>
+    <!ELEMENT obs (#PCDATA)>
+]>
+<root>    
+    <children>
+        <child>
+            <id>1</id>
+            <name>Exemplo1</name>
+            <description>Minha Descricao</description>            
+        </child>
+        <child>
+            <name>Exemplo 2</name>
+            <desc>Descricao 2</desc>
+        </child>
+    </children>
+</root>
