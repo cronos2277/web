@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE children[
+    <!ELEMENT children (child*)>
+    <!ELEMENT child (#PCDATA)>
+    <!ATTLIST children obrigatorio (valor1|valor2|valor3) #REQUIRED>
+    <!ATTLIST child opcional CDATA #IMPLIED>
+    <!ATTLIST child valor CDATA #REQUIRED >
+]>
+<children obrigatorio="valor2">
+    <child valor="1"></child>
+    <child valor="2" opcional="Valor Opcional"/>
+</children>

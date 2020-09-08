@@ -39,8 +39,8 @@ sintaxe básica, coloque isso na sua tag: `xlmns:[prefixo]="[url]"` substitua o 
 
 [NAMESPACE](./namespace.xml)
 
-## DTD
-[Arquivo Exemplo de DTD](./dtd.xml)
+## DTD Atributos
+[Arquivo Exemplo de DTD](./dtd1.xml)
 
 ### Verificar se o arquivo DTD é válido
 [xmlvalidation](https://www.xmlvalidation.com/)
@@ -141,3 +141,48 @@ Aqui temos o interrogação que indica opcional, lembrando que diferente do aste
     ...
 
 No caso a ordem com que foi definido os atributos importa e muito, no DTD isso é extremamente importante, outra coisa esse caracter funciona com um ou `|`, nesse trecho `(description|desc)` estamos dizendo que deve ser ou *description* ou *desc*, como não tem o asterisco, interrogação ou até mesmo o mais após esses parenteses, logo deve ter uma ocorrência de um ou outro elemento na ultima posição, lembrando que é um ou excludente, uma vez que a cardinalidade é exatamente 1.
+
+## DTD Atributos
+
+[dtd2.xml](./dtd2.xml)
+
+##### XML Mais basico
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE children[
+        <!ELEMENT children (child*)>
+        <!ELEMENT child (#PCDATA)>
+        <!ATTLIST children obrigatorio (valor1|valor2|valor3) #REQUIRED>
+        <!ATTLIST child opcional CDATA #IMPLIED>
+        <!ATTLIST child valor CDATA #REQUIRED >
+    ]>
+    <children obrigatorio="valor2"></children>
+
+### !ATTLIST
+Dessa forma você define um atributo a lógica sintática segue a seguinte lógica: `<!ATTLIST [NOME_ELEMENTO] [NOME_ATRIBUTO] [TIPO_DE_DADO] #[IMPLIED_OU_REQUIRED]>`
+
+### CDATA
+Esse tipo de dado é mais abrangente que o **#PCDATA**, ou seja ele aceita muito mais caracteres que esse tipo, caso o atributo seja composto, use o hifen ou underline, mas não use espaço, isso para o nome dos atributos, agora para os valores ai deve estar dentro de aspas, como valor vale tudo, agora como nome de atributo fique esperto com os espaço se precisar criar um atributo com nome composto.
+
+### ENUM
+`<!ATTLIST children obrigatorio (valor1|valor2|valor3) #REQUIRED>` Aqui temos um exemplo de como funciona uma **ENUM**, aqui `(valor1|valor2|valor3)`, estamos definindo os valores possiveis para o campo **obrigatorio**.
+
+### #REQUIRED e #IMPLIED
+`#REQUIRED` => Aqui definimos que o atributo é obrigatório.
+
+`#IMPLIED` => Aqui definimos que o atributo é opcional, podendo existir ou não.
+
+#### Com o Child definido
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE children[
+        <!ELEMENT children (child*)>
+        <!ELEMENT child (#PCDATA)>
+        <!ATTLIST children obrigatorio (valor1|valor2|valor3) #REQUIRED>
+        <!ATTLIST child opcional CDATA #IMPLIED>
+        <!ATTLIST child valor CDATA #REQUIRED >
+    ]>
+    <children obrigatorio="valor2">
+        <child valor="1"></child>
+        <child valor="2" opcional="Valor Opcional"/>
+    </children>
+
+Esse atributo **obrigatorio** no children é obrigatório, tendo que ser necessariamente *valor1* ou *valor2* o*valor3*, caso tenha algum elemento child esse mesmo deve ter um **valor**, podendo ser esse valor qualquer tipo de dado, além disso você pode definir um valor opicional com o atributo **opcional** no elemento child, e o elemento child como é um *#PCDATA*, ele pode ter a sua forma sem corpo `<child valor="2" opcional="Valor Opcional"/>`.
