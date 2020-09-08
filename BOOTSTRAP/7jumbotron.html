@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <title>Jumbotron</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <section id="cont" class="container">
+            <div class="jumbotron">
+                <h1 id="display" class="display-3">Título</h1>
+                <p class="lead">Uma breve descrição.</p>
+                <hr id="bsmy" class="my-3">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Donec fringilla metus ac volutpat rutrum. Donec sit amet sodales arcu, in vulputate eros. 
+                    Vestibulum efficitur sem id rutrum placerat. Ut quis elementum eros. Praesent elit massa,
+                    suscipit auctor massa ultrices, posuere aliquet nibh. Donec feugiat libero ante, sed viverra felis tempus tincidunt.
+                    Nam fermentum mollis lectus, vitae tincidunt tortor gravida a. Aenean ultrices libero porta massa elementum blandit.
+                    Nam ultricies felis eu lacus ultricies cursus. Donec eget purus in ante placerat pulvinar. Donec turpis urna, 
+                    convallis vel libero in, vulputate molestie eros. Quisque neque arcu, rutrum pharetra nulla sed, rutrum elementum arcu. 
+                    Integer non vulputate ex, et consequat ligula. Donec auctor sapien nisl. </p>
+            </div>
+        </section>
+        <section class="container bg-secondary">
+            <label>
+                Display: <span id="disp">3</span> <br />
+                <input type="range" onchange="jQuery('#display').removeClass();jQuery('#display').addClass(`display-${this.value}`);jQuery('#disp').text(this.value);" value="3" min="1" max="5" step="1"/>
+            </label>
+            <label>
+                hr: <span id="hr">3</span> <br />
+                <input type="range" value="3" min="1" max="5" step="1" onchange="jQuery('#bsmy').removeClass();jQuery('#bsmy').addClass(`my-${this.value}`);jQuery('#hr').text(this.value);" />
+            </label>
+            <label>
+                container-fluid: <input id="check1" type="checkbox" value="false" onchange="jQuery('#cont').removeClass();jQuery('#cont').addClass((this.checked)?'container-fluid':'container')" style="margin:10px;"/>
+            </label>
+        </section>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
