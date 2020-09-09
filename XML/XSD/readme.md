@@ -58,6 +58,6 @@ Um arquivo XSD precisa ter a anotação de XML `<?xml version="1.0" encoding="UT
 ### Atributo minOccurs,maxOccurs de Tag :element
 `<xs:element name="child" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>` => Aqui você basicamente define a frequencia com que o elemento deve aparecer, se omitido os valores de **minOccurs** e **maxOccurs** o padrão é no mínimo 1 e no máximo 1, ou seja obrigatório e deve aparecer apenas uma vez.
 
-`minOccurs` => Aqui definimos a ocorrência mínima, se colocado o valor como zero, logo o elemento se torna opcional, o valor passado aqui deve ser um número pertencente ao conjunto dos números naturais.
+`minOccurs` => Aqui definimos a ocorrência mínima, se colocado o valor como zero, logo o elemento se torna opcional, o valor passado aqui deve ser um número pertencente ao conjunto dos números naturais. Se omitido o limite mínimo é 1.
 
-`maxOccurs` => Aqui definimos a ocorrência máxima, no caso a quantidade com que esse elemento se repete não pode ultrapassar o estipulado aqui, o número passado como atributo deve ser um número pertencente ao conjunto dos números naturais ou o valor **maxOccurs**, caso a quantidade de repetição máxima seja infinita, ou seja não existe limite máximo.
+`maxOccurs` => Aqui definimos a ocorrência máxima, no caso a quantidade com que esse elemento se repete não pode ultrapassar o estipulado aqui, o número passado como atributo deve ser um número pertencente ao conjunto dos números naturais ou o valor **unbounded**, caso a quantidade de repetição máxima seja infinita, ou seja não existe limite máximo. Se omitido o limite máximo é 1.
