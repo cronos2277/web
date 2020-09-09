@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <children>
+        <name>Filho 1</name>
+        <child>Neto 1</child>
+        <child>Neto 2</child>
+    </children>
+    <children>
+        <name>Filho 2</name>
+    </children>
+</root>

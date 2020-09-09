@@ -186,3 +186,6 @@ Esse tipo de dado é mais abrangente que o **#PCDATA**, ou seja ele aceita muito
     </children>
 
 Esse atributo **obrigatorio** no children é obrigatório, tendo que ser necessariamente *valor1* ou *valor2* o*valor3*, caso tenha algum elemento child esse mesmo deve ter um **valor**, podendo ser esse valor qualquer tipo de dado, além disso você pode definir um valor opicional com o atributo **opcional** no elemento child, e o elemento child como é um *#PCDATA*, ele pode ter a sua forma sem corpo `<child valor="2" opcional="Valor Opcional"/>`.
+
+## XSD
+[ACESSAR](./XSD/)
