@@ -61,3 +61,55 @@ Um arquivo XSD precisa ter a anotação de XML `<?xml version="1.0" encoding="UT
 `minOccurs` => Aqui definimos a ocorrência mínima, se colocado o valor como zero, logo o elemento se torna opcional, o valor passado aqui deve ser um número pertencente ao conjunto dos números naturais. Se omitido o limite mínimo é 1.
 
 `maxOccurs` => Aqui definimos a ocorrência máxima, no caso a quantidade com que esse elemento se repete não pode ultrapassar o estipulado aqui, o número passado como atributo deve ser um número pertencente ao conjunto dos números naturais ou o valor **unbounded**, caso a quantidade de repetição máxima seja infinita, ou seja não existe limite máximo. Se omitido o limite máximo é 1.
+
+## XSD Atributos
+[Arquivo](./xsd2.xml)
+### XML 2
+    <?xml version="1.0" encoding="UTF-8"?>
+    <root attr1="texto" attr2="0" attr3="true"/>
+
+[Arquivo](./xsd2.xsd)
+### XSD 2
+    <?xml version="1.0" encoding="UTF-8"?>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <xs:element name="root" >   
+            <xs:complexType>            
+                <xs:attribute name="attr1" type="xs:string" use="required"/>
+                <xs:attribute name="attr2" type="xs:integer" use="optional"/>
+                <xs:attribute name="attr3" type="xs:boolean"/>                                   
+                <xs:attribute name="attr4" type="xs:decimal" default="0.0"/>                                   
+                <xs:attribute name="attr5" type="xs:date" fixed="2001-01-01"/>                                   
+                <xs:attribute name="attr6" type="xs:time" fixed="00:00:00" />                                   
+            </xs:complexType>                
+        </xs:element>
+    </xs:schema>
+
+### required
+Para que o atributo seja obrigatório no elemento em questão, ele deve ser especificado como um atributo de *use*, como nesse exemplo: `<xs:attribute name="attr1" type="xs:string" use="required"/>`, no use você também pode setar como opcional `<xs:attribute name="attr2" type="xs:integer" use="optional"/>`, mas isso é desnecessário, uma vez que o padrão é esse, se não for explicitado a obrigatóriedade conforme informado.
+
+### default
+Aqui definimos um valor padrão caso o atributo seja omitido ou não seja definido um valor a ele na tag, como aqui não definimos nenhum valor `<root attr1="texto" attr2="0" attr3="true"/>` a *attr4*, logo o valor para o *attr4* será o definido aqui: `<xs:attribute name="attr4" type="xs:decimal" default="0.0"/>`.
+
+### Fixed
+Diferente do default o valor desse atributo sempre vai ser o especificado o XSD e nunca vai mudar. Na prática ele funciona como um atributo oculto no XML que é específicado no XSD, exemplo: `<xs:attribute name="attr5" type="xs:date" fixed="2001-01-01"/> `.
+
+### Atributos
+Como você pode ver aqui estamos definindo uma tag sem corpo: `<root attr1="texto" attr2="0" attr3="true"/>`, uma tag sem corpo é um elemento complexo por mais paradoxo que isso pareça e deve estar envolto da tag `<xs:complexType>`. Aqui nessa tag começamos a definir os atributos `xs:attribute`. Todos os atributos devem obrigatóriamente ter um `name` e um `type` definido.
+
+#### xs:string
+`<xs:attribute name="attr1" type="xs:string" use="required"/>` => Aqui estamos definindo um dado do tipo String com o nome de attr1, ele é obrigatório e deve ser composto de texto.
+
+#### xs:integer
+`<xs:attribute name="attr2" type="xs:integer" use="optional"/>` => Um atributo com esse tipificado deve ser um número inteiro. Por mais que seja um número o mesmo deve estar envolto de aspas dupla no XML.
+
+#### xs:boolean
+`<xs:attribute name="attr3" type="xs:boolean"/>` => Esse atributo aceita apenas **true** ou **false**. Lembre-se que coloca-lo dentro de aspas no XML.
+
+#### xs:decimal
+`<xs:attribute name="attr4" type="xs:decimal" default="0.0"/>` => Esse atributo aceita números com pontos, ou seja numeros com casas decimais. Por mais que seja um número o mesmo deve estar envolto de aspas dupla no XML.
+
+#### xs:date
+` <xs:attribute name="attr5" type="xs:date" fixed="2001-01-01"/> ` => repare no padrão da data `2001-01-01`, o padrão deve ser primeiro o ano com 4 dígitos, seguido do mês e por fim seguido do dia, tudo isso dentro de string lá no XML, porém como esse valor é fixo ele deve ser ocultado do xml.
+
+#### xs:time
+`<xs:attribute name="attr6" type="xs:time" fixed="00:00:00" /> ` => Aqui temos o padrão para horário: `00:00:00` no caso os dois primeiros zero são as horas, os zeros do meio os minutos e por fim os segundos, esse é o padrão a ser seguido, sempre dentro de aspas duplas no xml, mas como o valor é fixo e opcional, devido a omissão do `use=required`, logo esse atributo deve ser omitido do XML.

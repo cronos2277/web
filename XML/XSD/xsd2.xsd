@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="root" >   
+        <xs:complexType>            
+            <xs:attribute name="attr1" type="xs:string" use="required"/>
+            <xs:attribute name="attr2" type="xs:integer" use="optional"/>
+            <xs:attribute name="attr3" type="xs:boolean"/>                                   
+            <xs:attribute name="attr4" type="xs:decimal" default="0.0"/>                                   
+            <xs:attribute name="attr5" type="xs:date" fixed="2001-01-01"/>                                   
+            <xs:attribute name="attr6" type="xs:time" fixed="00:00:00" />                                   
+        </xs:complexType>                
+    </xs:element>
+</xs:schema>
