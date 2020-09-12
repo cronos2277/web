@@ -1,4 +1,7 @@
 # XSD
+## Recomendação
+Aqui é usado o plugin XML de autoria da empresa Red Hat no software Visual Studio Code, dificilmente você conseguirá fazer um XSD sem o auxilio de um software e plugin como esses.
+
 ## Definindo Elementos
 [Arquivo](./xsd1.xml)
 ### XML 1
@@ -113,3 +116,67 @@ Como você pode ver aqui estamos definindo uma tag sem corpo: `<root attr1="text
 
 #### xs:time
 `<xs:attribute name="attr6" type="xs:time" fixed="00:00:00" /> ` => Aqui temos o padrão para horário: `00:00:00` no caso os dois primeiros zero são as horas, os zeros do meio os minutos e por fim os segundos, esse é o padrão a ser seguido, sempre dentro de aspas duplas no xml, mas como o valor é fixo e opcional, devido a omissão do `use=required`, logo esse atributo deve ser omitido do XML.
+
+## XSD Restrição
+[Arquivo](./xsd3.xml)
+### XML 3
+    <?xml version="1.0" encoding="UTF-8"?>
+    <pessoas>
+        <pessoa nome="Fulano" id="1" cpf="123.456.789-00"/>    
+        <pessoa nome="Beltrano" id="2" cpf="321.654.987-47"/>    
+        <pessoa nome="Ciclano" id="3" cpf="354.621.940-82"/>    
+    </pessoas>
+
+[Arquivo](./xsd3.xsd)
+### XSD 3
+    <?xml version="1.0" encoding="UTF-8"?>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <xs:element name="pessoas">
+            <xs:complexType>
+                <xs:sequence>                
+                    <xs:element name="pessoa" maxOccurs="unbounded">                                                            
+                        <xs:complexType>     
+                            <xs:attribute name="nome">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:minLength value="4"/>                                    
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:attribute>                                                                         
+                            <xs:attribute name="id" use="required">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:integer">                                    
+                                        <xs:minInclusive value="0"/>                                                                      
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:attribute>                                                               
+                            <xs:attribute name="cpf" use="required">                      
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="\d{3}\.\d{3}\.\d{3}\-\d{2}"/>
+                                        <xs:minLength value="11"/>
+                                        <xs:maxLength value="14"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:attribute>                                                              
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+    </xs:schema>
+
+### Atributos
+`<xs:simpleType>` => Com esse atributo, você pode definir restrições ao elemento, dentre outras coisas, o objeto disso é restringir a quantidade de valores válidos. Nesse exemplo estamos usando dentro de um atributo e com o auxilio do restriction.
+
+`<xs:restriction base="xs:string|integer|date|etc... ">` => Aqui é definido as restrições, essa tag deve ficar dentro de uma tag **simple** e deve ter um **base** com o tipo de dado que será aceito.
+
+`<xs:minLength value="4"/>` => Quantidade mínima de caracteres. No caso os nomes devem ter no mínimo 4 caracteres.
+
+` <xs:maxLength value="14"/>` => Aqui definimos o número máximo de caracteres.
+
+`<xs:minInclusive value="0"/>` => Aqui informamos o número mínimo a ser aceito, no caso zero, logo numeros negativos não será aceito.
+
+`<xs:pattern value="\d{3}\.\d{3}\.\d{3}\-\d{2}"/>` => Através do pattern você pode definir uma expressão regular para que o dado possa ser validado, caso o dado não bata com a essa expressão regular, o dado é invalidado.
+
+Repare que todos esses parametros estão dentro de cada atributo, os definindo.

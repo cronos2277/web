@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pessoas>
+    <pessoa nome="Fulano" id="1" cpf="123.456.789-00"/>    
+    <pessoa nome="Beltrano" id="2" cpf="321.654.987-47"/>    
+    <pessoa nome="Ciclano" id="3" cpf="354.621.940-82"/>    
+</pessoas>
