@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <person code="1">Joao</person>
+    <person code="2">Joao</person>
+    <person code="3">Joao</person>
+    <company code="abc123">Empresa ABC</company>
+    <company code="def456">Empresa DEF</company>
+</root>

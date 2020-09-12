@@ -180,3 +180,139 @@ Como você pode ver aqui estamos definindo uma tag sem corpo: `<root attr1="text
 `<xs:pattern value="\d{3}\.\d{3}\.\d{3}\-\d{2}"/>` => Através do pattern você pode definir uma expressão regular para que o dado possa ser validado, caso o dado não bata com a essa expressão regular, o dado é invalidado.
 
 Repare que todos esses parametros estão dentro de cada atributo, os definindo.
+
+## XSD Global e elementos com valor e atributo
+
+[Arquivo](xsd4.xml)
+### XML 4
+    <?xml version="1.0" encoding="UTF-8"?>
+    <root>
+        <person code="1">Joao</person>
+        <person code="2">Joao</person>
+        <person code="3">Joao</person>
+        <company code="abc123">Empresa ABC</company>
+        <company code="def456">Empresa DEF</company>
+    </root>
+
+[Arquivo](xsd4.xsd)
+### XSD 4
+    <?xml version="1.0" encoding="UTF-8"?>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:simpleType name="code_type">    
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="\w+"/>
+                </xs:restriction>    
+        </xs:simpleType>
+
+        <xs:element name="root">
+            <xs:complexType mixed="true">
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="person">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute name="code" type="code_type"/>
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>
+                    </xs:element>                
+                    <xs:element name="company">
+                        <xs:complexType>
+                            <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                    <xs:attribute name="code" type="code_type"/>
+                                </xs:extension>
+                            </xs:simpleContent>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>            
+            </xs:complexType>
+        </xs:element>
+    </xs:schema>
+
+### GLobal
+#### Repare nesse trecho:
+    <xs:simpleType name="code_type">    
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="\w+"/>
+                </xs:restriction>    
+        </xs:simpleType>
+
+Perceba que esse está fora do elemento `<root>`, no caso isso indica que ele é um atributo global, uma vez que ele não está dentro de nenhum elemento, apenas dentro do **xs:schema**, no caso ele é sinalizado antes de ser definido o elemento, mas envocado como um atributo interno de um elemento justamente por esse trecho aqui: `<xs:attribute name="code" type="code_type"/>`. Ou seja, nós criamos um atributo chamado **code_type** e depois o usamos como um tipo de **code**, é dessa forma que você faz uso de um atributo global, você o usa como o tipo do seu atributo, como a restrição dele é por *pattern*, logo o valor deve respeitar no caso essa expressão **/w+/** que é a que está aqui: `<xs:pattern value="\w+"/>` .
+
+### Elementos com valores e atributos.
+
+`<person code="1">Joao</person>` => repare que o nosso person tem um atributo chamado **code** e um valor que no caso seria o **Joao**. Para que isso aconteça você precisa ter o seguinte código no xsd:
+
+    <xs:element name="person">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="code" type="code_type"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>       
+
+ Dentro do elemento você informa que ele é complexo `<xs:complexType>`, após isso você adciona o tipo simplesContent, aqui estamos definido que ele recebe um dado e não um outro elemento filho, para tal usamos a tag `<xs:simpleContent>`, uma vez feito isso informamos que se trata de uma extensão, uma vez que o atributo será identificado como uma extensão `<xs:extension base="xs:string">`, na extensão você informa o tipo que quer, preste a atenção nisso, em elementos mais simples você define o tipo no type, aqui você já define o tipo como valor **base** da extensão, sendo que ela deve estar envolto de um **simpleContent** que por sua vez está envolto de um **complexType**.
+
+Dentro da extensão, você deve colocar os seus atributos, nesse caso: `<xs:attribute name="code" type="code_type"/>`, lembre-se que esse *code_type* não é nativo da linguagem, ele faz referência ao atributo global que criamos, ele no caso poderia ser sem problemas substituido por **xs:string** ou **xs:number** que fosse.
+
+### Escolha de elementos
+`<xs:choice minOccurs="0" maxOccurs="unbounded">` => O **choice** dá a opção de escolha, no caso temos dois elementos definido dentro dele:
+
+#### Person
+    <xs:element name="person">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="code" type="code_type"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+#### Company      
+    <xs:element name="company">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="code" type="code_type"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+##### Isso claro se reflete no XML:
+    <?xml version="1.0" encoding="UTF-8"?>
+    <root>
+        <person code="1">Joao</person>
+        <person code="2">Joao</person>
+        <person code="3">Joao</person>
+        <company code="abc123">Empresa ABC</company>
+        <company code="def456">Empresa DEF</company>
+    </root>
+
+No caso um root pode receber tanto um *person*, como um *company*. Isso acontece porque temos um xs:choice envolto de ambos que nos diz que pode ter zero ou N desses elementos nessa definição aqui: `<xs:choice minOccurs="0" maxOccurs="unbounded">`. Esse nosso choice diz que precisa ter zero ou n person ou company, por padrão seria no máximo 1 e no mínimo 1, que é a cardinalidade padrão do XSD quando é omitido o *minOccurs* e o *maxOccurs*. Segue o trecho com o **xs:choice**:
+
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="person">
+            <xs:complexType>
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="code" type="code_type"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:element>                
+        <xs:element name="company">
+            <xs:complexType>
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="code" type="code_type"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:element>
+    </xs:choice>            
