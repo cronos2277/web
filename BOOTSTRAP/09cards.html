@@ -13,16 +13,34 @@
                     <h2>CARDS</h2>                                       
                 </div>
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-6">
                         <div class="card text-md-center text-sm-center text-xs-center">
                             <div class="card-block m-5">
                                 <h3 id='jt' class="card-title">Lorem</h3>
                                 <h4 class="card-subtitle">Lorem ipsum dolor sit amet.</h4>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ullamcorper fringilla rutrum. Etiam aliquet eu nisl at facilisis. Nullam non mollis justo.</p>
+                                <p id='body' class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ullamcorper fringilla rutrum. Etiam aliquet eu nisl at facilisis. Nullam non mollis justo.</p>
+                                <a href="#link1" class="card-link">Link 1</a><a href="#link2" class="card-link">Link 2</a><a href="#link3" class="card-link">Link 3</a>
+                            </div>
+                        </div>                                                
+                    </div>
+                    <div class="col-6">
+                        <!-- 
+                            CARD classe necessaria para decorar e criar um card
+                            text-dispositivo-alinhamento => Alinhar texto
+                            text-white => a cor do texto
+                            border-warning => a cor da borda
+                            bg-dark => a cor de fundo do card
+                        -->
+                        <div class="card text-md-center text-sm-center text-xs-center text-white border-warning bg-dark">
+                            <div class="card-block m-5">
+                                <h3 class="card-title">Lorem</h3>
+                                <h4 class="card-subtitle">Lorem ipsum dolor sit amet.</h4>
+                                <p id='body' class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ullamcorper fringilla rutrum. Etiam aliquet eu nisl at facilisis. Nullam non mollis justo.</p>
                                 <a href="#link1" class="card-link">Link 1</a><a href="#link2" class="card-link">Link 2</a><a href="#link3" class="card-link">Link 3</a>
                             </div>
                         </div>                        
                     </div>
+                </div>
                 </div>
             </div>
         </section>        
@@ -33,7 +51,8 @@
             window.onhashchange = function(event){
                 const text = event.newURL.split('#')[1];
                 const id = document.getElementById('jt');
-                id.textContent = text;
+                const body = document.getElementById('body');
+                id.textContent = text;                
             }
         </script>
   </body>
