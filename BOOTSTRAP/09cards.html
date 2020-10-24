@@ -16,7 +16,7 @@
                     <div class="col-12 col-md-6 mt-3">
                         <div class="card text-md-center text-sm-center text-xs-center">
                             <div class="card-block m-5">
-                                <h3 id='jt' class="card-title">Lorem</h3>
+                                <h3 class="card-title trigger">Lorem</h3>
                                 <h4 class="card-subtitle">Lorem ipsum dolor sit amet.</h4>
                                 <p id='body' class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ullamcorper fringilla rutrum. Etiam aliquet eu nisl at facilisis. Nullam non mollis justo.</p>
                                 <a href="#link1" class="card-link">Link 1</a><a href="#link2" class="card-link">Link 2</a><a href="#link3" class="card-link">Link 3</a>
@@ -33,7 +33,7 @@
                         -->
                         <div class="card text-md-center text-sm-center text-xs-center text-white border-warning bg-dark">
                             <div class="card-block m-5">
-                                <h3 class="card-title">Lorem</h3>
+                                <h3 class="card-title trigger">Lorem</h3>
                                 <h4 class="card-subtitle">Lorem ipsum dolor sit amet.</h4>
                                 <p id='body' class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ullamcorper fringilla rutrum. Etiam aliquet eu nisl at facilisis. Nullam non mollis justo.</p>
                                 <a href="#link1" class="card-link">Link 1</a><a href="#link2" class="card-link">Link 2</a><a href="#link3" class="card-link">Link 3</a>
@@ -43,7 +43,7 @@
                     <div class="col-12 col-md-6 mt-3">
                         <div class="card text-md-center text-sm-center text-xs-center bg-transparent border-success">
                             <div class="card-block m-5">
-                                <h3 class="card-title">Lorem</h3>
+                                <h3 class="card-title trigger">Lorem</h3>
                                 <h4 class="card-subtitle">Lorem ipsum dolor sit amet.</h4>
                                 <p id='body' class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ullamcorper fringilla rutrum. Etiam aliquet eu nisl at facilisis. Nullam non mollis justo.</p>
                                 <a href="#link1" class="card-link">Link 1</a><a href="#link2" class="card-link">Link 2</a><a href="#link3" class="card-link">Link 3</a>
@@ -54,7 +54,7 @@
                         <div class="card text-md-center text-sm-center text-xs-center text-white">
                             <img src="https://cdn.pixabay.com/photo/2020/10/17/11/55/elephants-5661842_960_720.jpg" class="card-img" alt="imagem" height="auto" width="auto">
                             <div class="card-block m-5 card-img-overlay">
-                                <h3 class="card-title">Lorem</h3>
+                                <h3 class="card-title trigger">Lorem</h3>
                                 <h4 class="card-subtitle">Lorem ipsum dolor sit amet.</h4>
                                 <p id='body' class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ullamcorper fringilla rutrum. Etiam aliquet eu nisl at facilisis. Nullam non mollis justo.</p>
                                 <a href="#link1" class="card-link">Link 1</a><a href="#link2" class="card-link">Link 2</a><a href="#link3" class="card-link">Link 3</a>
@@ -71,9 +71,9 @@
         <script>
             window.onhashchange = function(event){
                 const text = event.newURL.split('#')[1];
-                const id = document.getElementById('jt');
-                const body = document.getElementById('body');
-                id.textContent = text;                
+                const myclass = Array.from(document.getElementsByClassName('trigger'))
+                .forEach(e => e.textContent = text);  
+                
             }
         </script>
   </body>
