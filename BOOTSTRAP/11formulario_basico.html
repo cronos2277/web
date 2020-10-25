@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Formulario Basico</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body class="container">
+        <section class="jumbotron">
+            <form action="get" action="#">
+                <div class="form-group">
+                    <div class="row">
+                        <label for="nome" class="form-control col-2">Input</label>
+                        <input type="text" name="nome" id="nome" class="form-control col-10">
+                    </div>                    
+                    <div class="form-group mt-3 row">
+                        <label for="set" class="form-control col-2">Select</label>
+                        <label for="set"></label>
+                        <select class="form-control col-10" name="set" id="set">
+                            <option>opt1</option>
+                            <option>opt2</option>
+                            <option>opt3</option>
+                        </select>                    
+                    </div>
+                    
+                    <div class="form-group row">                    
+                        <label for="radios" class="form-control col-2">Radio</label>
+                        <div class="form-control col-10" id="radios">                        
+                            <label for="valor1" class="form-check-label col-3">
+                                <input type="radio" class="form-check-input" name="valor" id="valor1" value="valor1" checked>
+                                Valor 1
+                            </label>
+                            <label for="valor2" class="form-check-label col-3">
+                                <input type="radio" class="form-check-input" name="valor" id="valor2" value="valor2" >
+                                valor2
+                            </label>
+                            <label for="valor3" class="form-check-label col-3">
+                                <input type="radio" class="form-check-input" name="valor" id="valor3" value="valor3" >
+                                valor3
+                            </label>
+                            <label for="valor4" class="form-check-label col-2 disabled">
+                                <input type="radio" class="form-check-input" name="valor" id="valor4" value="valor4" disabled>
+                                valor4
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row p-3">
+                        <div class="col-5 bg-dark p-3 text-white">
+                            <label for="arquivo">Arquivo</label>
+                            <input type="file" class="form-control-file" name="arquivo" id="arquivo" placeholder="" aria-describedby="fileHelpId">
+                            <small id="fileHelpId" class="form-text text-muted">Help text</small>
+                        </div>                        
+                        <div class="offset-1 form-group col-6 p-3 bg-dark text-white">
+                            <label for="mult">Multiple</label>
+                            <select multiple class="form-control" name="mult" id="mult">
+                                <option>opt1</option>
+                                <option>opt2</option>
+                                <option>opt2</option>
+                                <option>opt3</option>
+                                <option>opt3</option>
+                            </select>                        
+                        </div>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+                        Display value
+                      </label>
+                    </div>
+                    <button class="btn btn-warning btn-block">Reset</button>
+                    <button class="btn btn-success btn-block">Submit</button>
+                    
+                </div>
+            </form>
+        </section>    
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
