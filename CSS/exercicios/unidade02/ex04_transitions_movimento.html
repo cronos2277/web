@@ -46,6 +46,20 @@
                 left:180px;
                 background-color:rgb(255,0,0);
             }
+
+            div#janela1:hover + div#janela2{
+                left:500px;
+                background-color: purple;
+                transform: rotate(180deg);
+                transition: ease-out;
+                transition-duration: 10s;                
+            }
+            div#janela1 + div#janela2{
+                left:180px;
+                transform: rotate(-180deg);
+                transition: ease-in;
+                transition-duration: 10s;
+            }
         </style>
     </head>
 
