@@ -1,0 +1,61 @@
+main {
+    width:960px;	
+    margin:5px auto 15px;
+    background-color:rgb(255,255,255);    
+}
+
+header {
+    width:960px;
+    height:110px;
+    filter:grayscale(1);
+}
+
+article {
+    margin-top:10px;
+    width:100%;
+    float:left;
+    padding:20px;
+}
+
+article h1 {
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-style:italic;
+    font-size:32px;    
+    margin:3px 0;
+}
+
+article h2 {
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-style:italic;
+    font-size:26px;    
+    margin:3px 0;
+}
+
+article img {
+    float:left;
+    margin-right:10px;
+    display:none;
+}
+
+article p {
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size:14px;    
+    line-height:180%;
+}
+
+aside {
+    float:right;
+    width:300px;
+    padding:10px;
+    display: none;
+}
+
+aside img {
+    margin-bottom:10px;	
+}
+
+footer {
+    width:960px;
+    height:30px;    
+    clear:both;
+}
