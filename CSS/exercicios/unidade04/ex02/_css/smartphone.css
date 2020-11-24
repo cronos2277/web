@@ -5,13 +5,14 @@ body {
 /* iPhone 7*/
 @media only screen and (min-width:375px) and (max-width:767px) {
     h1 {
-        color:white;
+        color:pink;
+        text-decoration: underline;
     }
 }
 
 /* iPhone 7 Plus*/
 @media only screen and (min-width:414px) and (max-width:767px) {
     h1 {
-        color:yellow;
-    }
+        color:yellow;        
+    }    
 }
