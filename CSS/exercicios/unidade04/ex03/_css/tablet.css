@@ -1,0 +1,20 @@
+main, aside, article{
+    width: 90%;
+}
+
+aside{
+    float:left;
+}
+
+header{
+    width: 100%;
+    background-image: url('../_img/topo.jpg');
+}
+
+aside img:nth-child(1){
+    float: left;
+}
+
+aside img:nth-child(2){
+    float: right;
+}

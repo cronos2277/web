@@ -12,6 +12,7 @@ main {
 header {
     width:960px;
     height:110px;
+    background-image: url('../_img/topo.jpg');
 }
 
 article {
