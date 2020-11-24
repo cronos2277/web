@@ -18,3 +18,13 @@ aside img:nth-child(1){
 aside img:nth-child(2){
     float: right;
 }
+
+@media (max-width:695px){
+    aside{
+        text-align: center;
+    }
+
+    aside img:nth-child(1), aside img:nth-child(2){
+        float: none;
+    }
+}
