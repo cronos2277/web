@@ -21,11 +21,20 @@
             
             #janela:before, #janela:after
             {
-
+                position: absolute;
+                content: "";
+                box-shadow: 0 0 20px #777;
+                top: 50%;
+                bottom: 0;
+                right: 10px;
+                left: 10px;
+                border-radius: 100px/20px;
+                z-index: -1;
             }
             
             #janela:after {
-
+                right:10px;
+                left: auto;
             }
 
                         

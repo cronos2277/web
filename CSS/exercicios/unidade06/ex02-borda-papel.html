@@ -10,6 +10,7 @@
             }
             
             #janela {
+                position: relative;
                 margin:100px auto 50px;
                 width:700px;
                 height:250px;
@@ -17,6 +18,18 @@
                 background-color:#FFF;
             }
             
+            #janela:before{
+                content: "";
+                background: #999;
+                position: absolute;
+                left: 10px;
+                top:50%;
+                bottom: 15px;
+                width: 50%;
+                box-shadow: 0 10px 15px #999;
+                transform: rotate(-3deg);
+                z-index: -1;
+            }            
         </style>
     </head>
 
