@@ -31,7 +31,42 @@
                 height: 1500px;
                 background: #f0f0f0;
             }
-            
+            main section#apresentacao{
+                width: 90%;
+                max-width: 1500px;
+                min-width: 320px;
+                margin: 100px auto;
+
+                /*TEMP*/
+                height: 500px;
+                background-color: aqua;
+            }
+
+            main section.pizzas{
+                width: 30%;
+                float: left;
+                background-color: aliceblue;
+                border: 1px solid #333;
+
+                /*TEMP*/
+                height: 500px;
+            }
+
+            main section.pizzas img{
+                width: 100%;
+                max-width: 300px;
+                object-fit: cover;
+                object-fit: top center;
+            }
+
+            main section.direita{
+                float: right;
+            }
+
+            main section.centro{
+                margin-left: 5%;
+            }
+
             /* para mobile */
             @media only screen and (min-width:320px) and (max-width:414px) {
                 header {
@@ -61,7 +96,26 @@
         </header>
         
         <main>
-      
+            <section id="apresentacao">
+                <section class="pizzas">
+                    <img src="_img/pizza1.jpg" />
+                    <h3>Margueritta</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu turpis ullamcorper, maximus urna a, feugiat arcu. Pellentesque habitant morbi.</p>
+                    <a href="">APENAS R$29,99</a>
+                </section>
+                <section class="pizzas centro">
+                    <img src="_img/pizza2.jpg" />
+                    <h3>Calabresa</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit, lorem et faucibus sagittis, turpis justo sollicitudin erat, non posuere.</p>
+                    <a href="">APENAS R$29,99</a>
+                </section>
+                <section class="pizzas direita">
+                    <img src="_img/pizza3.jpg" />
+                    <h3>Brasileira</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultricies nisl non felis gravida pellentesque. Aliquam a elit nibh. Fusce.</p>
+                    <a href="">APENAS R$29,99</a>
+                </section>
+            </section>
         </main>
     </body>
 </html>
