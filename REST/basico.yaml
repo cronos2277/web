@@ -1,0 +1,55 @@
+swagger: "2.0" #Versão do swagger a ser usado
+info: #Informações, campo obrigatório.
+  title: Minha Api #Obrigatório
+  description: Exemplo Api #Opcional
+  version: "0.0.1" #Obrigatório
+  contact: #Opcional
+    name: Jotape 
+    email: email@email.com #Email completo e válido
+    url: http://meusite.com #URL completa e válida.
+host: api.host.com #Aqui você determina o seu dominio
+schemes: #Opcional
+  - https #Opções são o protocolo http e o websocket.
+basePath: /subdominio
+produces: 
+  - application/json
+
+paths:
+  /rotas:
+    get:
+      summary: metodo get de rotas
+      description: |
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a erat vestibulum, accumsan leo sit amet, volutpat nibh. Morbi ullamcorper placerat nisl, nec dignissim turpis tincidunt id. Donec viverra pretium vestibulum. Fusce volutpat fermentum leo sed imperdiet. Praesent pulvinar lectus mattis, molestie leo a, aliquam sem. Maecenas tincidunt pellentesque nunc ac placerat. Nullam et dictum odio. Praesent condimentum dui a lacinia lobortis.
+      tags: 
+        - GET ROTAS TAG
+      responses:
+        200:
+          description: Uma Lista de usuários
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Cliente'
+        default:
+          description: Problemas nas requisições
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+  Cliente:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Identificador único do usuário.
+      nome:
+        type: string
+        description: Nome do usuário.
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        description: Código do erro.
+      message:
+        type: string
+        description: Mensagem referente ao erro.
