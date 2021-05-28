@@ -1,0 +1,10 @@
+swagger: "2.0" #Versão do swagger a ser usado
+info: #Informações, campo obrigatório.
+  title: Minha Api #Obrigatório
+  version: "0.0.1" #Obrigatório
+paths:
+  /rotas:
+    get:
+      responses:
+        default:
+          description: Problemas nas requisições
