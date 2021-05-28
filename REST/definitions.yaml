@@ -1,0 +1,42 @@
+swagger: "2.0" #Versão do swagger a ser usado
+info: #Informações, campo obrigatório.
+  title: Minha Api #Obrigatório
+  description: Exemplo Api #Opcional
+  version: "0.0.1" #Obrigatório
+  contact: #Opcional
+    name: Jotape 
+    email: email@email.com #Email completo e válido
+    url: http://meusite.com #URL completa e válida.
+host: api.host.com #Aqui você determina o seu dominio
+schemes: #Opcional
+  - https #Opções são o protocolo http e o websocket.
+basePath: /subdominio
+produces: 
+  - application/json
+  - application/xml
+paths:
+  /rotas:
+    get:
+      responses:
+        default:
+          description: Problemas nas requisições
+          
+definitions:
+  Cliente:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Identificador único do usuário.
+      nome:
+        type: string
+        description: Nome do usuário.
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        description: Código do erro.
+      message:
+        type: string
+        description: Mensagem referente ao erro.

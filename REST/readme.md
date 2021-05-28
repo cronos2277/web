@@ -77,3 +77,83 @@ Através do `host` você define o domínio alvo e com base no `basePath` você d
 
 #### Output com contatos e outros campos extras acima:
 ![informativo](.informativo.png)
+
+### Definitions
+[Definitions](definitions.yaml)
+
+    swagger: "2.0"
+    info:
+        title: Minha Api
+        description: Exemplo Api
+        version: "0.0.1"
+    contact:
+        name: Jotape 
+        email: email@email.com
+        url: http://meusite.com
+    host: api.host.com
+    schemes:
+        - https
+    basePath: /subdominio
+    produces: 
+        - application/json
+        - application/xml
+    paths:
+        /rotas:
+            get:
+            responses:
+                default:
+                    description: Problemas nas requisições
+            
+    definitions:
+        Cliente:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    description: Identificador único do usuário.
+                nome:
+                    type: string
+                    description: Nome do usuário.
+        Error:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: Código do erro.
+                message:
+                    type: string
+                    description: Mensagem referente ao erro.
+
+#### Definitions
+Aqui você cria tipos de dados customizáveis, para compor tipos mais complexo, funciona de maneira semelhante aos registros das linguagens de programação estruturadas. Um campo customizável deve ter um `type` para indicar o tipo, nesse caso temos um objeto, mas poderia ser um array, ou algum outro tipo de dados qualquer, além disso caso seja um objeto, devemos informar as propriedades.
+
+##### Cliente
+
+    Cliente:
+        type: object
+        properties:
+            id:
+                type: integer
+                description: Identificador único do usuário.
+            nome:
+                type: string
+                description: Nome do usuário.
+
+Aqui temos um cliente que tem um `id` e um `nome`, o primeiro sendo do tipo inteiro e o segundo do tipo string, o interessante é modelar isso de acordo com as entidades, no caso cada um com a sua descrição cuja a importância é mais para fins de documentação.
+
+##### Error
+
+    Error:
+        type: object
+        properties:
+            code:
+                type: integer
+                description: Código do erro.
+            message:
+                type: string
+                description: Mensagem referente ao erro.
+   
+Algo análogo ocorre com o **Error**, porém a mesma tem propriedades diferentes, ambos poderão ser usados para compor o tipo de dados do PATH.
+
+#### Imagem envolvendo definitions
+![definitions](.definitions.png)
