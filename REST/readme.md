@@ -26,7 +26,7 @@
 #### No YAML
 No caso aqui temos o minimo para funcionar, aqui `swagger: "2.0"` especificamos a aplicação e a versão que usaremos para criar a nossa **API REST**. Info também é um campo obrigatório, ao qual você deve indicar obrigatório dentro dele o título e a versão da api, nesse caso `Minha APi` e `0.0.1`. Após isso temos os Path.
 
-##### PATH
+##### PATH Básico
 Toda essa parte do *path* é obrigatória, na sua forma básica, o mesmo deve conter o método http a ser atendido, pelo menos o *get*, conforme ilustrado acima. Em cada método se faz necessário especificar as respostas, nessa, você deve conter os códigos *HTTP*, ou até mesmo o *default* caso você queira lidar de uma maneira mais genérica, além claro das descrições, representado por *description*.
 
 #### Exemplo com o mínimo para funcionar, visual:
@@ -157,3 +157,118 @@ Algo análogo ocorre com o **Error**, porém a mesma tem propriedades diferentes
 
 #### Imagem envolvendo definitions
 ![definitions](.definitions.png)
+
+### Paths
+
+    swagger: "2.0"
+    info:
+        title: Minha Api
+        description: Exemplo Api
+        version: "0.0.1"
+        contact:
+            name: Jotape 
+            email: email@email.com
+            url: http://meusite.com
+    host: api.host.com
+    schemes:
+        - https
+    basePath: /subdominio
+    produces: 
+        - application/json
+    paths:
+        /rotas:
+            get:
+                summary: metodo get de rotas
+                description: |
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a erat vestibulum, accumsan leo sit amet, volutpat nibh. Morbi ullamcorper placerat nisl, nec dignissim turpis tincidunt id. Donec viverra pretium vestibulum. Fusce volutpat fermentum leo sed imperdiet. Praesent pulvinar lectus mattis, molestie leo a, aliquam sem. Maecenas tincidunt pellentesque nunc ac placerat. Nullam et dictum odio. Praesent condimentum dui a lacinia lobortis.
+                tags: 
+                  - GET ROTAS TAG
+                responses:
+                    200:
+                        description: Uma Lista de usuários
+                        schema:
+                            type: array
+                            items:
+                            $ref: '#/definitions/Cliente'
+                    400:
+                        description: Bad Request
+                    500:
+                        description: Erro No servidor
+                        schema:
+                            type: integer
+                    default:
+                        description: Problemas nas requisições
+                        schema:
+                            $ref: '#/definitions/Error'            
+    definitions:
+        Cliente:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    description: Identificador único do usuário.
+                nome:
+                    type: string
+                    description: Nome do usuário.
+        Error:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: Código do erro.
+                message:
+                    type: string
+                    description: Mensagem referente ao erro.
+#### PATH Imagem
+![PATH](.path.png)
+
+#### summary, tags, description
+Sumary deve ser uma breve descrição da página com o método em questão, a tags ajuda na organização e na criação de palavras chaves para *SEO*, já o description a idéia é que tenha uma explicação mais aprofundada.
+
+#### responses dentro de paths
+
+    responses:
+        200:
+            description: Uma Lista de usuários
+            schema:
+                type: array
+                items:
+                    $ref: '#/definitions/Cliente'
+        400:
+            description: Bad Request
+        500:
+            description: Erro No servidor
+            schema:
+                type: integer
+        default:
+            description: Problemas nas requisições
+            schema:
+                $ref: '#/definitions/Error' 
+
+**Nesse exemplo abaixo, você não está retornando nada ao cliente, para fazer isso basta apenas colocar uma descrição:**
+
+    400:
+        description: Bad Request
+
+**Dessa outra forma você faz o retorno ao cliente com base em um tipo primitivo, no caso um código numérico, basta para isso usar um schema e definir o type:**
+
+    500:
+        description: Erro No servidor
+        schema:
+            type: integer
+
+**Dessa outra forma abaixo você retorna um objeto customizável em JSON, conforme o produces, bastando colocar um `$ref` e especificar o tipo colocando `#/definitions` na frente:**
+
+      default:
+            description: Problemas nas requisições
+            schema:
+                $ref: '#/definitions/Error'
+
+**Por fim dessa outra forma devolvemos um array de JSON ao cliente, de acordo com o especificado em `produces`**
+
+    200:
+        description: Uma Lista de usuários
+        schema:
+            type: array
+            items:
+                $ref: '#/definitions/Cliente'

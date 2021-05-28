@@ -1,4 +1,4 @@
-swagger: "2.0" #Versão do swagger a ser usado
+swagger: "2.0"
 info: #Informações, campo obrigatório.
   title: Minha Api #Obrigatório
   description: Exemplo Api #Opcional
@@ -10,8 +10,8 @@ info: #Informações, campo obrigatório.
 host: api.host.com #Aqui você determina o seu dominio
 schemes: #Opcional
   - https #Opções são o protocolo http e o websocket.
-basePath: /subdominio
-produces: 
+basePath: /subdominio #subdominio se houver
+produces: # Aqui define o Content-Type
   - application/json
 paths:
   /rotas:

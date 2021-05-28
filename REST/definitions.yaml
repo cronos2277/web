@@ -1,15 +1,15 @@
-swagger: "2.0" #Versão do swagger a ser usado
-info: #Informações, campo obrigatório.
-  title: Minha Api #Obrigatório
-  description: Exemplo Api #Opcional
-  version: "0.0.1" #Obrigatório
-  contact: #Opcional
+swagger: "2.0"
+info:
+  title: Minha Api
+  description: Exemplo Api
+  version: "0.0.1"
+  contact:
     name: Jotape 
-    email: email@email.com #Email completo e válido
-    url: http://meusite.com #URL completa e válida.
-host: api.host.com #Aqui você determina o seu dominio
-schemes: #Opcional
-  - https #Opções são o protocolo http e o websocket.
+    email: email@email.com
+    url: http://meusite.com
+host: api.host.com
+schemes:
+  - https
 basePath: /subdominio
 produces: 
   - application/json
@@ -21,17 +21,17 @@ paths:
         default:
           description: Problemas nas requisições
           
-definitions:
-  Cliente:
-    type: object
-    properties:
-      id:
-        type: integer
-        description: Identificador único do usuário.
+definitions: #Seus tipos customizaveis
+  Cliente: # Nome do novo tipo
+    type: object # Tipo que ele será
+    properties: # Propriedades do novo tipo
+      id: # Nome da propriedade
+        type: integer # Tipo da propridade
+        description: Identificador único do usuário. # descrição
       nome:
         type: string
         description: Nome do usuário.
-  Error:
+  Error: # Criando um outro tipo "Error"
     type: object
     properties:
       code:
