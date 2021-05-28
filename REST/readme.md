@@ -31,3 +31,49 @@ Toda essa parte do *path* é obrigatória, na sua forma básica, o mesmo deve co
 
 #### Exemplo com o mínimo para funcionar, visual:
 ![funcional](.funcional.png)
+
+### Adicionando campos extras
+[informativo](informativo.yaml)
+
+    swagger: "2.0"
+    info: 
+        title: Minha Api
+        description: Exemplo Api
+        version: "0.0.1"
+    contact: 
+        name: Jotape 
+        email: email@email.com
+        url: http://meusite.com
+    host: api.host.com
+    schemes:
+        - https
+    basePath: /subdominio
+    produces: 
+        - application/json
+    paths:
+        /rotas:
+            get:
+            responses:
+                default:
+                description: Problemas nas requisições
+
+#### Contatos
+Você pode colocar um campo de contatos se for o caso, uma vez inserido e-mail e name são campos obrigatórios, além disso é possível colocar uma *url*:
+
+    contact: 
+        name: Jotape 
+        email: email@email.com
+        url: http://meusite.com
+
+####  :schemes, :produces, :host e :basePath
+Através do `host` você define o domínio alvo e com base no `basePath` você define um subdominio raiz caso tenha, ambos os campos não são obrigatórios e o `basePath` só é útil caso você use um diretório dentro de seu domínio. Em `:schemes` você define o protocolo que será usado, podendo ser usado: `http`, `https`, `ws`, `wss`, esse campo pode ser facilmente omitido, mas quanto mais informação tiver a sua API, melhor será a documentação e o código resultante. Para concluir, temos o campo `:produces`, que indica que tipo de resposta o servidor irá dar, o padrão se omitido é `application/json`, esse campo seria o equivalente a `Content-Type` de uma requisição *http*.
+
+    host: api.host.com
+    schemes:
+        - https
+    basePath: /subdominio
+    produces: 
+        - application/json
+
+#### Output com contatos e outros campos extras acima:
+![informativo](.informativo.png)
