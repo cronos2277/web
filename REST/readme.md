@@ -272,3 +272,32 @@ Sumary deve ser uma breve descrição da página com o método em questão, a ta
             type: array
             items:
                 $ref: '#/definitions/Cliente'
+
+### Parametros
+    swagger: "2.0"
+    info:
+        title: Minha Api
+        version: "0.0.1"
+    paths: 
+        /rotas{id}:
+            get:
+                responses:
+                    default:
+                        description: Problemas nas requisições
+                parameters:
+                  - name: id
+                    in: path
+                    required: true
+                    type: integer
+
+Como nesse exemplo acima você pode informar parametros na rota. A estrutura é semelhante a estrutura acima. Inicialmente você indica o parametro aqui `/rotas{id}:`, após isso, o trecho que interessa é esse:
+
+    parameters:
+        - name: id
+            in: path
+            required: true
+            type: integer
+
+Esses três parametros são obrigados, aqui `- name: id` definimos o *nome* do parametro, ao qual deve bate com a rota `/rotas{id}:`. Aqui `in: path` definimos a origem do parametro, como é por url, logo deve ser `path`, mas também poderia ser: `body`, `header`, `formData`, `query`, ou até mesmo o `path`. Aqui `required: true` definimos se o parametro é obrigatório ou não e por fim, aqui `type: integer` definimos o tipo do parametro.
+
+![parametros](.parametros.png)
