@@ -9,6 +9,8 @@
 
 [Api Especificação atual](https://swagger.io/specification/)
 
+[Exemplo completo envolvendo a API Rest criado com Swagger](completo.yaml)
+
 ### Exemplo apenas com os campos obrigatórios
 [funcional](funcional.yaml)
 
@@ -305,4 +307,112 @@ Esses três parametros são obrigados, aqui `- name: id` definimos o *nome* do p
 ### Métodos
 ![Metodos](.metodos.png)
 
-    
+    ...
+        paths: 
+            /:
+                get:
+                    responses:
+                        200:
+                            description: Todos os usuários carregado com sucesso!
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/definitions/Cliente"                        
+                        default:
+                            description: Erro ao pegar todos os usuários!
+                            schema:
+                                $ref: "#/definitions/Error"
+                post:
+                    responses:
+                    201:
+                        description: Cadastrado com sucesso!
+                        schema:
+                            $ref: "#/definitions/Cliente"
+                    default:
+                        description: Erro ao cadastrar usuários!
+                        schema:
+                            $ref: "#/definitions/Error"
+                    parameters:
+                      - name: data
+                        in: body
+                        required: true
+                        schema:
+                            $ref: "#/definitions/Cliente"
+                options:
+                    responses:
+                        200:
+                            description: Mostra todos os metodos HTTP Disponiveis.
+                        default:
+                            description: Erro ao exibir os métodos!
+            /{id}/:
+                get:
+                    responses:
+                        default:
+                            description: Pega um registro
+                            schema:
+                                $ref: "#/definitions/Error"
+                        200:
+                            description: Usuário carregado com sucesso!
+                            schema:
+                                $ref: "#/definitions/Cliente"
+                    parameters:
+                      - name: id
+                        in: path
+                        required: true
+                        type: integer
+                put:
+                    consumes: [application/x-www-form-urlencoded]
+                    responses:
+                        default:
+                            description: Erro ao atualizar!
+                            schema:
+                                $ref: "#/definitions/Error"
+                        200:
+                            description: Usuário carregado com sucesso!
+                            schema:
+                                $ref: "#/definitions/Cliente"
+                    parameters:
+                        - name: id
+                        in: path
+                        required: true
+                        type: integer
+                      - name: data
+                        in: body
+                        required: true
+                        schema:
+                            $ref: "#/definitions/Cliente"
+                patch:
+                    consumes: [application/x-www-form-urlencoded]
+                    responses:
+                        default:
+                            description: Erro ao atualizar!
+                            schema:
+                                $ref: "#/definitions/Error"
+                    200:
+                        description: Usuário carregado com sucesso!
+                        schema:
+                            $ref: "#/definitions/Cliente"
+                    parameters:
+                        - name: id
+                        in: path
+                        required: true
+                        type: integer
+                      - name: data
+                        in: body
+                        required: true
+                        schema:
+                            $ref: "#/definitions/Cliente"
+                delete:
+                    responses:
+                        204:
+                            description: Sem conteúdo.
+                        default:
+                            description: Erro ao excluir um registro
+                    parameters:
+                        - name: id
+                        in: path
+                        required: true
+                        type: integer          
+    ...
+
+**Para esse tipo de valor em `in: body` dentro de `parameters` dentro de algum método http, você precisa informar um `consumes`, conforme visto aqui `consumes: [application/x-www-form-urlencoded]`.**
