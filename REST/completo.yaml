@@ -1,0 +1,130 @@
+swagger: "2.0"
+info:
+  title: Api Cliente
+  version: "0.0.1"
+paths: 
+  /:
+    get:
+      responses:
+        200:
+          description: Todos os usuários carregado com sucesso!
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Cliente"
+              
+        default:
+          description: Erro ao pegar todos os usuários!
+          schema:
+            $ref: "#/definitions/Error"
+    post:
+      responses:
+        201:
+          description: Cadastrado com sucesso!
+          schema:
+            $ref: "#/definitions/Cliente"
+        default:
+          description: Erro ao cadastrar usuários!
+          schema:
+            $ref: "#/definitions/Error"
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Cliente"
+    options:
+      responses:
+        200:
+          description: Mostra todos os metodos HTTP Disponiveis.
+        default:
+          description: Erro ao exibir os métodos!
+  /{id}/:
+    get:
+      responses:
+        default:
+          description: Pega um registro
+          schema:
+            $ref: "#/definitions/Error"
+        200:
+          description: Usuário carregado com sucesso!
+          schema:
+            $ref: "#/definitions/Cliente"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+    put:
+      consumes: [application/x-www-form-urlencoded]
+      responses:
+        default:
+          description: Erro ao atualizar!
+          schema:
+            $ref: "#/definitions/Error"
+        200:
+          description: Usuário carregado com sucesso!
+          schema:
+            $ref: "#/definitions/Cliente"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Cliente"
+    patch:
+      consumes: [application/x-www-form-urlencoded]
+      responses:
+        default:
+          description: Erro ao atualizar!
+          schema:
+            $ref: "#/definitions/Error"
+        200:
+          description: Usuário carregado com sucesso!
+          schema:
+            $ref: "#/definitions/Cliente"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Cliente"
+    delete:
+      responses:
+        204:
+          description: Sem conteúdo.
+        default:
+          description: Erro ao excluir um registro
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          
+definitions:
+  Cliente:
+    type: object
+    properties:
+      id: 
+        type: integer
+        description: Identificador único do usuário.
+      nome:
+        type: string
+        description: Nome do usuário.
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        description: Código do erro.
+      message:
+        type: string
+        description: Mensagem referente ao erro.

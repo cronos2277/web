@@ -301,3 +301,8 @@ Como nesse exemplo acima você pode informar parametros na rota. A estrutura é 
 Esses três parametros são obrigados, aqui `- name: id` definimos o *nome* do parametro, ao qual deve bate com a rota `/rotas/{id}:`. Aqui `in: path` definimos a origem do parametro, como é por url, logo deve ser `path`, mas também poderia ser: `body`, `header`, `formData`, `query`, ou até mesmo o `path`. Aqui `required: true` definimos se o parametro é obrigatório ou não e por fim, aqui `type: integer` definimos o tipo do parametro.
 
 ![parametros](.parametros.png)
+
+### Métodos
+![Metodos](.metodos.png)
+
+    
