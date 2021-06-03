@@ -17,6 +17,7 @@
       - [Esquema Básico](#esquema-básico)
       - [No navegador](#no-navegador)
   - [Tipos](#tipos)
+    - [Scalar](#scalar)
 
 ## Instalando
 Para começar uma das formas é tendo o npm com o node js instalado e: `npm install graphql` e `npm install apollo-server`, e claro se for o caso `npm install nodemon` para ambientes de desenvolvimento. Com os pacotes instalado bastar usar o `npm start` e inicializar tudo.
@@ -217,7 +218,7 @@ Dentro das chaves você informa os recursos que você quiser, por padrão se ass
     `;
     ...
 
-O `GraphQL` trabalha com 5 tipos de dados básicos, no caso o tipo `ID` é o tipo identificador, `int` número inteiro, `float` número decimal, `boolean` para tipos booleanos, `string` para tipos de textos, sendo possível criar um tipo customizável se esses não forem o suficiente. Importante salientar, os tipos começam com a primeira letra em maíusculo, sendo o tipo `ID` inteiro em letra de forma e o inteiro sendo representado por `Int`. No exemplo abaixo as variáveis que possuem todos os caracteres em minusculos do exemplo acima, sendo resolvidas:
+O `GraphQL` trabalha com 5 tipos de dados básicos, no caso o tipo `ID` é o tipo identificador, `int` número inteiro, `float` número decimal, `boolean` para tipos booleanos, `string` para tipos de textos, sendo possível criar um tipo customizável se esses não forem o suficiente. Importante salientar, os tipos começam com a primeira letra em maíusculo, sendo o tipo `ID` inteiro em letra de forma e o inteiro sendo representado por `Int`, outra coisa, `!` após o tipo significa que o atributo é obrigatório, por exemplo se o campo **id** fosse obrigatório, bastaria adicionar uma exclamação no tipo, por exemplo `id:ID!`. No exemplo abaixo as variáveis que possuem todos os caracteres em minusculos do exemplo acima, sendo resolvidas:
 
     const resolvers = {
         Query:{
@@ -247,4 +248,44 @@ Esse exemplo é executado em uma porta diferenta, no caso na porta `4004`:
         }
     );
 
-Sendo definido aqui `.listen(4004)`.
+Sendo definido aqui `.listen(4004)`. No navegador ao passar a query `{id, int, float, boolean, string}`, temos:
+
+    {
+        "data": 
+        {
+            "id": "1",
+            "int": 3232,
+            "float": 10.5,
+            "boolean": true,
+            "string": "texto"
+        }
+    }
+
+### Scalar
+[Scalar arquivo](scalar.js)
+
+    ...
+    const typeDefs = gql `        
+        scalar MinhaData
+        type Query{
+            id:ID!                        
+            string:String
+            data:MinhaData
+        }
+    `;
+    ...
+>repara que o id aqui é obrigatório `id:ID!`
+
+Repare esse campo `scalar MinhaData`, aqui estamos definindo um novo tipo, que no caso está sendo usado aqui `data:MinhaData`, que no caso está sendo usado para definir o `data`, nesse caso, esse tipo de dados **scalar** é genérico e aceita qualquer coisa, conforme visto abaixo:
+
+    ...
+    const resolvers = {
+        Query:{
+            id: () => parseInt(Math.random() * 99),
+            string: () => "String retornada.",
+            data: () => new Date
+        }
+    }
+    ...
+
+No caso esse dado criado é resolvido aqui `data: () => new Date`. Mas lembre-se o scalar aceita qualquer tipo de dados, seria o tipo `any` das linguagens de programação.
