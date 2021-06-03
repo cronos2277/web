@@ -16,11 +16,13 @@
       - [Promise retornado do server.listen](#promise-retornado-do-serverlisten)
       - [Esquema Básico](#esquema-básico)
       - [No navegador](#no-navegador)
+  - [Tipos](#tipos)
 
 ## Instalando
 Para começar uma das formas é tendo o npm com o node js instalado e: `npm install graphql` e `npm install apollo-server`, e claro se for o caso `npm install nodemon` para ambientes de desenvolvimento. Com os pacotes instalado bastar usar o `npm start` e inicializar tudo.
 
 ## Basico
+[basico](basico.js)
 
     const {ApolloServer,gql} = require('apollo-server');
     const typeDefs = gql `
@@ -155,3 +157,94 @@ OU
 
 Dentro das chaves você informa os recursos que você quiser, por padrão se assume o tipo query ou seja `query{}` e `{}` tem a mesma funcionalidade, pois query é o padrão. Além disso você pode informar parcialmente o que quer, inclusive esse é um dos diferenciais do **GraphQL** para o **REST**, sendo também válido só `{exemplo}` ou só `{hoje}`, porém dessa forma apenas será retornado o recurso solicitado.
 
+## Tipos
+[Tipos código](tipos.js)
+
+    const {ApolloServer,gql} = require('apollo-server');
+    const typeDefs = gql `
+        #Pontos de entrada da API
+        type Query{
+            id:ID
+            int:Int
+            float:Float
+            boolean:Boolean
+            string:String
+        }
+    `;
+
+    const resolvers = {
+        Query:{
+            id: () => 1,
+            int: () => 3232,
+            float: () => 10.50,
+            boolean: () => true,
+            string: () => "texto"
+        }
+    };
+
+    const server = new ApolloServer({
+            typeDefs,
+            resolvers
+    });
+    server
+    .listen(4004)
+    .then(param => 
+        {
+            console.log(`
+                url: ${param.url},
+                address: ${param.address}, 
+                family: ${param.family},
+                port: ${param.port},
+                server: ${param.server},
+                subscriptionsPath: ${param.subscriptionsPath},
+                subscriptionsUrl: ${param.subscriptionsUrl}
+            `);             
+        }
+    );
+
+**Sobre tipos, temos os seguintes padrões:**
+
+    ...
+    const typeDefs = gql `
+        #Pontos de entrada da API
+        type Query{
+            id:ID
+            int:Int
+            float:Float
+            boolean:Boolean
+            string:String
+        }
+    `;
+    ...
+
+O `GraphQL` trabalha com 5 tipos de dados básicos, no caso o tipo `ID` é o tipo identificador, `int` número inteiro, `float` número decimal, `boolean` para tipos booleanos, `string` para tipos de textos, sendo possível criar um tipo customizável se esses não forem o suficiente. Importante salientar, os tipos começam com a primeira letra em maíusculo, sendo o tipo `ID` inteiro em letra de forma e o inteiro sendo representado por `Int`. No exemplo abaixo as variáveis que possuem todos os caracteres em minusculos do exemplo acima, sendo resolvidas:
+
+    const resolvers = {
+        Query:{
+            id: () => 1,
+            int: () => 3232,
+            float: () => 10.50,
+            boolean: () => true,
+            string: () => "texto"
+        }
+    };
+
+Esse exemplo é executado em uma porta diferenta, no caso na porta `4004`:
+
+    server
+    .listen(4004)
+    .then(param => 
+        {
+            console.log(`
+                url: ${param.url},
+                address: ${param.address}, 
+                family: ${param.family},
+                port: ${param.port},
+                server: ${param.server},
+                subscriptionsPath: ${param.subscriptionsPath},
+                subscriptionsUrl: ${param.subscriptionsUrl}
+            `);             
+        }
+    );
+
+Sendo definido aqui `.listen(4004)`.
