@@ -19,6 +19,7 @@
   - [Tipos](#tipos)
     - [Scalar](#scalar)
     - [Tipo Customizável](#tipo-customizável)
+    - [Resolvendo nomes de campos que não batem](#resolvendo-nomes-de-campos-que-não-batem)
 
 ## Instalando
 Para começar uma das formas é tendo o npm com o node js instalado e: `npm install graphql` e `npm install apollo-server`, e claro se for o caso `npm install nodemon` para ambientes de desenvolvimento. Com os pacotes instalado bastar usar o `npm start` e inicializar tudo.
@@ -356,3 +357,110 @@ Segue o seguinte resolver:
     }
 
 Repare que a pessoa acima é resolvida como um objeto, que retorna um número aleatório e uma string fixa.
+
+### Resolvendo nomes de campos que não batem
+
+    ...
+    const typeDefs = gql `        
+            type Pessoa{
+                identity:ID
+                nome:String
+            }
+            
+            type Query{
+                id:ID!                                    
+                pessoa:Pessoa
+            }
+        `;
+
+        const resolvers = {
+            Pessoa:{            
+                nome: pessoa => pessoa.sobrenome
+            },        
+            Query:{
+                id: () => parseInt(Math.random() * 99),                        
+                pessoa: () => (
+                    {
+                        identity:parseInt(Math.random() * 99),
+                        sobrenome: "Da Silva"
+                    })
+            }
+        }
+        ...
+
+Essa é uma solução para quando o typeDef tiver um campo diferente dos objetos oriundo de alguma outra estrutura, por exemplo queremos que esse **sobrenome** abaixo seja exibido quando requerido o recurso de nome, no caso:
+
+    pessoa: () => 
+    (
+        {
+            identity:parseInt(Math.random() * 99),
+            sobrenome: "Da Silva"
+        }
+    )
+
+Repare que o pessoa está retornando um identity e um sobrenome, por padrão o **GraphQL** associa o nome aqui ao nome definido no typedef, porém quando os nomes são diferentes isso não ocorre de maneira automática e aqui que entra essa solução, a função identity desse objeto `identity:parseInt(Math.random() * 99),` é relacionado a esse `identity:ID` de maneira automática, porém como nome e sobrenome tem nomes diferentes, isso não ocorre aqui de maneira automática, no caso o que faremos é associar essa resposta `sobrenome: "Da Silva"` a essa `nome:String`, logo para que isso ocorra, devemos resolver o tipo pessoa, conforme visto abaixo:
+
+    const resolvers = {
+        Pessoa:{            
+                nome: pessoa => pessoa.sobrenome
+            },        
+        
+        ...
+    }
+    ...
+
+No caso para resolver, criamos um novo objeto com o nome do tipo dentro do resolver `Pessoa:{}`, dentro desse objeto criaremos um método para cada campo a ser resolvido dentro do ``typedefs`` nesse caso temos apenas o **nome**, conforme visto abaixo:
+
+     const typeDefs = gql `        
+            type Pessoa{
+                identity:ID
+                nome:String
+            }
+            ...
+
+O método deve ter o nome do tipo dentro de `pessoa` a ser resolvido, por isso o método tem o nome de `nome`, conforme visto aqui `nome: pessoa => pessoa.sobrenome`, após isso definimos o que esse tipo deve retornar, no caso esse método está retornando o atributo `sobrenome` capturado do retorno feito de `Query`, conforme ilustrado abaixo:
+
+    const resolvers = {
+           ...
+
+            Query:{
+                id: () => parseInt(Math.random() * 99),                        
+                pessoa: () => (
+                    { //O objeto em questão
+
+                        identity:parseInt(Math.random() * 99),
+                        sobrenome: "Da Silva" //No caso o retorno será esse.
+
+                    })
+            }
+        }
+        ...
+
+feito isso temos que `nome:String` está relacionado a `sobrenome: "Da Silva" //No caso o retorno será esse.`, sendo no método que define isso `Pessoa:{nome: pessoa => pessoa.sobrenome}`, lembrando que **nome** faz referência ao atributo typedef e o argumento do método é o objeto retornado que Query logo abaixo, no caso esse objeto abaixo:
+
+    { //O objeto em questão
+
+        identity:parseInt(Math.random() * 99),
+        sobrenome: "Da Silva" //No caso o retorno será esse.
+
+    })
+
+Logo a query a ser passada no navegador
+
+    {
+        id pessoa{identity nome}
+    }
+
+com o seguinte output:
+
+    {
+        "data": 
+        {
+            "id": "83",
+            "pessoa":
+            {
+                "identity": "49",
+                "nome": "Da Silva"
+            }
+        }
+    }
