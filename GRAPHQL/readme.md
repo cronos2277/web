@@ -18,6 +18,7 @@
       - [No navegador](#no-navegador)
   - [Tipos](#tipos)
     - [Scalar](#scalar)
+    - [Tipo Customizável](#tipo-customizável)
 
 ## Instalando
 Para começar uma das formas é tendo o npm com o node js instalado e: `npm install graphql` e `npm install apollo-server`, e claro se for o caso `npm install nodemon` para ambientes de desenvolvimento. Com os pacotes instalado bastar usar o `npm start` e inicializar tudo.
@@ -288,4 +289,70 @@ Repare esse campo `scalar MinhaData`, aqui estamos definindo um novo tipo, que n
     }
     ...
 
-No caso esse dado criado é resolvido aqui `data: () => new Date`. Mas lembre-se o scalar aceita qualquer tipo de dados, seria o tipo `any` das linguagens de programação.
+No caso esse dado criado é resolvido aqui `data: () => new Date`. Mas lembre-se o scalar aceita qualquer tipo de dados, seria o tipo `any` das linguagens de programação. Qury para o navegador abaixo: 
+
+    {
+        id string data
+    }
+
+No caso nesse exemplo é renderizado, porém é valido lembrar que o ID é randomico alem de obrigatório: `parseInt(Math.random() * 99),`:
+
+    {
+        "data": 
+        {
+          "id": "76",
+          "string": "String retornada.",
+          "data": "2021-06-03T20:28:24.791Z"
+        }
+    }
+
+### Tipo Customizável
+[Type](type.js)
+
+    ...
+    const typeDefs = gql `        
+        type Pessoa{
+            identity:ID
+            nome:String
+        }
+        
+        type Query{
+            id:ID!                                    
+            pessoa:Pessoa
+        }
+    `;
+    ...
+
+Você pode perfeitamente criar um tipo, nesse caso, diferente do *scalar*, você pode definir a estrutura dos dados. No caso você pode criar um tipo de dado chamado `Pessoa`, que é composto facultativamente de um `ID` e um nome, sendo os tipos `ID` e `string` respectivamente. A sintaxe para a criação de tipo é essa `type [SEUTIPO]{}` e para usar você pode usar em qualquer lugar da query, conforme visto aqui `pessoa:Pessoa`. No caso abaixo temos um exemplo de uma query a ser informada:
+
+    {
+        id pessoa{identity nome}
+    }
+
+Repare que caso você queria pegar dados do tipo pessoa você precisa informar o que você quer pegar de pessoa, conforme visto aqui `pessoa{identity nome}`, no caso é pego o `identity` e o `nome` da estrutura `pessoa`. Assim temos o seguinte output:
+
+    {
+        "data":
+        {
+            "id": "93",
+            "pessoa": {
+                "identity": "15",
+                "nome": "Da Silva"
+            }
+        }          
+    }
+
+Segue o seguinte resolver:
+
+    const resolvers = {        
+        Query:{
+            id: () => parseInt(Math.random() * 99),                        
+            pessoa: () => (
+                {
+                    identity:parseInt(Math.random() * 99),
+                    nome: "Da Silva"
+                })
+        }
+    }
+
+Repare que a pessoa acima é resolvida como um objeto, que retorna um número aleatório e uma string fixa.
